@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare, HelpCircle } from 'lucide-react';
+import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
@@ -13,6 +13,11 @@ interface FeedbackOption {
   response: string;
 }
 
+interface ChipOption {
+  text: string;
+  icon: any;
+}
+
 interface Message {
   id: string;
   content: string;
@@ -23,14 +28,14 @@ interface Message {
   customFeedback?: string;
   isCustomFeedbackSubmitted?: boolean;
   isFeedbackResponseDismissed?: boolean;
-  chips?: string[];
+  chips?: ChipOption[];
 }
 
 interface ChatDialogCaptureProps {
   onClose: () => void;
 }
 
-const WELCOME_OPTIONS: { text: string; icon: any }[] = [];
+const WELCOME_OPTIONS: ChipOption[] = [];
 
 const POSITIVE_OPTIONS: FeedbackOption[] = [
   { id: 'fast', label: 'Fast (Efficient)', response: "Thanks for your feedback! We strive for quick, accurate responses." },
@@ -54,9 +59,9 @@ const NEGATIVE_OPTIONS: FeedbackOption[] = [
 
 const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
   const [isTyping, setIsTyping] = React.useState(false);
-  const [inputPlaceholder, setInputPlaceholder] = React.useState('Ask a question...');
+  const [inputPlaceholder] = React.useState('Ask a question...');
   const [showSalesDialog, setShowSalesDialog] = React.useState(false);
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [, setIsSubmitted] = React.useState(false);
   const [messages, setMessages] = React.useState<Message[]>([
     { 
       id: '1',
@@ -520,14 +525,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
           </div>
         </div>
       )}
-      {isSubmitted && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-            <p className="text-lg font-medium mb-2">Thank you for your submission!</p>
-            <p className="text-sm text-gray-600 mb-4">We will review your submission and get back to you soon.</p>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };
