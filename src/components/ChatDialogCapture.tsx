@@ -1,10 +1,11 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare } from 'lucide-react';
+import { X, Send, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack, TextField } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
 import { getAssetPath } from '../utils/assetPath';
+import ChatBubbleOutlined from '@mui/icons-material/ChatBubbleOutlined';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -111,12 +112,6 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
 
   const handleSalesDialogSubmit = (name: string, email: string, phone: string) => {
     console.log('SalesDialog onSubmit called with:', { name, email, phone });
@@ -130,7 +125,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
 
   return (
     <div 
-      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px]" 
+      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px]" 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
@@ -169,7 +164,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
             onClick={() => setShowSalesDialog(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 border border-white hover:bg-white hover:text-[#008080] rounded-md transition-colors text-sm font-medium"
           >
-            <MessageSquare size={16} />
+            <ChatBubbleOutlined sx={{ fontSize: 16, color: 'inherit' }} />
             Talk to us
           </button>
           <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors">
@@ -532,7 +527,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
       </div>
       {showSalesDialog && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div style={{ width: '448px', height: '495px' }}>
+          <div style={{ width: '448px', height: '600px' }}>
             <SalesDialog
               onSubmit={handleSalesDialogSubmit}
               onClose={() => setShowSalesDialog(false)}

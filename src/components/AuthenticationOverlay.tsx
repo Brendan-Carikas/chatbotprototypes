@@ -16,9 +16,8 @@ interface AuthenticationOverlayProps {
   onClose: () => void;
 }
 
-const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthenticate, onClose }) => {
+const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthenticate }) => {
   const [email, setEmail] = React.useState('');
-  const [acceptedPrivacy] = React.useState(false);
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -28,11 +27,6 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
     if (!validateEmail(email)) {
       return;
     }
-    
-    if (!acceptedPrivacy) {
-      return;
-    }
-    
     onAuthenticate(email);
   };
 
@@ -52,17 +46,31 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="sm" sx={{ flex: 1, display: 'flex', alignItems: 'center', py: 4 }}>
+      <Container maxWidth="sm" sx={{ 
+        flex: 1, 
+        display: 'flex', 
+        alignItems: 'center',
+        px: { xs: 0, sm: 4, md: 6 },
+        maxWidth: 'calc(100% - 48px)'
+      }}>
         <Box sx={{ width: '100%' }}>
-          <Typography variant="h5" component="h2" gutterBottom sx={{ color: 'text.primary', fontWeight: 600 }}>
-            Welcome, I'm Arto!
+          <Typography variant="h5" component="h2" gutterBottom sx={{ 
+            color: 'text.primary', 
+            fontWeight: 600,
+            fontFamily: 'Libre Franklin'
+          }}>
+            Welcome, I'm Artoo!
           </Typography>
           
-          <Typography variant="body1" gutterBottom sx={{ color: 'text.secondary', mb: 4 }}>
+          <Typography variant="body1" gutterBottom sx={{ 
+            color: 'text.secondary', 
+            mb: 2,
+            fontFamily: 'Libre Franklin'
+          }}>
             I'm here to provide helpful assistance. Please enter your email to start using Arto AI Chat.
           </Typography>
           
-          <Box component="form" noValidate sx={{ mt: 2 }}>
+          <Box component="form" noValidate sx={{ mt: 0 }}>
             <TextField
               fullWidth
               id="email"
@@ -83,36 +91,49 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
               }}
               sx={{
                 '& .MuiOutlinedInput-root': {
+                  fontFamily: 'Libre Franklin',
                   '&.Mui-focused fieldset': {
                     borderColor: '#008080',
                   },
                 },
-                '& .MuiInputLabel-root.Mui-focused': {
-                  color: '#008080',
+                '& .MuiInputLabel-root': {
+                  fontFamily: 'Libre Franklin',
+                  '&.Mui-focused': {
+                    color: '#008080',
+                  },
                 },
               }}
             />
-            
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={handleAuthenticate}
-              disabled={!validateEmail(email) || !acceptedPrivacy}
-              sx={{
-                mt: 3,
-                bgcolor: '#008080',
-                '&:hover': {
-                  bgcolor: '#006666',
-                },
-                '&:disabled': {
-                  bgcolor: '#E5E7EB',
-                },
-              }}
-            >
-              Continue
-            </Button>
           </Box>
         </Box>
+      </Container>
+
+      <Container maxWidth="sm"
+        sx={{
+          px: { xs: 0, sm: 4, md: 6 },
+          mb: 4,
+          maxWidth: 'calc(100% - 48px)'
+        }}
+      >
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={handleAuthenticate}
+          disabled={!email.trim()}
+          sx={{
+            mt: 0,
+            bgcolor: '#008080',
+            fontFamily: 'Libre Franklin',
+            '&:hover': {
+              bgcolor: '#006666',
+            },
+            '&:disabled': {
+              bgcolor: '#E5E7EB',
+            },
+          }}
+        >
+          Continue
+        </Button>
       </Container>
     </Paper>
   );
