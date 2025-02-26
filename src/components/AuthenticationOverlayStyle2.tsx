@@ -1,11 +1,12 @@
 import React from 'react';
+import { getAssetPath } from '../utils/assetPath';
 
 interface AuthenticationOverlayProps {
   onAuthenticate: (email: string) => void;
   onClose: () => void;
 }
 
-const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onAuthenticate }) => {
+const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onAuthenticate, onClose }) => {
   const [email, setEmail] = React.useState('');
   const [acceptedPrivacy, setAcceptedPrivacy] = React.useState(false);
 
@@ -23,7 +24,7 @@ const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onA
     <div className="absolute inset-0 bg-white flex flex-col items-center justify-center p-8 rounded-lg">
       
         <div className="flex justify-center mb-8">
-          <img src="/arto-site-logo.png" alt="Arto" className="h-12" />
+          <img src={getAssetPath('arto-site-logo.png')} alt="Arto" className="h-12" />
         </div>
 
         <h2 className="mb-6 text-gray-700 text-xl font-semibold">
