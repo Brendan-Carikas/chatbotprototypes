@@ -670,8 +670,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
         <div className="text-xs text-center pb-2 font-regular bg-[#F3F3F3] rounded-b-lg">
           <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
 
-            <span className="text-[#757575] mt-0">Powered by</span>
-            <img src="/arto-site-logo-grey.svg" alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
+         
 
             <span className="text-[#C0C0C0] mt-0">Powered by</span>
             <img src={getAssetPath('arto-site-logo-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
