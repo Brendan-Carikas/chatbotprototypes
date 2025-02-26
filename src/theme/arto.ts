@@ -1,8 +1,9 @@
 import { type Theme } from './types';
+import { getAssetPath } from '../utils/assetPath';
 
 export const artoTheme: Theme = {
   name: 'arto',
-  logo: '/Arto-Logo-Reverse.svg',
+  logo: getAssetPath('Arto-Logo-Reverse.svg'),
   textSizes: {
     xs: '0.75rem',    // 12px
     sm: '0.875rem',   // 14px

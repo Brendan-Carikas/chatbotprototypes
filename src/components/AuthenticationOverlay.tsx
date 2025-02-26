@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetPath } from '../utils/assetPath';
 
 interface AuthenticationOverlayProps {
   onAuthenticate: (email: string) => void;
@@ -24,7 +25,7 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
       {/* Header */}
       <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/Arto-Logo-Reverse.svg" alt="Arto" className="h-14" />
+          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           
         </div>
         
