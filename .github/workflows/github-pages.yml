@@ -1,8 +1,8 @@
-name: Deploy to GitHub Pages
+name: GitHub Pages Deployment
 
 on:
   push:
-    branches: [ "main", "25feb" ]
+    branches: [ "main", "github-pages" ]
   workflow_dispatch:
 
 permissions:
