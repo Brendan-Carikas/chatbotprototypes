@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ChatDialog from './components/ChatDialog';
 import Welcome from './Welcome';
 import WelcomeStyle2 from './WelcomeStyle2';
@@ -17,7 +17,7 @@ function OriginalApp() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/welcome-style2" element={<WelcomeStyle2 />} />
@@ -26,7 +26,7 @@ function App() {
         <Route path="/capture-v2" element={<CaptureDetailsV2 />} />
         <Route path="/" element={<Navigate to="/welcome" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
