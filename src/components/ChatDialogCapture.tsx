@@ -1,9 +1,10 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare, HelpCircle } from 'lucide-react';
+import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
+import { getAssetPath } from '../utils/assetPath';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -11,6 +12,11 @@ interface FeedbackOption {
   id: string;
   label: string;
   response: string;
+}
+
+interface ChipOption {
+  text: string;
+  icon: any;
 }
 
 interface Message {
@@ -23,14 +29,14 @@ interface Message {
   customFeedback?: string;
   isCustomFeedbackSubmitted?: boolean;
   isFeedbackResponseDismissed?: boolean;
-  chips?: string[];
+  chips?: ChipOption[];
 }
 
 interface ChatDialogCaptureProps {
   onClose: () => void;
 }
 
-const WELCOME_OPTIONS: { text: string; icon: any }[] = [];
+const WELCOME_OPTIONS: ChipOption[] = [];
 
 const POSITIVE_OPTIONS: FeedbackOption[] = [
   { id: 'fast', label: 'Fast (Efficient)', response: "Thanks for your feedback! We strive for quick, accurate responses." },
@@ -54,9 +60,9 @@ const NEGATIVE_OPTIONS: FeedbackOption[] = [
 
 const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
   const [isTyping, setIsTyping] = React.useState(false);
-  const [inputPlaceholder, setInputPlaceholder] = React.useState('Ask a question...');
+  const [inputPlaceholder] = React.useState('Ask a question...');
   const [showSalesDialog, setShowSalesDialog] = React.useState(false);
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [, setIsSubmitted] = React.useState(false);
   const [messages, setMessages] = React.useState<Message[]>([
     { 
       id: '1',
@@ -130,7 +136,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
       {/* Header */}
       <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/Arto-Logo-Reverse.svg" alt="Arto" className="h-14" />
+          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
             title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
             arrow
@@ -506,7 +512,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
         <div className="text-xs text-center mt-4 font-regular">
           <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
             <span className="text-[#C0C0C0] mt-0">Powered by</span>
-            <img src="/arto-site-logo-grey.svg" alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
+            <img src={getAssetPath('arto-site-logo-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
           </a>
         </div>
       </div>
@@ -520,14 +526,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
           </div>
         </div>
       )}
-      {isSubmitted && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-            <p className="text-lg font-medium mb-2">Thank you for your submission!</p>
-            <p className="text-sm text-gray-600 mb-4">We will review your submission and get back to you soon.</p>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };

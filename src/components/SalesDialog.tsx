@@ -1,6 +1,7 @@
 import React from 'react';
-import { Info } from 'lucide-react';
+import { Info, CheckCircle2 } from 'lucide-react';
 import { Tooltip } from '@mui/material';
+import { getAssetPath } from '../utils/assetPath';
 
 interface SalesDialogProps {
   onSubmit: (name: string, email: string, phone: string) => void;
@@ -67,9 +68,13 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
     if (validateForm()) {
-      setIsSubmitted(true); // Immediately show confirmation message
+      onSubmit(name, email, phone); // Call the onSubmit prop with form data
+      setIsSubmitted(true); // Show confirmation message
+      
+      // After 4 seconds, hide confirmation and close dialog
       setTimeout(() => {
-        setIsSubmitted(false); // Hide confirmation message after 4 seconds
+        setIsSubmitted(false);
+        onClose(); // Close SalesDialog to show ChatDialog
       }, 4000);
     }
   };
@@ -79,7 +84,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
       {/* Header */}
       <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/Arto-Logo-Reverse.svg" alt="Arto" className="h-14" />
+          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
             title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
             arrow
@@ -116,8 +121,15 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
         }}>
         <div className="w-full flex flex-col">
           {isSubmitted ? (
-            <div className="flex flex-col items-center justify-center py-12 text-center h-full">
-              <h6 className="mb-4 text-gray-700 text-lg font-semibold">
+            <div className="flex-1 flex flex-col items-center justify-center pt-16 p-8 space-y-4">
+            <div className="animate-[scale-up_0.5s_ease-out,ease-in-out_0.5s]">
+              <CheckCircle2 
+                className="w-16 h-16 text-teal-600 animate-[draw-check_1s_ease-out_forwards]"
+                strokeWidth={2.5}
+                aria-label="Success check mark"
+              />
+            </div>
+              <h6 className=" mb-4 text-gray-700 text-lg font-semibold">
                 Thank you for your interest!
               </h6>
               <p className="text-gray-700">
