@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare } from 'lucide-react';
+import { X, Send, ThumbsUp, ThumbsDown, Mail, MessageSquare, Info } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
@@ -58,11 +58,63 @@ const NEGATIVE_OPTIONS: FeedbackOption[] = [
   { id: 'other', label: 'Other', response: "Thanks for your feedback!" }
 ];
 
+type TabType = 'ai' | 'talk';
+
 const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) => {
   const [isTyping, setIsTyping] = React.useState(false);
   const [inputPlaceholder] = React.useState('Ask a question...');
+  const [activeTab, setActiveTab] = React.useState<TabType>('ai');
   const [showSalesDialog, setShowSalesDialog] = React.useState(false);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [contactName, setContactName] = React.useState('');
+  const [contactEmail, setContactEmail] = React.useState('');
+  const [contactPhone, setContactPhone] = React.useState('');
+  const [nameError, setNameError] = React.useState('');
+  const [emailError, setEmailError] = React.useState('');
+  const [phoneError, setPhoneError] = React.useState('');
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    // Allow UK formats: +44 7XXX XXX XXX, 07XXX XXX XXX, 07XXX-XXX-XXX
+    const phoneRegex = /^(\+44\s?7|07)[0-9]{3}(\s|\-)?[0-9]{3}(\s|\-)?[0-9]{3}$/;
+    return phoneRegex.test(phone.trim());
+  };
+
+  const validateContactForm = () => {
+    let isValid = true;
+    
+    if (!contactName.trim()) {
+      setNameError('Name is required');
+      isValid = false;
+    } else {
+      setNameError('');
+    }
+
+    if (!contactEmail.trim()) {
+      setEmailError('Email is required');
+      isValid = false;
+    } else if (!validateEmail(contactEmail)) {
+      setEmailError('Please enter a valid email address');
+      isValid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (!contactPhone.trim()) {
+      setPhoneError('Phone number is required');
+      isValid = false;
+    } else if (!validatePhone(contactPhone)) {
+      setPhoneError('Please enter a valid UK mobile number');
+      isValid = false;
+    } else {
+      setPhoneError('');
+    }
+
+    return isValid;
+  };
   const [messages, setMessages] = React.useState<Message[]>([
     { 
       id: '1',
@@ -118,6 +170,20 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
     }
   };
 
+  const handleContactSubmit = () => {
+    if (validateContactForm()) {
+      console.log('Contact form submitted:', { contactName, contactEmail, contactPhone });
+      // TODO: Handle form submission
+      setContactName('');
+      setContactEmail('');
+      setContactPhone('');
+      setNameError('');
+      setEmailError('');
+      setPhoneError('');
+      setActiveTab('ai'); // Switch back to conversation tab after submit
+    }
+  };
+
   const handleSalesDialogSubmit = (name: string, email: string, phone: string) => {
     console.log('SalesDialog onSubmit called with:', { name, email, phone });
     setIsSubmitted(true);
@@ -130,7 +196,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
   return (
     <div 
-      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px]" 
+      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[560px]" 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
@@ -160,35 +226,28 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
               aria-label="Information about AI Assistant"
               tabIndex={2}
             >
-              <Info className="h-4 w- text-white" />
+              <Info className="h-4 w-4 text-white" />
             </button>
           </Tooltip>
         </div>
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setShowSalesDialog(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-white hover:bg-white hover:text-[#008080] rounded-md transition-colors text-sm font-medium"
-          >
-            <MessageSquare size={16} />
-            Talk to us
-          </button>
+        <div className="flex items-center">
           <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors">
             <X size={20} />
           </button>
         </div>
       </div>
 
-      {/* Messages */}
-      <div 
-        className="flex-1 overflow-y-auto"
-        style={{
-          padding: artoTheme.messageStyles.container.padding,
-          gap: artoTheme.messageStyles.container.spacing,
-          minHeight: artoTheme.messageStyles.container.minHeight,
-          maxHeight: artoTheme.messageStyles.container.maxHeight,
-        }}
-      >
-        {messages.map((message, index) => (
+      {/* Tab Content */}
+      {activeTab === 'ai' ? (
+        <div 
+          className="flex-1 overflow-y-auto"
+          style={{
+            padding: artoTheme.messageStyles.container.padding,
+            gap: artoTheme.messageStyles.container.spacing,
+            height: '100%',
+          }}
+        >
+          {messages.map((message, index) => (
           <div key={index} className="mb-4">
             <div className="flex flex-col mb-2">
               <div className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
@@ -489,36 +548,140 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
           </div>
         )}
 
-      </div>
+        </div>
+      ) : (
+        <div className="flex-1 overflow-y-auto px-4 py-4" style={{ height: '100%' }}>
+          <div className="space-y-6">
+            <div>
+              <h6 className="mt-2 mb-6 text-gray-700 text-lg font-semibold">Talk to our sales team</h6>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={contactName}
+                  onChange={(e) => setContactName(e.target.value)}
+                  className={`block w-full rounded-md border ${nameError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                  placeholder="Your name"
+                />
+                {nameError && (
+                  <p className="mt-1 text-sm text-red-600">{nameError}</p>
+                )}
+              </div>
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email address</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={contactEmail}
+                  onChange={(e) => setContactEmail(e.target.value)}
+                  className={`block w-full rounded-md border ${emailError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                  placeholder="you@example.com"
+                />
+                {emailError && (
+                  <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                )}
+              </div>
+              
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={contactPhone}
+                  onChange={(e) => setContactPhone(e.target.value)}
+                  className={`block w-full rounded-md border ${phoneError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                  placeholder="Your phone number"
+                />
+                {phoneError && (
+                  <p className="mt-1 text-sm text-red-600">{phoneError}</p>
+                )}
+              </div>
+
+              <div className="mt-8 pt-2">
+                <button
+                  onClick={handleContactSubmit}
+                  className="w-full bg-[#008080] text-white py-2 px-4 rounded-md hover:bg-[#006666] transition-colors focus:outline-none focus:ring-2 focus:ring-[#008080] focus:ring-offset-2"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Input area */}
-      <div className="p-4 border-t text-sm">
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder={inputPlaceholder}
-            className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080]"
-          />
-          <button
-            onClick={handleSendMessage}
-            className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors"
-          >
-            <Send size={20} />
-          </button>
+      <div className={`${activeTab === 'ai' ? 'border-t' : ''} text-sm`}>
+        {activeTab === 'ai' && (
+          <div className="flex gap-2 mx-4 my-4">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={inputPlaceholder}
+              className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080]"
+            />
+            <button
+              onClick={handleSendMessage}
+              className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors"
+            >
+              <Send size={20} />
+            </button>
+          </div>
+        )}
+        {/* Bottom Navigation */}
+        <div>
+          <hr className="border-t border-gray-200" />
+          <nav className="flex justify-around px-4 bg-[#F3F3F3]" aria-label="Bottom Navigation">
+            <button
+              onClick={() => setActiveTab('ai')}
+              className={`flex flex-col items-center px-4 py-2 relative transition-colors ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#757575] hover:text-[#008080]'}`}
+              aria-current={activeTab === 'ai' ? 'page' : undefined}
+            >
+              <MessageSquare
+                size={20}
+                className={activeTab === 'ai' ? 'text-[#008080]' : 'text-[#757575]'}
+              />
+              <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#757575]'}`}>Conversation</span>
+              {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-0.5 bg-[#008080] rounded-full" />}
+            </button>
+            <button
+              onClick={() => setActiveTab('talk')}
+              className={`flex flex-col items-center px-4 py-2 relative transition-colors ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#757575] hover:text-[#008080]'}`}
+              aria-current={activeTab === 'talk' ? 'page' : undefined}
+            >
+              <Mail
+                size={20}
+                className={activeTab === 'talk' ? 'text-[#008080]' : 'text-[#757575]'}
+              />
+              <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#757575]'}`}>Talk to us</span>
+              {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-0.5 bg-[#008080] rounded-full" />}
+            </button>
+          </nav>
         </div>
-        <div className="text-xs text-center mt-4 font-regular">
+
+        {/* Powered by Arto */}
+        <div className="text-xs text-center pb-2 font-regular bg-[#F3F3F3] rounded-b-lg">
           <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
+
+            <span className="text-[#757575] mt-0">Powered by</span>
+            <img src="/arto-site-logo-grey.svg" alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
+
             <span className="text-[#C0C0C0] mt-0">Powered by</span>
             <img src={getAssetPath('arto-site-logo-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
+
           </a>
         </div>
       </div>
       {showSalesDialog && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div style={{ width: '448px', height: '495px' }}>
+          <div style={{ width: '448px', height: '471px' }}>
             <SalesDialog
               onSubmit={handleSalesDialogSubmit}
               onClose={() => setShowSalesDialog(false)}
