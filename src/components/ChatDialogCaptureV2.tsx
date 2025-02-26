@@ -1,7 +1,9 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Mail, MessageSquare, Info } from 'lucide-react';
+import { X, Send, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack } from '@mui/material';
+import QuestionAnswerOutlined from '@mui/icons-material/QuestionAnswerOutlined';
+import MailOutlined from '@mui/icons-material/MailOutlined';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
 import { getAssetPath } from '../utils/assetPath';
@@ -196,7 +198,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
   return (
     <div 
-      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[560px]" 
+      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px]" 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
@@ -550,7 +552,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 py-4" style={{ height: '100%' }}>
+        <div className="flex-1 overflow-y-auto px-8 py-8" style={{ height: '100%' }}>
           <div className="space-y-6">
             <div>
               <h6 className="mt-2 mb-6 text-gray-700 text-lg font-semibold">Talk to our sales team</h6>
@@ -636,43 +638,47 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
           </div>
         )}
         {/* Bottom Navigation */}
-        <div>
-          <hr className="border-t border-gray-200" />
-          <nav className="flex justify-around px-4 bg-[#F3F3F3]" aria-label="Bottom Navigation">
+        <div className="shadow-[0_-3px_4px_rgba(0,0,0,0.1)]">
+          <hr className="border-t border-gray-200 bg-[#F3F3F3]" />
+          <nav className="flex w-full bg-white">
             <button
               onClick={() => setActiveTab('ai')}
-              className={`flex flex-col items-center px-4 py-2 relative transition-colors ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#757575] hover:text-[#008080]'}`}
-              aria-current={activeTab === 'ai' ? 'page' : undefined}
+              className="relative flex-1 flex flex-col items-center pt-5 hover:bg-gray-50"
+              aria-label="Switch to AI conversation"
             >
-              <MessageSquare
-                size={20}
-                className={activeTab === 'ai' ? 'text-[#008080]' : 'text-[#757575]'}
+              <QuestionAnswerOutlined
+                sx={{ 
+                  fontSize: 24,
+                  color: activeTab === 'ai' ? '#008080' : '#333333'
+                }}
               />
-              <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#757575]'}`}>Conversation</span>
-              {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-0.5 bg-[#008080] rounded-full" />}
+              <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#333333'}`}>Chat</span>
+              {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080]" />}
             </button>
             <button
               onClick={() => setActiveTab('talk')}
-              className={`flex flex-col items-center px-4 py-2 relative transition-colors ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#757575] hover:text-[#008080]'}`}
-              aria-current={activeTab === 'talk' ? 'page' : undefined}
+              className="relative flex-1 flex flex-col items-center pt-5 hover:bg-gray-50"
+              aria-label="Switch to sales team chat"
             >
-              <Mail
-                size={20}
-                className={activeTab === 'talk' ? 'text-[#008080]' : 'text-[#757575]'}
+              <MailOutlined
+                sx={{ 
+                  fontSize: 24,
+                  color: activeTab === 'talk' ? '#008080' : '#333333'
+                }}
               />
-              <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#757575]'}`}>Talk to us</span>
-              {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-0.5 bg-[#008080] rounded-full" />}
+              <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#333333'}`}>Talk to us</span>
+              {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080] " />}
             </button>
           </nav>
         </div>
 
         {/* Powered by Arto */}
-        <div className="text-xs text-center pb-2 font-regular bg-[#F3F3F3] rounded-b-lg">
+        <div className="text-xs text-center mt-2 pb-4 font-regular rounded-b-lg">
           <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
 
          
 
-            <span className="text-[#C0C0C0] mt-0">Powered by</span>
+            <span className="text-[#C0C0C0] pt-2mb-2">Powered by</span>
             <img src={getAssetPath('arto-site-logo-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
 
           </a>
@@ -680,7 +686,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       </div>
       {showSalesDialog && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div style={{ width: '448px', height: '471px' }}>
+          <div className="w-[378px] xl:w-[448px]" style={{ height: '471px' }}>
             <SalesDialog
               onSubmit={handleSalesDialogSubmit}
               onClose={() => setShowSalesDialog(false)}
