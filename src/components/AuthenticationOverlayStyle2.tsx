@@ -32,7 +32,7 @@ const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onA
         </h2>
         
         <div className="mb-6 text-gray-700">
-          I'm here to provide helpful assistance. Please enter your email to continue using Arto AI Chat.
+          I'm here to provide helpful assistance. Please enter your email to start using Arto AI Chat.
         </div>
         
         <div className="space-y-8">
