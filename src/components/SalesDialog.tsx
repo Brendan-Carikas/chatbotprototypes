@@ -1,6 +1,6 @@
 import React from 'react';
 import { Info, CheckCircle2 } from 'lucide-react';
-import { Tooltip } from '@mui/material';
+import { Tooltip, TextField } from '@mui/material';
 import { getAssetPath } from '../utils/assetPath';
 
 interface SalesDialogProps {
@@ -80,7 +80,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   };
 
   return (
-    <div className="bg-white flex flex-col rounded-lg shadow-lg w-[448px] h-[495px] overflow-hidden">
+    <div className="bg-white flex flex-col rounded-lg shadow-lg w-[378px] xl:w-[448px] h-[495px] overflow-hidden">
       {/* Header */}
       <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
         <div className="flex items-center gap-2">
@@ -144,53 +144,92 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
               
               <div>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
+              <TextField
+                fullWidth
                 id="name"
+                label="Name"
+                type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className={`block w-full rounded-md border ${nameError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                error={!!nameError}
+                helperText={nameError}
                 placeholder="Your name"
+                size="small"
+                inputProps={{
+                  'aria-label': 'Name input field',
+                  'aria-required': 'true',
+                  'aria-invalid': !!nameError
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#008080',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#008080',
+                  },
+                }}
               />
-              {nameError && (
-                <p className="mt-1 text-sm text-red-600">{nameError}</p>
-              )}
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email address
-              </label>
-              <input
-                type="email"
+              <TextField
+                fullWidth
                 id="email"
+                label="Email address"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`block w-full rounded-md border ${emailError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                error={!!emailError}
+                helperText={emailError}
                 placeholder="you@example.com"
+                size="small"
+                inputProps={{
+                  'aria-label': 'Email input field',
+                  'aria-required': 'true',
+                  'aria-invalid': !!emailError
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#008080',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#008080',
+                  },
+                }}
               />
-              {emailError && (
-                <p className="mt-1 text-sm text-red-600">{emailError}</p>
-              )}
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                Phone number
-              </label>
-              <input
-                type="tel"
+              <TextField
+                fullWidth
                 id="phone"
+                label="Phone number"
+                type="tel"
                 value={phone}
                 onChange={handlePhoneChange}
-                className={`block w-full rounded-md border ${phoneError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                error={!!phoneError}
+                helperText={phoneError}
                 placeholder="Your phone number"
+                size="small"
+                inputProps={{
+                  'aria-label': 'Phone number input field',
+                  'aria-required': 'true',
+                  'aria-invalid': !!phoneError
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#008080',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#008080',
+                  },
+                }}
               />
-              {phoneError && (
-                <p className="mt-1 text-sm text-red-600">{phoneError}</p>
-              )}
             </div>
 
             <div className="flex gap-3 mt-8">

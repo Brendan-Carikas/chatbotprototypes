@@ -1,12 +1,20 @@
 import React from 'react';
 import { getAssetPath } from '../utils/assetPath';
+import { 
+  TextField, 
+  Button, 
+  Paper, 
+  Typography, 
+  Box, 
+  Container
+} from '@mui/material';
 
 interface AuthenticationOverlayProps {
   onAuthenticate: (email: string) => void;
   onClose: () => void;
 }
 
-const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onAuthenticate }) => {
+const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onAuthenticate, onClose }) => {
   const [email, setEmail] = React.useState('');
   const [acceptedPrivacy] = React.useState(false);
 
@@ -15,51 +23,100 @@ const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onA
   };
 
   const handleAuthenticate = () => {
-    if (validateEmail(email) && acceptedPrivacy) {
-      onAuthenticate(email);
+    if (!validateEmail(email)) {
+      return;
     }
+    
+    if (!acceptedPrivacy) {
+      return;
+    }
+    
+    onAuthenticate(email);
   };
 
   return (
-    <div className="absolute inset-0 bg-white flex flex-col items-center justify-center px-6 py-8 rounded-lg">
-      <div className="w-full max-w-[calc(100%-48px)]">
-        <div className="flex justify-center mb-8">
-          <img src={getAssetPath('arto-site-logo.png')} alt="Arto" className="h-12" />
-        </div>
+    <Paper 
+      elevation={0} 
+      className="absolute inset-0 bg-white flex flex-col items-center justify-center p-8 rounded-lg"
+      sx={{ 
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        p: 4,
+        borderRadius: 2
+      }}
+    >
+      <Container maxWidth="sm" sx={{ width: '100%', maxWidth: 'calc(100% - 48px)' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+          <Box 
+            component="img" 
+            src={getAssetPath('arto-site-logo.png')} 
+            alt="Arto" 
+            sx={{ height: 48 }} 
+          />
+        </Box>
 
-        <h2 className="mb-6 text-gray-700 text-xl font-semibold">
+        <Typography variant="h5" component="h2" align="center" gutterBottom sx={{ color: 'text.primary', fontWeight: 600 }}>
           Welcome, I'm Arto!
-        </h2>
+        </Typography>
         
-        <div className="mb-6 text-gray-700">
+        <Typography variant="body1" align="center" gutterBottom sx={{ color: 'text.secondary', mb: 4 }}>
           I'm here to provide helpful assistance. Please enter your email to start using Arto AI Chat.
-        </div>
+        </Typography>
         
-        <div className="space-y-8">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-3">
-              Email address
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080]"
-              placeholder="Enter your email"
-            />
-          </div>
-         
-          <button
+        <Box component="form" noValidate sx={{ mt: 2 }}>
+          <TextField
+            fullWidth
+            id="email"
+            label="Email address"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleAuthenticate()}
+            error={email !== '' && !validateEmail(email)}
+            helperText={email !== '' && !validateEmail(email) ? 'Please enter a valid email address' : ''}
+            variant="outlined"
+            margin="normal"
+            size="small"
+            inputProps={{
+              'aria-label': 'Email address input field',
+              'aria-required': 'true',
+              'aria-invalid': email !== '' && !validateEmail(email)
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '&.Mui-focused fieldset': {
+                  borderColor: '#008080',
+                },
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#008080',
+              },
+            }}
+          />
+          
+          <Button
+            fullWidth
+            variant="contained"
             onClick={handleAuthenticate}
             disabled={!validateEmail(email) || !acceptedPrivacy}
-            className="w-full bg-[#008080] text-white py-2 px-4 rounded-md hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            sx={{
+              mt: 3,
+              bgcolor: '#008080',
+              '&:hover': {
+                bgcolor: '#006666',
+              },
+              '&:disabled': {
+                bgcolor: '#E5E7EB',
+              },
+            }}
           >
             Continue
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Box>
+      </Container>
+    </Paper>
   );
 };
 

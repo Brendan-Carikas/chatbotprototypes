@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Send, ThumbsUp, ThumbsDown, Info, MessageSquare } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
-import { Tooltip, Chip, Stack } from '@mui/material';
+import { Tooltip, Chip, Stack, TextField } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
 import { getAssetPath } from '../utils/assetPath';
@@ -494,13 +494,27 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
       {/* Input area */}
       <div className="p-4 border-t text-sm">
         <div className="flex gap-2">
-          <input
-            type="text"
+          <TextField
+            fullWidth
+            size="small"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
             placeholder={inputPlaceholder}
-            className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080]"
+            inputProps={{
+              'aria-label': 'Message input field',
+              'aria-required': 'true'
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '&.Mui-focused fieldset': {
+                  borderColor: '#008080',
+                },
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#008080',
+              },
+            }}
           />
           <button
             onClick={handleSendMessage}
