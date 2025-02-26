@@ -1,6 +1,7 @@
 import React from 'react';
 import { Info, CheckCircle2 } from 'lucide-react';
 import { Tooltip } from '@mui/material';
+import { getAssetPath } from '../utils/assetPath';
 
 interface SalesDialogProps {
   onSubmit: (name: string, email: string, phone: string) => void;
@@ -83,7 +84,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
       {/* Header */}
       <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/Arto-Logo-Reverse.svg" alt="Arto" className="h-14" />
+          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
             title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
             arrow
