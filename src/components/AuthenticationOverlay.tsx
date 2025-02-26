@@ -41,7 +41,7 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
         </h2>
         
         <div className="mb-6 text-gray-700 text-">
-          I'm here to provide helpful assistance. Please enter your email to continue using Arto AI Chat.
+          I'm here to provide helpful assistance. Please enter your email to start using Arto AI Chat.
         </div>
          
         
