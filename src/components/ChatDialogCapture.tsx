@@ -487,7 +487,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
       </div>
 
       {/* Input area */}
-      <div className="p-4 border-t text-sm">
+      <div className="p-4 px-4 border-t text-sm">
         <div className="flex gap-2">
           <TextField
             fullWidth
@@ -513,7 +513,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
           />
           <button
             onClick={handleSendMessage}
-            className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors"
+            className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
           >
             <Send size={20} />
           </button>

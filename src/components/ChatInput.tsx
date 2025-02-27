@@ -24,7 +24,7 @@ const ChatInput: React.FC = () => {
       >
         <div className="flex space-x-2">
           <label htmlFor="messageInput" className="sr-only">
-            Type your message
+            Ask a question
           </label>
           <input
             id="messageInput"

@@ -412,8 +412,7 @@ const ChatDialogWelcomeStyle2: React.FC<ChatDialogWelcomeStyle2Props> = ({ onClo
           />
           <button
             onClick={handleSendMessage}
-            disabled={!isAuthenticated || !newMessage.trim()}
-            className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
           >
             <Send size={20} />
           </button>

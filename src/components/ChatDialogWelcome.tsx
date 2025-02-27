@@ -406,14 +406,14 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder={isAuthenticated ? "Type your message..." : "Please authenticate first..."}
+            placeholder={isAuthenticated ? "Ask a question..." : "Please authenticate first..."}
             disabled={!isAuthenticated}
             className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080] disabled:bg-gray-100"
           />
           <button
             onClick={handleSendMessage}
             disabled={!isAuthenticated || !newMessage.trim()}
-            className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
           >
             <Send size={20} />
           </button>
