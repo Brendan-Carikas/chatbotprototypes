@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2 } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useFeedback } from '../hooks/useFeedback';
 import FeedbackOptions from './FeedbackOptions';
+import FeedbackConfirmation from './FeedbackConfirmation';
 import { POSITIVE_OPTIONS, NEGATIVE_OPTIONS, FeedbackOption } from '../types';
 
 const FeedbackDrawer: React.FC = () => {
@@ -70,22 +71,7 @@ const FeedbackDrawer: React.FC = () => {
       <div className="absolute inset-0 bg-black/0" />
       <div className="absolute inset-0 bg-white rounded-lg shadow-xl overflow-hidden flex flex-col">
         {submitted && submittedOption ? (
-          <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-4">
-            <div className="animate-[scale-up_0.5s_ease-out,bounce_0.5s_ease-in-out_0.5s]">
-              <CheckCircle2 
-                className="w-16 h-16 text-teal-600 animate-[draw-check_1s_ease-out_forwards]"
-                strokeWidth={2.5}
-                aria-label="Success check mark"
-              />
-            </div>
-            <p 
-              className="text-lg text-center text-gray-900 max-w-md animate-fade-in"
-              role="status"
-              aria-live="polite"
-            >
-              {submittedOption.response}
-            </p>
-          </div>
+          <FeedbackConfirmation submittedOption={submittedOption} />
         ) : (
           <>
             <div className="flex items-center justify-between p-4 border-b">
