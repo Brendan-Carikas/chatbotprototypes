@@ -10,7 +10,7 @@ import { getAssetPath } from '../utils/assetPath';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
-interface FeedbackOption {
+interface FeedbackOptionLocal {
   id: string;
   label: string;
   response: string;
@@ -40,7 +40,7 @@ interface ChatDialogCaptureV2Props {
 
 const WELCOME_OPTIONS: WelcomeOption[] = [];
 
-const POSITIVE_OPTIONS: FeedbackOption[] = [
+const POSITIVE_OPTIONS: FeedbackOptionLocal[] = [
   { id: 'fast', label: 'Fast (Efficient)', response: "Thanks for your feedback! We strive for quick, accurate responses." },
   { id: 'clear', label: 'Provided clear and helpful answers', response: "Glad to hear our answers were clear and helpful!" },
   { id: 'knowledgeable', label: 'Knowledgeable assistant', response: "We appreciate your recognition! We aim for expertise in every response." },
@@ -50,7 +50,7 @@ const POSITIVE_OPTIONS: FeedbackOption[] = [
   { id: 'other', label: 'Other', response: "Thanks for your positive feedback!" }
 ];
 
-const NEGATIVE_OPTIONS: FeedbackOption[] = [
+const NEGATIVE_OPTIONS: FeedbackOptionLocal[] = [
   { id: 'slow', label: 'Slow (Inefficient)', response: "Sorry for the delay. We're working on improving speed." },
   { id: 'unhelpful', label: 'Answers were not helpful', response: "Sorry our answers weren’t helpful. We’re working to improve." },
   { id: 'incorrect', label: 'Provided incorrect information', response: "Apologies for the mistake. We’ll review and improve accuracy." },
@@ -194,6 +194,13 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       setShowSalesDialog(false); 
       // Optionally, you can set any other state necessary to show ChatDialogCaptureV2
     }, 4000);
+  };
+
+
+  const salesConfirmationOption: FeedbackOptionLocal = {
+    id: 'sales_confirmation',
+    label: 'Sales Confirmation',
+    response: 'Thank you for your interest! A representative will contact you shortly.'
   };
 
   return (
