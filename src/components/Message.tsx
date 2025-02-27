@@ -54,8 +54,8 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
           </button>
           <button
             onClick={() => openFeedback('negative', message.id)}
-            className="p-1.5 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors
-                     focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                     focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             aria-label="Rate this response as not helpful"
           >
             <ThumbsDown className="w-4 h-4" />

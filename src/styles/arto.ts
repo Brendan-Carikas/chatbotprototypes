@@ -71,7 +71,7 @@ export const artoTheme: Theme = {
     placeholder: {
       fontSize: 'text-sm',
       color: 'text-gray-400',
-      text: 'Type your message here...'
+      text: 'Ask a question...'
     }
   },
 };

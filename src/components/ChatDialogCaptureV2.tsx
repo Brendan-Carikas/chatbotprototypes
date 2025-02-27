@@ -166,12 +166,6 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
 
   const handleContactSubmit = () => {
     if (validateContactForm()) {
@@ -625,71 +619,85 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       )}
 
       {/* Input area */}
-      <div className={`${activeTab === 'ai' ? 'border-t' : ''} text-sm`}>
+      <div className={`${activeTab === 'ai' ? 'border-t' : ''}`}>
         {activeTab === 'ai' && (
-          <div className="flex gap-2 mx-4 my-4">
-            <input
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={inputPlaceholder}
-              className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080]"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors"
-            >
-              <Send size={20} />
-            </button>
-          </div>
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSendMessage();
+            }} 
+            className="p-4 px-2 pr-4"
+            aria-label="Chat message form"
+          >
+            <div className="flex space-x-2">
+              <label htmlFor="messageInput" className="sr-only">
+                Ask a question
+              </label>
+              <input
+                id="messageInput"
+                type="text"
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
+                placeholder={inputPlaceholder}
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 text-sm text-gray-700"
+                aria-label="Message input"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-teal-600 text-white rounded-lg px-4 py-2 hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2"
+                aria-label="Send message"
+                disabled={!newMessage.trim()}
+              >
+                <Send className="w-5 h-5" aria-hidden="true" />
+              </button>
+            </div>
+          </form>
         )}
-        {/* Bottom Navigation */}
-        <div className="shadow-[0_-3px_4px_rgba(0,0,0,0.1)]">
-          <hr className="border-t border-gray-200 bg-[#F3F3F3]" />
-          <nav className="flex w-full bg-white">
-            <button
-              onClick={() => setActiveTab('ai')}
-              className="relative flex-1 flex flex-col items-center pt-5 hover:bg-gray-50"
-              aria-label="Switch to AI conversation"
-            >
-              <QuestionAnswerOutlined
-                sx={{ 
-                  fontSize: 24,
-                  color: activeTab === 'ai' ? '#008080' : '#333333'
-                }}
-              />
-              <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#333333'}`}>Chat</span>
-              {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080]" />}
-            </button>
-            <button
-              onClick={() => setActiveTab('talk')}
-              className="relative flex-1 flex flex-col items-center pt-5 hover:bg-gray-50"
-              aria-label="Switch to sales team chat"
-            >
-              <MailOutlined
-                sx={{ 
-                  fontSize: 24,
-                  color: activeTab === 'talk' ? '#008080' : '#333333'
-                }}
-              />
-              <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#333333'}`}>Talk to us</span>
-              {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080] " />}
-            </button>
-          </nav>
-        </div>
+      </div>
 
-        {/* Powered by Arto */}
-        <div className="text-xs text-center mt-2 pb-4 font-regular rounded-b-lg">
-          <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
+      {/* Bottom Navigation */}
+      <div className="shadow-[0_-3px_4px_rgba(0,0,0,0.1)]">
+        <hr className="border-t border-gray-200 bg-[#F3F3F3]" />
+        <nav className="flex w-full bg-white">
+          <button
+            onClick={() => setActiveTab('ai')}
+            className="relative flex-1 flex flex-col items-center pt-5 hover:bg-gray-50"
+            aria-label="Switch to AI conversation"
+          >
+            <QuestionAnswerOutlined
+              sx={{ 
+                fontSize: 24,
+                color: activeTab === 'ai' ? '#008080' : '#333333'
+              }}
+            />
+            <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#333333'}`}>Chat</span>
+            {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080]" />}
+          </button>
+          <button
+            onClick={() => setActiveTab('talk')}
+            className="relative flex-1 flex flex-col items-center pt-5 hover:bg-gray-50"
+            aria-label="Switch to sales team chat"
+          >
+            <MailOutlined
+              sx={{ 
+                fontSize: 24,
+                color: activeTab === 'talk' ? '#008080' : '#333333'
+              }}
+            />
+            <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#333333'}`}>Talk to us</span>
+            {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080] " />}
+          </button>
+        </nav>
+      </div>
 
-         
-
-            <span className="text-[#C0C0C0] pt-2mb-2">Powered by</span>
-            <img src={getAssetPath('arto-site-logo-lite-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
-
-          </a>
-        </div>
+      {/* Powered by Arto */}
+      <div className="text-xs text-center mt-2 pb-4 font-regular rounded-b-lg">
+        <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
+          <span className="text-[#C0C0C0] pt-2mb-2">Powered by</span>
+          <img src={getAssetPath('arto-site-logo-lite-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
+        </a>
       </div>
       {showSalesDialog && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">

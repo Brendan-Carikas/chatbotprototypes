@@ -2,8 +2,14 @@ import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { FeedbackOption } from '../types';
 
+interface FeedbackOptionLocal {
+  id: string;
+  label: string;
+  response: string;
+}
+
 interface FeedbackConfirmationProps {
-  submittedOption: FeedbackOption;
+  submittedOption: FeedbackOption | FeedbackOptionLocal;
 }
 
 const FeedbackConfirmation: React.FC<FeedbackConfirmationProps> = ({ submittedOption }) => {
