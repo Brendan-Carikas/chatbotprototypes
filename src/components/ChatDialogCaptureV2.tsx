@@ -6,7 +6,9 @@ import QuestionAnswerOutlined from '@mui/icons-material/QuestionAnswerOutlined';
 import MailOutlined from '@mui/icons-material/MailOutlined';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
+import FeedbackConfirmation from './FeedbackConfirmation';
 import { getAssetPath } from '../utils/assetPath';
+import { FeedbackOption } from '../types';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -194,6 +196,12 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       setShowSalesDialog(false); 
       // Optionally, you can set any other state necessary to show ChatDialogCaptureV2
     }, 4000);
+  };
+
+  const salesConfirmationOption: FeedbackOption = {
+    id: 'sales_confirmation',
+    label: 'Sales Confirmation',
+    response: 'Thank you for your interest! A representative will contact you shortly.'
   };
 
   return (
@@ -697,8 +705,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       {isSubmitted && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-            <p className="text-lg font-medium mb-2">Thank you for your submission!</p>
-            <p className="text-sm text-gray-600 mb-4">We will review your submission and get back to you soon.</p>
+            <FeedbackConfirmation submittedOption={salesConfirmationOption} />
           </div>
         </div>
       )}

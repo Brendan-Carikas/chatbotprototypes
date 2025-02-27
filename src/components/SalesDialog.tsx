@@ -1,5 +1,5 @@
 import React from 'react';
-import { Info, CheckCircle2 } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { Tooltip, TextField } from '@mui/material';
 import { getAssetPath } from '../utils/assetPath';
 
@@ -15,8 +15,6 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   const [nameError, setNameError] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
   const [phoneError, setPhoneError] = React.useState('');
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
-
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -66,16 +64,9 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     if (validateForm()) {
-      onSubmit(name, email, phone); // Call the onSubmit prop with form data
-      setIsSubmitted(true); // Show confirmation message
-      
-      // After 4 seconds, hide confirmation and close dialog
-      setTimeout(() => {
-        setIsSubmitted(false);
-        onClose(); // Close SalesDialog to show ChatDialog
-      }, 4000);
+      onSubmit(name, email, phone);
     }
   };
 
@@ -120,142 +111,123 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
           maxHeight: 'calc(495px - 72px - 24px)' // 495px total - header height - padding
         }}>
         <div className="w-full flex flex-col">
-          {isSubmitted ? (
-            <div className="flex-1 flex flex-col items-center justify-center pt-16 p-8 space-y-4">
-            <div className="animate-[scale-up_0.5s_ease-out,ease-in-out_0.5s]">
-              <CheckCircle2 
-                className="w-16 h-16 text-teal-600 animate-[draw-check_1s_ease-out_forwards]"
-                strokeWidth={2.5}
-                aria-label="Success check mark"
+          <div className="px-4 py-4 flex flex-col justify-end">
+            <h6 className="mt-2 mb-6 text-gray-700 text-lg font-semibold">
+              Talk to our sales team
+            </h6>
+            <div className="mb-4">
+              <TextField
+                fullWidth
+                id="name"
+                label="Name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                error={!!nameError}
+                helperText={nameError}
+                placeholder="Your name"
+                size="small"
+                inputProps={{
+                  'aria-label': 'Name input field',
+                  'aria-required': 'true',
+                  'aria-invalid': !!nameError
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#008080',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#008080',
+                  },
+                }}
               />
             </div>
-              <h6 className=" mb-4 text-gray-700 text-lg font-semibold">
-                Thank you for your interest!
-              </h6>
-              <p className="text-gray-700">
-                A representative will contact you shortly.
-              </p>
+            <div className="mb-4">
+              <TextField
+                fullWidth
+                id="email"
+                label="Email address"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={!!emailError}
+                helperText={emailError}
+                placeholder="you@example.com"
+                size="small"
+                inputProps={{
+                  'aria-label': 'Email input field',
+                  'aria-required': 'true',
+                  'aria-invalid': !!emailError
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#008080',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#008080',
+                  },
+                }}
+              />
             </div>
-          ) : (
-            <>
-              
-              <div className="px-4 py-4 flex flex-col justify-end">
-                <h6 className="mt-2 mb-6 text-gray-700 text-lg font-semibold">
-                  Talk to our sales team
-                </h6>
-                <div className="mb-4">
-                  <TextField
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    error={!!nameError}
-                    helperText={nameError}
-                    placeholder="Your name"
-                    size="small"
-                    inputProps={{
-                      'aria-label': 'Name input field',
-                      'aria-required': 'true',
-                      'aria-invalid': !!nameError
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#008080',
-                        },
-                      },
-                      '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#008080',
-                      },
-                    }}
-                  />
-                </div>
-                <div className="mb-4">
-                  <TextField
-                    fullWidth
-                    id="email"
-                    label="Email address"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    error={!!emailError}
-                    helperText={emailError}
-                    placeholder="you@example.com"
-                    size="small"
-                    inputProps={{
-                      'aria-label': 'Email input field',
-                      'aria-required': 'true',
-                      'aria-invalid': !!emailError
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#008080',
-                        },
-                      },
-                      '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#008080',
-                      },
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <TextField
-                    fullWidth
-                    id="phone"
-                    label="Phone number"
-                    type="tel"
-                    value={phone}
-                    onChange={handlePhoneChange}
-                    error={!!phoneError}
-                    helperText={phoneError}
-                    placeholder="Your phone number"
-                    size="small"
-                    inputProps={{
-                      'aria-label': 'Phone number input field',
-                      'aria-required': 'true',
-                      'aria-invalid': !!phoneError
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#008080',
-                        },
-                      },
-                      '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#008080',
-                      },
-                    }}
-                  />
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Footer with buttons */}
-      {!isSubmitted && (
-        <div className="mt-auto  px-6 py-6 bg-gray-0">
-          <div className="flex gap-3">
-            <button
-              onClick={onClose}
-              className="flex-1 rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
-            >
-              Cancel
-            </button>
+            <div className="mb-4">
+              <TextField
+                fullWidth
+                id="phone"
+                label="Phone number"
+                type="tel"
+                value={phone}
+                onChange={handlePhoneChange}
+                error={!!phoneError}
+                helperText={phoneError}
+                placeholder="07XXX XXX XXX"
+                size="small"
+                inputProps={{
+                  'aria-label': 'Phone number input field',
+                  'aria-required': 'true',
+                  'aria-invalid': !!phoneError
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#008080',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#008080',
+                  },
+                }}
+              />
+            </div>
             <button
               onClick={handleSubmit}
-              className="flex-1 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#008080] hover:bg-[#006666] focus-visible:outline-[#008080]"
+              className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
+                name && email && phone
+                  ? 'bg-teal-600 text-white hover:bg-teal-700'
+                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              }`}
+              disabled={!name || !email || !phone}
+              aria-disabled={!name || !email || !phone}
             >
               Submit
             </button>
           </div>
         </div>
-      )}
+      </div>
+      {/* Footer with buttons */}
+      <div className="mt-auto  px-6 py-6 bg-gray-0">
+        <div className="flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
