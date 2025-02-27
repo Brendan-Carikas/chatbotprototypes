@@ -6,7 +6,6 @@ import QuestionAnswerOutlined from '@mui/icons-material/QuestionAnswerOutlined';
 import MailOutlined from '@mui/icons-material/MailOutlined';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
-import FeedbackConfirmation from './FeedbackConfirmation';
 import { getAssetPath } from '../utils/assetPath';
 
 type FeedbackType = 'positive' | 'negative' | null;
@@ -190,6 +189,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       // Optionally, you can set any other state necessary to show ChatDialogCaptureV2
     }, 4000);
   };
+
 
   const salesConfirmationOption: FeedbackOptionLocal = {
     id: 'sales_confirmation',
@@ -712,7 +712,8 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       {isSubmitted && (
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-lg p-4 text-center">
-            <FeedbackConfirmation submittedOption={salesConfirmationOption} />
+            <p className="text-lg font-medium mb-2">Thank you for your submission!</p>
+            <p className="text-sm text-gray-600 mb-4">We will review your submission and get back to you soon.</p>
           </div>
         </div>
       )}
