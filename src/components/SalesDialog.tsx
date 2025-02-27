@@ -75,16 +75,21 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission
     if (validateForm()) {
+      console.log('Form validated, submitting...');
       onSubmit(name, email, phone); // Call the onSubmit prop with form data
       setIsSubmitted(true); // Show confirmation message
+      console.log('isSubmitted set to true');
       
       // After 3 seconds, hide confirmation and close dialog
       setTimeout(() => {
+        console.log('Timeout triggered');
         setIsSubmitted(false);
         onClose(); // Close SalesDialog to show ChatDialog
       }, 3000);
     }
   };
+
+  console.log('Rendering SalesDialog, isSubmitted:', isSubmitted);
 
   return (
     <div className="bg-white flex flex-col rounded-lg shadow-lg w-[378px] xl:w-[448px] h-[600px] overflow-hidden">
@@ -128,7 +133,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
         }}>
         <div className="w-full flex flex-col">
           {isSubmitted ? (
-            <div className="flex-1 flex items-center justify-center" style={{ minHeight: '400px' }}>
+            <div className="flex-1 flex items-center justify-center min-h-[400px] pt-16">
               <FeedbackConfirmation submittedOption={salesConfirmationOption} />
             </div>
           ) : (
