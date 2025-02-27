@@ -679,7 +679,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
          
 
             <span className="text-[#C0C0C0] pt-2mb-2">Powered by</span>
-            <img src={getAssetPath('arto-site-logo-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
+            <img src={getAssetPath('arto-site-logo-lite-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
 
           </a>
         </div>
