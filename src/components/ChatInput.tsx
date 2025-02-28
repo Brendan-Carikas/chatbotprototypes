@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Send as SendLucide } from 'lucide-react';
 import { useChat } from '../contexts/ChatContext';
 import { artoTheme } from '../styles/arto';
 import SendIcon from '@mui/icons-material/Send';
