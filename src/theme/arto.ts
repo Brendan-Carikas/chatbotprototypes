@@ -46,15 +46,15 @@ export const artoTheme: Theme = {
     showFeedback: true,
     hideAssistantInfo: false,
     userMessage: {
-      background: '#008080',
-      text: 'white',
+      background: '#ccfbf1', // bg-teal-100
+      text: '#111827', // text-gray-900
       borderRadius: '12px 12px 4px 12px',
       fontSize: 'text-sm',
       marginBottom: '8px',
     },
     botMessage: {
-      background: '#ebebeb',
-      text: 'black',
+      background: '#f3f4f6', // bg-gray-100 
+      text: '#111827', // text-gray-900
       borderRadius: '12px 12px 12px 4px',
       fontSize: 'text-sm',
     },

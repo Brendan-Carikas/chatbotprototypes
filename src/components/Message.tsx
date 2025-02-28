@@ -2,7 +2,7 @@ import React from 'react';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Message as MessageType } from '../types';
 import { useFeedback } from '../hooks/useFeedback';
-import { artoTheme } from '../styles/arto';
+import { artoTheme } from '../theme/arto';
 
 interface MessageProps {
   message: MessageType;
@@ -24,17 +24,15 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
         style={{
           borderRadius: message.isBot ? artoTheme.borderRadius.botMessage : artoTheme.borderRadius.userMessage,
           fontFamily: artoTheme.fonts.sans.join(', '),
-          fontSize: message.isBot ? artoTheme.messageStyles.botMessage.fontSize : artoTheme.messageStyles.userMessage.fontSize
+          fontSize: message.isBot ? artoTheme.messageStyles.botMessage.fontSize : artoTheme.messageStyles.userMessage.fontSize,
+          backgroundColor: message.isBot ? artoTheme.messageStyles.botMessage.background : artoTheme.messageStyles.userMessage.background,
+          color: message.isBot ? artoTheme.messageStyles.botMessage.text : artoTheme.messageStyles.userMessage.text
         }}
-        className={`max-w-[80%] p-3 ${artoTheme.messageStyles.fontSize} ${
-          message.isBot
-            ? 'bg-gray-100 text-gray-900'
-            : 'bg-teal-600 text-white'
-        }`}
+        className={`max-w-[80%] p-3 ${artoTheme.messageStyles.fontSize}`}
       >
         {message.content}
         <time 
-          className="block text-xs mt-1 opacity-70"
+          className="block text-xs mt-1 opacity-100"
           dateTime={message.timestamp}
           aria-label={`Sent at ${message.timestamp}`}
         >
