@@ -1,5 +1,6 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import SendIcon from '@mui/icons-material/Send';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack } from '@mui/material';
 import QuestionAnswerOutlined from '@mui/icons-material/QuestionAnswerOutlined';
@@ -191,11 +192,6 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
   };
 
 
-  const salesConfirmationOption: FeedbackOptionLocal = {
-    id: 'sales_confirmation',
-    label: 'Sales Confirmation',
-    response: 'Thank you for your interest! A representative will contact you shortly.'
-  };
 
   return (
     <div 
@@ -394,20 +390,20 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                       <textarea
                         value={message.customFeedback}
                         onChange={(e) => {
-                          const newValue = e.target.value.slice(0, 600);
+                          const newValue = e.target.value.slice(0, 180);
                           setMessages(messages.map(msg =>
                             msg.id === message.id
                               ? { ...msg, customFeedback: newValue }
                               : msg
                           ));
                         }}
-                        maxLength={600}
+                        maxLength={180}
                         className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#008080] mb-1"
                         placeholder="Please add your feedback here..."
                         rows={3}
                       />
                       <div className="text-xs text-gray-500 font-medium mb-2 text-right">
-                        {message.customFeedback?.length || 0}/600 characters
+                        {message.customFeedback?.length || 0}/180 characters
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -646,11 +642,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
               />
               <button
                 type="submit"
-                className="bg-teal-600 text-white rounded-lg px-4 py-2 hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2"
+                className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
                 aria-label="Send message"
                 disabled={!newMessage.trim()}
               >
-                <Send className="w-5 h-5" aria-hidden="true" />
+                <SendIcon fontSize="small" />
               </button>
             </div>
           </form>

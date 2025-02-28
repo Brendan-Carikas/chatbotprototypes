@@ -1,11 +1,12 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack, TextField } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
 import { getAssetPath } from '../utils/assetPath';
 import ChatBubbleOutlined from '@mui/icons-material/ChatBubbleOutlined';
+import SendIcon from '@mui/icons-material/Send';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -327,20 +328,20 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
                       <textarea
                         value={message.customFeedback}
                         onChange={(e) => {
-                          const newValue = e.target.value.slice(0, 600);
+                          const newValue = e.target.value.slice(0, 180);
                           setMessages(messages.map(msg =>
                             msg.id === message.id
                               ? { ...msg, customFeedback: newValue }
                               : msg
                           ));
                         }}
-                        maxLength={600}
+                        maxLength={180}
                         className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#008080] mb-1"
                         placeholder="Please add your feedback here..."
                         rows={3}
                       />
                       <div className="text-xs text-gray-500 font-medium mb-2 text-right">
-                        {message.customFeedback?.length || 0}/600 characters
+                        {message.customFeedback?.length || 0}/180 characters
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -385,20 +386,20 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
                       <textarea
                         value={message.customFeedback}
                         onChange={(e) => {
-                          const newValue = e.target.value.slice(0, 600);
+                          const newValue = e.target.value.slice(0, 180);
                           setMessages(messages.map(msg =>
                             msg.id === message.id
                               ? { ...msg, customFeedback: newValue }
                               : msg
                           ));
                         }}
-                        maxLength={600}
+                        maxLength={180}
                         className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#008080] mb-1"
                         placeholder="Please add your feedback here..."
                         rows={3}
                       />
                       <div className="text-xs text-[#008080] font-medium mb-2">
-                        {message.customFeedback?.length || 0}/600 characters
+                        {message.customFeedback?.length || 0}/180 characters
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -490,6 +491,17 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
       <div className="p-4 px-4 border-t text-sm">
         <div className="flex gap-2">
           <TextField
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '8px',
+                '&.Mui-focused fieldset': {
+                  borderColor: '#008080',
+                },
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#008080',
+              },
+            }}
             fullWidth
             size="small"
             value={newMessage}
@@ -500,22 +512,12 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
               'aria-label': 'Message input field',
               'aria-required': 'true'
             }}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&.Mui-focused fieldset': {
-                  borderColor: '#008080',
-                },
-              },
-              '& .MuiInputLabel-root.Mui-focused': {
-                color: '#008080',
-              },
-            }}
           />
           <button
             onClick={handleSendMessage}
             className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
           >
-            <Send size={20} />
+            <SendIcon fontSize="small" />
           </button>
         </div>
         <div className="text-xs text-center mt-4 font-regular">
