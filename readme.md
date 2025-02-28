@@ -54,14 +54,14 @@ MIT License
 
 ### Handy URLS
 
-https://brendan-carikas.github.io/chatbotfeedbackinline/#/original
+https://brendan-carikas.github.io/chatbotprototypes/#/original
 
-https://brendan-carikas.github.io/chatbotfeedbackinline/#/welcome
+https://brendan-carikas.github.io/chatbotprototypes/#/welcome
 
-https://brendan-carikas.github.io/chatbotfeedbackinline/#/welcome-style2
+https://brendan-carikas.github.io/chatbotprototypes/#/welcome-style2
 
-https://brendan-carikas.github.io/chatbotfeedbackinline/#/capture
+https://brendan-carikas.github.io/chatbotprototypes/#/capture
 
-https://brendan-carikas.github.io/chatbotfeedbackinline/#/capture-v2
+https://brendan-carikas.github.io/chatbotprototypes/#/capture-v2
 
-https://brendan-carikas.github.io/chatbotfeedbackinline/#/chat-feedback
+https://brendan-carikas.github.io/chatbotprototypes/#/chat-feedback
