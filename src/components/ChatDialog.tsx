@@ -1,5 +1,6 @@
 import React from 'react';
-import { X, Send, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import SendIcon from '@mui/icons-material/Send';
 import { artoTheme } from '../theme/arto';
 import { Tooltip } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
@@ -407,9 +408,9 @@ const ChatDialog: React.FC<ChatDialogProps> = ({ onClose }) => {
           />
           <button
             onClick={handleSendMessage}
-            className="p-2 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors"
+            className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
           >
-            <Send size={20} />
+            <SendIcon fontSize="small" />
           </button>
         </div>
         <div className="text-xs text-center mt-4 font-regular">

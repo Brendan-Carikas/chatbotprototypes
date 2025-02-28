@@ -193,13 +193,13 @@ const ChatbotFeedback = () => {
               <div>
                 <textarea
                   value={customFeedback}
-                  onChange={(e) => setCustomFeedback(e.target.value.slice(0, 600))}
-                  maxLength={600}
+                  onChange={(e) => setCustomFeedback(e.target.value.slice(0, 180))}
+                  maxLength={180}
                   className="w-full p-3 border rounded-lg mb-2 min-h-[100px] focus:outline-none focus:ring-2 focus:ring-teal-500"
                   placeholder="Please add your feedback here..."
                 />
                 <div className="text-sm text-teal-600 font-medium">
-                  {customFeedback.length}/600 characters
+                  {customFeedback.length}/180 characters
                 </div>
               </div>
               <div className="flex gap-2">

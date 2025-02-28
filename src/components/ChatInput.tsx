@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Send } from 'lucide-react';
+import { Send as SendLucide } from 'lucide-react';
 import { useChat } from '../contexts/ChatContext';
 import { artoTheme } from '../styles/arto';
+import SendIcon from '@mui/icons-material/Send';
 
 const ChatInput: React.FC = () => {
   const [input, setInput] = useState('');
@@ -41,7 +42,7 @@ const ChatInput: React.FC = () => {
             className="bg-teal-600 text-white rounded-lg px-4 py-2 hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2"
             aria-label="Send message"
           >
-            <Send className="w-5 h-5" aria-hidden="true" />
+            <SendIcon fontSize="small" />
           </button>
         </div>
       </form>
