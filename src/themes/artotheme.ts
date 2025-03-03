@@ -2,7 +2,7 @@ import { type Theme } from './types';
 
 export const artotheme: Theme = {
   name: 'artotheme',
-  logo: 'public/Arto-Logo-Reverse.svg', // Logo shown in chat header
+  logo: 'Arto-Logo-Reverse.svg', // Logo shown in chat header
   colors: {
     primary: '181 100% 26%', // User message bubbles, send button
     background: '174 57% 90%', // Chat dialog background
