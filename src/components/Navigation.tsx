@@ -82,6 +82,16 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen: propIsOpen, onToggle: p
         <div className="flex flex-col h-full p-4 mt-20">
 
           <div className="flex flex-col space-y-2">
+            
+          <Link 
+              to="/original" 
+              className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/original' ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}
+              aria-label="Go to Original Chat Dialog page"
+              onClick={handleLinkClick}
+            >
+              Chatbot: Original Dialog
+            </Link>
+            
             <Link 
               to="/welcome" 
               className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/welcome' ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}
@@ -114,14 +124,7 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen: propIsOpen, onToggle: p
             >
               Chatbot: Feedback
             </Link>
-            <Link 
-              to="/original" 
-              className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/original' ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}
-              aria-label="Go to Original Chat Dialog page"
-              onClick={handleLinkClick}
-            >
-              Chatbot: Original Dialog
-            </Link>
+            
             <Link 
               to="/capture" 
               className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/capture' ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}

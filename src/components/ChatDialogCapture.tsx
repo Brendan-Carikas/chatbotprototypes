@@ -528,8 +528,8 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
         </div>
       </div>
       {showSalesDialog && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <div style={{ width: '448px', height: '600px' }}>
+        <div className="fixed inset-0 z-10 flex items-center justify-center">
+          <div className="w-full max-w-[448px] mx-auto">
             <SalesDialog
               onSubmit={handleSalesDialogSubmit}
               onClose={() => setShowSalesDialog(false)}
