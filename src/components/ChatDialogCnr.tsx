@@ -9,6 +9,7 @@ import { Tooltip } from '@mui/material';
 import { Info } from 'lucide-react';
 import PoweredByArto from './PoweredByArto';
 import SendIcon from '@mui/icons-material/Send';
+import { getAssetPath } from '../utils/assetPath';
 
 interface ChatDialogCnrProps {
   onClose?: () => void;
@@ -171,7 +172,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
         <div className="flex items-center gap-2">
           <div className="flex items-center h-[56px] w-auto">
             <img 
-              src={currentThemeObj.logo}
+              src={getAssetPath(currentThemeObj.logo)}
               alt="Logo" 
               className="h-full w-auto"
             />
@@ -225,7 +226,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
       {!currentThemeObj.messageStyles.hideAssistantInfo && (
         <div className="flex items-center gap-2 px-4 py-2 bg-secondary/30">
           <img 
-            src="/chatbottheme/Arto-icon.svg"
+            src={getAssetPath('/chatbottheme/Arto-icon.svg')}
             alt="Bot"
             className="h-[17.5px] w-[17.5px]"
           />
@@ -260,7 +261,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                 {message.sender === 'bot' && !currentThemeObj.messageStyles.hideAssistantInfo && (
                   <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
                     <img 
-                      src="/chatbottheme/Arto-icon.svg"
+                      src={getAssetPath('/chatbottheme/Arto-icon.svg')}
                       alt="Bot"
                       className="h-5 w-5"
                     />
