@@ -1,5 +1,6 @@
 import React from 'react';
 import { getAssetPath } from '../utils/assetPath';
+import { artoTheme } from '../theme/arto';
 import { 
   TextField, 
   Button, 
@@ -40,7 +41,7 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
         borderRadius: 2
       }}
     >
-      <AppBar position="static" color="primary" elevation={0} sx={{ bgcolor: '#008080', borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
+      <AppBar position="static" color="primary" elevation={0} sx={{ bgcolor: artoTheme.colors.primary, borderTopLeftRadius: 8, borderTopRightRadius: 8 }}>
         <Toolbar sx={{ py: 1 }}>
           <Box component="img" src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" sx={{ height: 56 }} />
         </Toolbar>
@@ -93,13 +94,13 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
                 '& .MuiOutlinedInput-root': {
                   fontFamily: 'Libre Franklin',
                   '&.Mui-focused fieldset': {
-                    borderColor: '#008080',
+                    borderColor: artoTheme.colors.primary,
                   },
                 },
                 '& .MuiInputLabel-root': {
                   fontFamily: 'Libre Franklin',
                   '&.Mui-focused': {
-                    color: '#008080',
+                    color: artoTheme.colors.primary,
                   },
                 },
               }}
@@ -122,10 +123,10 @@ const AuthenticationOverlay: React.FC<AuthenticationOverlayProps> = ({ onAuthent
           disabled={!email.trim()}
           sx={{
             mt: 0,
-            bgcolor: '#008080',
+            bgcolor: artoTheme.colors.primary,
             fontFamily: 'Libre Franklin',
             '&:hover': {
-              bgcolor: '#006666',
+              bgcolor: artoTheme.colors.primary,
             },
             '&:disabled': {
               bgcolor: '#E5E7EB',

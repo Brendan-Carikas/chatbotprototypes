@@ -10,6 +10,7 @@ export interface Theme {
   };
   colors: {
     primary: string;
+    primaryLight: string;
     secondary: string;
     background: string;
     foreground: string;
