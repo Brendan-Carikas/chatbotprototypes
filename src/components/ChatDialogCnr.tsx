@@ -5,6 +5,8 @@ import { Card } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { cn } from '../lib/utils';
 import { themes } from '../themes';
+import { Tooltip } from '@mui/material';
+import { Info } from 'lucide-react';
 
 interface ChatDialogCnrProps {
   onClose?: () => void;
@@ -158,13 +160,13 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
   };
 
   return (
-    <Card className="h-[600px] w-full max-w-full sm:max-w-[448px] flex flex-col overflow-hidden border border-[#E5E7EB] shadow-lg bg-white rounded-lg" role="dialog" aria-label="Chat Dialog">
+    <Card className="h-[600px] w-full max-w-full sm:max-w-[448px] flex flex-col overflow-hidden shadow-lg bg-white rounded-lg" role="dialog" aria-label="Chat Dialog">
       {/* Header */}
       <div className={cn(
         "p-4 flex items-center justify-between rounded-t-lg",
         "bg-[#008080] text-white"
       )}>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div className="flex items-center h-[56px] w-auto">
             <img 
               src={currentThemeObj.logo}
@@ -172,17 +174,33 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
               className="h-full w-auto"
             />
           </div>
-          <div 
-            className="p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full"
-            aria-label="Information about AI Assistant"
-            tabIndex={2}
+
+          <Tooltip 
+            title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
+            arrow
+            placement="bottom"
+            sx={{
+              '& .MuiTooltip-tooltip': {
+                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                color: '#fff',
+                fontSize: '0.75rem',
+                padding: '8px 12px',
+                maxWidth: '280px',
+                borderRadius: '4px'
+              },
+              '& .MuiTooltip-arrow': {
+                color: 'rgba(0, 0, 0, 0.9)'
+              }
+            }}
           >
-            <img 
-              src="/chatbottheme/Arto-icon.svg"
-              alt="Bot"
-              className="h-4 w-4"
-            />
-          </div>
+            <button 
+              className="p-1 rounded-full hover:bg-[#006666] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Information about AI Assistant"
+              tabIndex={2}
+            >
+              <Info className="h-4 w-4 text-white" />
+            </button>
+          </Tooltip>
         </div>
         {onClose && (
           <Button

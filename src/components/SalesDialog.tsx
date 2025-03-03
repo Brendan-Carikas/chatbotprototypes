@@ -81,7 +81,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   };
 
   return (
-    <div className="bg-white flex flex-col rounded-lg shadow-lg w-[378px] xl:w-[448px] h-[600px] overflow-hidden">
+    <div className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] overflow-hidden mx-auto">
       {/* Header */}
       <div className="text-white p-4 rounded-t-lg flex justify-between items-center" style={{ backgroundColor: artoTheme.colors.primary }}>
         <div className="flex items-center gap-2">
