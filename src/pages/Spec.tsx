@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "../components/ui/button";
 import ChatDialogCnr from '../components/ChatDialogCnr';
 import { useTheme } from '../contexts/ThemeContext';
-
+import { getAssetPath } from '../utils/assetPath';
 
 const Spec = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -37,7 +37,7 @@ const Spec = () => {
             size="icon"
           >
             <img 
-              src="./public/Arto-icon-Reverse.svg"
+              src={getAssetPath('Arto-icon-Reverse.svg')}
               alt="Chat"
               className="h-6 w-6 md:h-9 md:w-9"
             />
