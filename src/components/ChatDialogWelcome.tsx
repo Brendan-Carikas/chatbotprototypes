@@ -115,7 +115,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
-      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
+      <div className="text-white p-4 rounded-t-lg flex justify-between items-center" style={{ backgroundColor: artoTheme.colors.primary }}>
         <div className="flex items-center gap-2">
           <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
@@ -200,7 +200,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                             : msg
                         ));
                       }}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Positive feedback"
                     >
                       <ThumbsUp className="w-4 h-4" />
@@ -213,7 +213,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                             : msg
                         ));
                       }}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Negative feedback"
                     >
                       <ThumbsDown className="w-4 h-4" />
@@ -241,7 +241,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                                 : msg
                             ));
                           }}
-                          className="px-3 py-1 rounded-full text-xs transition-colors bg-teal-50 hover:bg-teal-100 text-[#008080]"
+                          className="px-3 py-1 rounded-full text-xs transition-colors bg-teal-50 hover:bg-teal-100" style={{ color: artoTheme.colors.primary }}
                         >
                           {option.label}
                         </button>
@@ -262,7 +262,9 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                           ));
                         }}
                         maxLength={180}
-                        className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#008080] mb-1"
+                        className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 mb-1" style={{ 
+                          '--tw-ring-color': artoTheme.colors.primary 
+                        }}
                         placeholder="Please add your feedback here..."
                         rows={3}
                       />
@@ -282,7 +284,8 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                           }
                         }}
                         disabled={!message.customFeedback?.trim()}
-                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors bg-[#008080] hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        style={{ backgroundColor: artoTheme.colors.primary }}
                       >
                         Submit Feedback
                       </button>
@@ -320,7 +323,9 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                           ));
                         }}
                         maxLength={180}
-                        className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#008080] mb-1"
+                        className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 mb-1" style={{ 
+                          '--tw-ring-color': artoTheme.colors.primary 
+                        }}
                         placeholder="Please add your feedback here..."
                         rows={3}
                       />
@@ -340,7 +345,8 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                           }
                         }}
                         disabled={!message.customFeedback?.trim()}
-                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors bg-[#008080] hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        style={{ backgroundColor: artoTheme.colors.primary }}
                       >
                         Submit Feedback
                       </button>
@@ -409,12 +415,13 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
             onKeyPress={handleKeyPress}
             placeholder={isAuthenticated ? "Ask a question..." : "Please authenticate first..."}
             disabled={!isAuthenticated}
-            className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080] disabled:bg-gray-100"
+            className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2" style={{ '--tw-ring-color': artoTheme.colors.primary }}
           />
           <button
             onClick={handleSendMessage}
             disabled={!isAuthenticated || !newMessage.trim()}
-            className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
+            className="p-2 w-14 h-10 text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
+            style={{ backgroundColor: artoTheme.colors.primary }}
           >
             <SendIcon fontSize="small" />
           </button>

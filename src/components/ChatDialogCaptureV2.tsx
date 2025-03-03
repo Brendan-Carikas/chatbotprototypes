@@ -199,7 +199,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
-      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
+      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center" style={{ backgroundColor: artoTheme.colors.primary }}>
         <div className="flex items-center gap-2">
           <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
@@ -336,7 +336,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                             : msg
                         ));
                       }}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Positive feedback"
                     >
                       <ThumbsUp className="w-4 h-4" />
@@ -349,7 +349,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                             : msg
                         ));
                       }}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Negative feedback"
                     >
                       <ThumbsDown className="w-4 h-4" />
@@ -377,7 +377,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                                 : msg
                             ));
                           }}
-                          className="px-3 py-1 rounded-full text-xs transition-colors bg-teal-50 hover:bg-teal-100 text-[#008080]"
+                          className="px-3 py-1 rounded-full text-xs transition-colors bg-teal-50 hover:bg-teal-100" style={{ color: artoTheme.colors.primary }}
                         >
                           {option.label}
                         </button>
@@ -419,6 +419,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                         }}
                         disabled={!message.customFeedback?.trim()}
                         className="px-3 py-1 text-white rounded-lg text-xs transition-colors bg-[#008080] hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        style={{ backgroundColor: artoTheme.colors.primary }}
                       >
                         Submit Feedback
                       </button>
@@ -477,6 +478,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                         }}
                         disabled={!message.customFeedback?.trim()}
                         className="px-3 py-1 text-white rounded-lg text-xs transition-colors bg-[#008080] hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        style={{ backgroundColor: artoTheme.colors.primary }}
                       >
                         Submit Feedback
                       </button>
@@ -563,7 +565,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                   id="name"
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
-                  className={`block w-full rounded-md border ${nameError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                  className={`block w-full rounded-md border ${nameError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:outline-none focus:ring-2 sm:text-sm`}
+                  style={{ 
+                    ['--tw-ring-color' as string]: artoTheme.colors.primary,
+                    ['--tw-border-color' as string]: artoTheme.colors.primary
+                  }}
                   placeholder="Your name"
                 />
                 {nameError && (
@@ -578,7 +584,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                   id="email"
                   value={contactEmail}
                   onChange={(e) => setContactEmail(e.target.value)}
-                  className={`block w-full rounded-md border ${emailError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                  className={`block w-full rounded-md border ${emailError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:outline-none focus:ring-2 sm:text-sm`}
+                  style={{ 
+                    ['--tw-ring-color' as string]: artoTheme.colors.primary,
+                    ['--tw-border-color' as string]: artoTheme.colors.primary
+                  }}
                   placeholder="you@example.com"
                 />
                 {emailError && (
@@ -593,7 +603,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                   id="phone"
                   value={contactPhone}
                   onChange={(e) => setContactPhone(e.target.value)}
-                  className={`block w-full rounded-md border ${phoneError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:border-[#008080] focus:outline-none focus:ring-1 focus:ring-[#008080] sm:text-sm`}
+                  className={`block w-full rounded-md border ${phoneError ? 'border-red-300' : 'border-gray-300'} px-3 py-2 shadow-sm focus:outline-none focus:ring-2 sm:text-sm`}
+                  style={{ 
+                    ['--tw-ring-color' as string]: artoTheme.colors.primary,
+                    ['--tw-border-color' as string]: artoTheme.colors.primary
+                  }}
                   placeholder="Your phone number"
                 />
                 {phoneError && (
@@ -604,7 +618,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
               <div className="mt-8 pt-2">
                 <button
                   onClick={handleContactSubmit}
-                  className="w-full bg-[#008080] text-white py-2 px-4 rounded-md hover:bg-[#006666] transition-colors focus:outline-none focus:ring-2 focus:ring-[#008080] focus:ring-offset-2"
+                  className="w-full bg-[#008080] text-white py-2 px-4 rounded-md hover:bg-[#006666] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  style={{ 
+                    backgroundColor: artoTheme.colors.primary,
+                    ['--tw-ring-color' as string]: artoTheme.colors.primary
+                  }}
                 >
                   Submit
                 </button>
@@ -643,6 +661,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
               <button
                 type="submit"
                 className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
+                style={{ backgroundColor: artoTheme.colors.primary }}
                 aria-label="Send message"
                 disabled={!newMessage.trim()}
               >
@@ -665,11 +684,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
             <QuestionAnswerOutlined
               sx={{ 
                 fontSize: 24,
-                color: activeTab === 'ai' ? '#008080' : '#333333'
+                color: activeTab === 'ai' ? artoTheme.colors.primary : '#333333'
               }}
             />
-            <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? 'text-[#008080]' : 'text-[#333333'}`}>Chat</span>
-            {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080]" />}
+            <span className={`text-xs font-medium mt-1 ${activeTab === 'ai' ? '' : 'text-[#333333]'}`} style={{ color: activeTab === 'ai' ? artoTheme.colors.primary : undefined }}>Chat</span>
+            {activeTab === 'ai' && <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: artoTheme.colors.primary }} />}
           </button>
           <button
             onClick={() => setActiveTab('talk')}
@@ -679,11 +698,11 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
             <MailOutlined
               sx={{ 
                 fontSize: 24,
-                color: activeTab === 'talk' ? '#008080' : '#333333'
+                color: activeTab === 'talk' ? artoTheme.colors.primary : '#333333'
               }}
             />
-            <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? 'text-[#008080]' : 'text-[#333333'}`}>Talk to us</span>
-            {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-1 bg-[#008080] " />}
+            <span className={`text-xs font-medium mt-1 ${activeTab === 'talk' ? '' : 'text-[#333333]'}`} style={{ color: activeTab === 'talk' ? artoTheme.colors.primary : undefined }}>Talk to us</span>
+            {activeTab === 'talk' && <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: artoTheme.colors.primary }} />}
           </button>
         </nav>
       </div>

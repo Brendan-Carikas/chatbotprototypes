@@ -13,6 +13,7 @@ export const artoTheme: Theme = {
   },
   colors: {
     primary: '#008080',
+    primaryLight: '#00808040', // 25% of primary using hex opacity
     secondary: '#006666',
     background: '#ffffff',
     foreground: '#000000',
@@ -46,7 +47,7 @@ export const artoTheme: Theme = {
     showFeedback: true,
     hideAssistantInfo: false,
     userMessage: {
-      background: '#ccfbf1', // bg-teal-100
+      background: '#00808040', // Same as primaryLight
       text: '#111827', // text-gray-900
       borderRadius: '12px 12px 4px 12px',
       fontSize: 'text-sm',
