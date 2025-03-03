@@ -16,9 +16,9 @@ const PoweredByArto: React.FC<PoweredByArtoProps> = ({ className = '' }) => {
         tabIndex={0}
         aria-label="Visit Arto AI Chatbot website"
       >
-        <span className="text-[#C0C0C0] pt-2mb-2">Powered by</span>
+        <span className="text-[#656565] pt-2mb-2">Powered by</span>
         <img 
-          src={getAssetPath('arto-site-logo-lite-grey.svg')} 
+          src={getAssetPath('arto-site-logo-grey.svg')} 
           alt="Arto" 
           className="inline-block h-4 mb-1 ml-0.5" 
         />

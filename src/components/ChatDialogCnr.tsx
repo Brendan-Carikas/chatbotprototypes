@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Send, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Textarea } from './ui/textarea';
@@ -8,6 +8,7 @@ import { themes } from '../themes';
 import { Tooltip } from '@mui/material';
 import { Info } from 'lucide-react';
 import PoweredByArto from './PoweredByArto';
+import SendIcon from '@mui/icons-material/Send';
 
 interface ChatDialogCnrProps {
   onClose?: () => void;
@@ -443,7 +444,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
               tabIndex={messages.length * 2 + 4}
               disabled={!inputValue.trim()}
             >
-              <Send className="h-5 w-5" />
+              <SendIcon className="h-5 w-5" />
             </button>
           </div>
           <div className="text-xs text-center mt-4 font-regular">
