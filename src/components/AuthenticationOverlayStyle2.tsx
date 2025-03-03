@@ -8,6 +8,7 @@ import {
   Box, 
   Container
 } from '@mui/material';
+import { artoTheme } from '../theme/arto';
 
 interface AuthenticationOverlayProps {
   onAuthenticate: (email: string) => void;
@@ -97,13 +98,13 @@ const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onA
                 '& .MuiOutlinedInput-root': {
                   fontFamily: 'Libre Franklin',
                   '&.Mui-focused fieldset': {
-                    borderColor: '#008080',
+                    borderColor: artoTheme.colors.primary,
                   },
                 },
                 '& .MuiInputLabel-root': {
                   fontFamily: 'Libre Franklin',
                   '&.Mui-focused': {
-                    color: '#008080',
+                    color: artoTheme.colors.primary,
                   },
                 },
               }}
@@ -125,10 +126,10 @@ const AuthenticationOverlayStyle2: React.FC<AuthenticationOverlayProps> = ({ onA
           disabled={!email.trim()}
           sx={{
             mt: 0,
-            bgcolor: '#008080',
+            bgcolor: artoTheme.colors.primary,
             fontFamily: 'Libre Franklin',
             '&:hover': {
-              bgcolor: '#006666',
+              bgcolor: artoTheme.colors.secondary,
             },
             '&:disabled': {
               bgcolor: '#E5E7EB',
