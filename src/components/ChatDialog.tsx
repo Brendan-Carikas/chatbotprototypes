@@ -5,6 +5,7 @@ import { artoTheme } from '../theme/arto';
 import { Tooltip } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
 import { getAssetPath } from '../utils/assetPath';
+import PoweredByArto from './PoweredByArto';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -414,10 +415,7 @@ const ChatDialog: React.FC<ChatDialogProps> = ({ onClose }) => {
           </button>
         </div>
         <div className="text-xs text-center mt-4 font-regular">
-          <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
-            <span className="text-[#C0C0C0] mt-0">Powered by</span>
-            <img src={getAssetPath('arto-site-logo-lite-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
-          </a>
+          <PoweredByArto />
         </div>
       </div>
     </div>

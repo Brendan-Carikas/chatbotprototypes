@@ -8,6 +8,7 @@ import MailOutlined from '@mui/icons-material/MailOutlined';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
 import { getAssetPath } from '../utils/assetPath';
+import PoweredByArto from './PoweredByArto';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -709,10 +710,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
       {/* Powered by Arto */}
       <div className="text-xs text-center mt-2 pb-4 font-regular rounded-b-lg">
-        <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
-          <span className="text-[#C0C0C0] pt-2mb-2">Powered by</span>
-          <img src={getAssetPath('arto-site-logo-lite-grey.svg')} alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
-        </a>
+        <PoweredByArto />
       </div>
       {showSalesDialog && (
         <div className="fixed inset-0 z-10 flex items-center justify-center">

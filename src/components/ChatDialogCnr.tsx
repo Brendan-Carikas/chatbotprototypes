@@ -7,6 +7,7 @@ import { cn } from '../lib/utils';
 import { themes } from '../themes';
 import { Tooltip } from '@mui/material';
 import { Info } from 'lucide-react';
+import PoweredByArto from './PoweredByArto';
 
 interface ChatDialogCnrProps {
   onClose?: () => void;
@@ -446,10 +447,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
             </button>
           </div>
           <div className="text-xs text-center mt-4 font-regular">
-            <a href="https://invotra.com/arto-ai-chatbot/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center hover:opacity-80">
-              <span className="text-[#C0C0C0] mt-0">Powered by</span>
-              <img src="public/arto-site-logo-lite-grey.svg" alt="Arto" className="inline-block h-4 mb-1 ml-0.5" />
-            </a>
+            <PoweredByArto />
           </div>
         </div>
       </div>
