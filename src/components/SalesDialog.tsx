@@ -2,6 +2,7 @@ import React from 'react';
 import { Info, CheckCircle2 } from 'lucide-react';
 import { Tooltip, TextField } from '@mui/material';
 import { getAssetPath } from '../utils/assetPath';
+import { artoTheme } from '../theme/arto';
 
 interface SalesDialogProps {
   onSubmit: (name: string, email: string, phone: string) => void;
@@ -82,7 +83,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   return (
     <div className="bg-white flex flex-col rounded-lg shadow-lg w-[378px] xl:w-[448px] h-[600px] overflow-hidden">
       {/* Header */}
-      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
+      <div className="text-white p-4 rounded-t-lg flex justify-between items-center" style={{ backgroundColor: artoTheme.colors.primary }}>
         <div className="flex items-center gap-2">
           <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
@@ -163,11 +164,11 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         '&.Mui-focused fieldset': {
-                          borderColor: '#008080',
+                          borderColor: artoTheme.colors.primary,
                         },
                       },
                       '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#008080',
+                        color: artoTheme.colors.primary,
                       },
                     }}
                   />
@@ -192,11 +193,11 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         '&.Mui-focused fieldset': {
-                          borderColor: '#008080',
+                          borderColor: artoTheme.colors.primary,
                         },
                       },
                       '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#008080',
+                        color: artoTheme.colors.primary,
                       },
                     }}
                   />
@@ -222,11 +223,11 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                     sx={{
                       '& .MuiOutlinedInput-root': {
                         '&.Mui-focused fieldset': {
-                          borderColor: '#008080',
+                          borderColor: artoTheme.colors.primary,
                         },
                       },
                       '& .MuiInputLabel-root.Mui-focused': {
-                        color: '#008080',
+                        color: artoTheme.colors.primary,
                       },
                     }}
                   />
@@ -249,7 +250,11 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
             </button>
             <button
               onClick={handleSubmit}
-              className="flex-1 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#008080] hover:bg-[#006666] focus-visible:outline-[#008080]"
+              className="flex-1 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-[#006666]"
+              style={{ 
+                backgroundColor: artoTheme.colors.primary,
+                ['--tw-outline-color' as string]: artoTheme.colors.primary
+              }}
             >
               Submit
             </button>
