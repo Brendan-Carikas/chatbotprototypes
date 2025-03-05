@@ -25,7 +25,7 @@ const ChatInput: React.FC = () => {
       >
         <div className="flex space-x-2">
           <label htmlFor="messageInput" className="sr-only">
-            Ask a question
+            Ask a question buddy
           </label>
           <input
             id="messageInput"
@@ -44,10 +44,13 @@ const ChatInput: React.FC = () => {
             className="text-white rounded-lg px-4 py-2 hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
             style={{ 
               backgroundColor: artoTheme.colors.primary,
-              '--tw-ring-color': artoTheme.colors.primary
+              '--tw-ring-color': artoTheme.colors.primary,
+              opacity: !input.trim() ? '0.7' : '1'
             } as React.CSSProperties}
             aria-label="Send message"
             tabIndex={2}
+            disabled={!input.trim()}
+            aria-disabled={!input.trim()}
           >
             <SendIcon fontSize="small" />
           </button>
