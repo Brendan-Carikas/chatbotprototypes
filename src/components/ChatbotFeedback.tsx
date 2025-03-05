@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -129,19 +130,21 @@ const ChatbotFeedback = () => {
         <div className="flex items-center gap-2 mb-4">
           <button 
             onClick={handleThumbsUp}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors text-teal-600"
+            className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                     focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             aria-label="Positive feedback"
             tabIndex={3}
           >
-            <ThumbsUp className="w-5 h-5" />
+            <ThumbUpOutlinedIcon fontSize="small" />
           </button>
           <button 
             onClick={handleThumbsDown}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors text-teal-600"
+            className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                     focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             aria-label="Negative feedback"
             tabIndex={4}
           >
-            <ThumbsDown className="w-5 h-5" />
+            <ThumbDownOutlinedIcon fontSize="small" />
           </button>
         </div>
       )}

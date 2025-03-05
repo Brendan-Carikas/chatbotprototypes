@@ -1,5 +1,8 @@
 import React from 'react';
-import { X, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import CloseIcon from '@mui/icons-material/Close';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { artoTheme } from '../theme/arto';
 import { Tooltip, Chip, Stack, TextField } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
@@ -20,7 +23,7 @@ interface FeedbackOption {
 
 interface ChipOption {
   text: string;
-  icon: any;
+  icon: React.ElementType;
 }
 
 interface Message {
@@ -67,7 +70,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
   const [isTyping, setIsTyping] = React.useState(false);
   const [inputPlaceholder] = React.useState('Ask a question...');
   const [showSalesDialog, setShowSalesDialog] = React.useState(false);
-  const [, setIsSubmitted] = React.useState(false);
+  const [] = React.useState(false);
   const [messages, setMessages] = React.useState<Message[]>([
     { 
       id: '1',
@@ -169,7 +172,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
               aria-label="Information about AI Assistant"
               tabIndex={2}
             >
-              <Info className="h-4 w- text-white" />
+              <InfoOutlinedIcon className="h-4 w- text-white" />
             </button>
           </Tooltip>
         </div>
@@ -189,7 +192,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
             Talk to us
           </button>
           <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors" tabIndex={100}>
-            <X size={20} />
+            <CloseIcon sx={{ fontSize: 20 }} />
           </button>
         </div>
       </div>
@@ -235,7 +238,10 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
                         key={index}
                         label={option.text}
                         variant="outlined"
-                        icon={<option.icon size={16} color="currentColor" />}
+                        icon={React.createElement(option.icon, { 
+                          sx: { fontSize: 16 },
+                          className: "text-current"
+                        })}
                         onClick={() => {
                           const handleClick = async () => {
                             // Remove chips from the first message
@@ -294,11 +300,12 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
                             : msg
                         ));
                       }}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                               focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                       aria-label="Positive feedback"
                       tabIndex={3 + (index * 2)}
                     >
-                      <ThumbsUp className="w-4 h-4" />
+                      <ThumbUpOutlinedIcon fontSize="small" />
                     </button>
                     <button
                       onClick={() => {
@@ -308,11 +315,12 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
                             : msg
                         ));
                       }}
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                               focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                       aria-label="Negative feedback"
                       tabIndex={4 + (index * 2)}
                     >
-                      <ThumbsDown className="w-4 h-4" />
+                      <ThumbDownOutlinedIcon fontSize="small" />
                     </button>
                   </div>
                 ) : message.feedbackOption === null ? (
@@ -481,7 +489,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
                       className="absolute top-1 right-1 p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
                       aria-label="Dismiss feedback response"
                     >
-                      <X className="w-3 h-3" />
+                      <CloseIcon className="w-3 h-3" />
                     </button>
                     {(message.feedback === 'positive' ? POSITIVE_OPTIONS : NEGATIVE_OPTIONS).find(
                       (opt) => opt.id === message.feedbackOption
