@@ -51,11 +51,10 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
       timestamp: new Date(),
     },
   ]);
-  const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [, setActiveFeedbackMessageId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState('');
   const activeTheme = theme || 'artotheme';
 
   const currentThemeObj = themes[activeTheme as keyof typeof themes];
@@ -65,42 +64,6 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
       // setChatTheme(theme);
     }
   }, [theme]);
-
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: inputValue,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue('');
-    setIsTyping(true);
-
-    // Auto-scroll after user message
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    setTimeout(() => {
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: 'Thank you for your message. I understand your query and I will help you with that.',
-        sender: 'bot',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, botMessage]);
-      setIsTyping(false);
-
-      // Auto-scroll after bot message
-      if (messagesEndRef.current) {
-        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 1000);
-  };
 
   const handleFeedbackClick = (messageId: string, isPositive: boolean) => {
     setActiveFeedbackMessageId(messageId);
@@ -161,6 +124,41 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
     if (onClose) {
       onClose();
     }
+  };
+
+  const handleSendMessage = (text: string) => {
+    if (!text.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: text,
+      sender: 'user',
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setIsTyping(true);
+
+    // Auto-scroll after user message
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    setTimeout(() => {
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: 'Thank you for your message. I understand your query and I will help you with that.',
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, botMessage]);
+      setIsTyping(false);
+
+      // Auto-scroll after bot message
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1000);
   };
 
   return (
@@ -368,43 +366,56 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
         </div>
 
         {/* Input Area */}
-        <div className="p-4 border-t border-gray-200 mt-auto">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Ask a question..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSendMessage();
-                }
-                if (e.key === 'Escape') {
-                  handleClose();
-                }
-              }}
-              className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              aria-label="Chat input"
-              tabIndex={1}
-              ref={inputRef}
-            />
-            <button 
-              onClick={handleSendMessage}
-              aria-label="Send message"
-              className={cn(
-                "p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center",
-                !inputValue.trim() && "opacity-50 cursor-not-allowed"
-              )}
-              tabIndex={2}
-              disabled={!inputValue.trim()}
-            >
-              <SendIcon className="h-5 w-5" />
-            </button>
+        <div className="border-t border-gray-200 mt-auto">
+          <div className="p-4 px-2 pr-4">
+            <div className="flex space-x-2">
+              <label htmlFor="messageInput" className="sr-only">
+                Ask a question
+              </label>
+              <input
+                id="messageInput"
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage(inputValue);
+                    setInputValue('');
+                  }
+                  if (e.key === 'Escape') {
+                    handleClose();
+                  }
+                }}
+                placeholder="Ask a question..."
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 text-sm"
+                style={{ '--tw-ring-color': artoTheme.colors.primary } as React.CSSProperties}
+                aria-label="Message input"
+                required
+                tabIndex={1}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  handleSendMessage(inputValue);
+                  setInputValue('');
+                }}
+                className="text-white rounded-lg px-4 py-2 hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                style={{ 
+                  backgroundColor: artoTheme.colors.primary,
+                  '--tw-ring-color': artoTheme.colors.primary,
+                  opacity: !inputValue.trim() ? '0.7' : '1'
+                } as React.CSSProperties}
+                aria-label="Send message"
+                tabIndex={2}
+                disabled={!inputValue.trim()}
+                aria-disabled={!inputValue.trim()}
+              >
+                <SendIcon fontSize="small" />
+              </button>
+            </div>
           </div>
-          <div className="text-xs text-center mt-4 font-regular">
-            <PoweredByArto />
-          </div>
+          <PoweredByArto />
         </div>
       </div>
     </Card>

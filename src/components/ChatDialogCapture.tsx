@@ -146,7 +146,10 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
-      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
+      <div 
+        className="text-white p-4 rounded-t-lg flex justify-between items-center"
+        style={{ backgroundColor: artoTheme.colors.primary }}
+      >
         <div className="flex items-center gap-2">
           <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
           <Tooltip 
@@ -191,7 +194,17 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
             <ChatBubbleOutlined sx={{ fontSize: 16, color: 'inherit' }} />
             Talk to us
           </button>
-          <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors" tabIndex={100}>
+          <button 
+            onClick={onClose} 
+            className="p-1 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            style={{
+              ':hover': { 
+                backgroundColor: 'rgba(0, 94, 84, 0.8)' // Slightly darker version of primary
+              }
+            } as React.CSSProperties}
+            aria-label="Close dialog"
+            tabIndex={100}
+          >
             <CloseIcon sx={{ fontSize: 20 }} />
           </button>
         </div>
@@ -386,7 +399,13 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
                           }
                         }}
                         disabled={!message.customFeedback?.trim()}
-                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors bg-[#008080] hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        style={{ 
+                          backgroundColor: artoTheme.colors.primary,
+                          ':hover': { 
+                            backgroundColor: 'rgba(0, 94, 84, 0.8)' // Slightly darker version of primary
+                          }
+                        } as React.CSSProperties}
                       >
                         Submit Feedback
                       </button>
@@ -444,7 +463,13 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
                           }
                         }}
                         disabled={!message.customFeedback?.trim()}
-                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors bg-[#008080] hover:bg-[#006666] disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        className="px-3 py-1 text-white rounded-lg text-xs transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        style={{ 
+                          backgroundColor: artoTheme.colors.primary,
+                          ':hover': { 
+                            backgroundColor: 'rgba(0, 94, 84, 0.8)' // Slightly darker version of primary
+                          }
+                        } as React.CSSProperties}
                       >
                         Submit Feedback
                       </button>
@@ -546,8 +571,17 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
           />
           <button
             onClick={handleSendMessage}
-            className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
+            className="p-2 w-14 h-10 text-white rounded-md transition-colors flex items-center justify-center"
+            style={{ 
+              backgroundColor: artoTheme.colors.primary,
+              ':hover': { 
+                backgroundColor: 'rgba(0, 94, 84, 0.8)' // Slightly darker version of primary
+              },
+              opacity: !newMessage.trim() ? '0.7' : '1'
+            } as React.CSSProperties}
             tabIndex={2}
+            disabled={!newMessage.trim()}
+            aria-disabled={!newMessage.trim()}
           >
             <SendIcon fontSize="small" />
           </button>

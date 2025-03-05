@@ -653,10 +653,14 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
               />
               <button
                 type="submit"
-                className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
-                style={{ backgroundColor: artoTheme.colors.primary }}
+                className="p-2 w-14 h-10 text-white rounded-md transition-colors flex items-center justify-center"
+                style={{ 
+                  backgroundColor: artoTheme.colors.primary,
+                  opacity: !newMessage.trim() ? '0.7' : '1'
+                }}
                 aria-label="Send message"
                 disabled={!newMessage.trim()}
+                aria-disabled={!newMessage.trim()}
                 tabIndex={2}
               >
                 <SendIcon fontSize="small" />
