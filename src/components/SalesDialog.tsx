@@ -3,6 +3,7 @@ import { Info, CheckCircle2 } from 'lucide-react';
 import { Tooltip, TextField } from '@mui/material';
 import { getAssetPath } from '../utils/assetPath';
 import { artoTheme } from '../theme/arto';
+import ChatHeader from './ChatHeader';
 
 interface SalesDialogProps {
   onSubmit: (name: string, email: string, phone: string) => void;
@@ -83,37 +84,13 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] overflow-hidden mx-auto">
       {/* Header */}
-      <div className="text-white p-4 rounded-t-lg flex justify-between items-center" style={{ backgroundColor: artoTheme.colors.primary }}>
-        <div className="flex items-center gap-2">
-          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
-          <Tooltip 
-            title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
-            arrow
-            placement="bottom"
-            sx={{
-              '& .MuiTooltip-tooltip': {
-                backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                color: '#fff',
-                fontSize: '0.75rem',
-                padding: '8px 12px',
-                maxWidth: '280px',
-                borderRadius: '4px'
-              },
-              '& .MuiTooltip-arrow': {
-                color: 'rgba(0, 0, 0, 0.9)'
-              }
-            }}
-          >
-            <button 
-              className="p-1 rounded-full hover:bg-[#006666] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Information about AI Assistant"
-              tabIndex={2}
-            >
-              <Info className="h-4 w-4 text-white" />
-            </button>
-          </Tooltip>
-        </div>
-      </div>
+      <ChatHeader 
+        logoSrc={getAssetPath('Arto-Logo-Reverse.svg')} 
+        logoAlt="Arto"
+        tooltipText="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
+        onClose={onClose}
+        className="bg-[#008080]"
+      />
 
       <div className="flex-1 px-6 py-6 overflow-y-auto" style={{
           scrollbarWidth: 'thin',
@@ -159,7 +136,8 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                     inputProps={{
                       'aria-label': 'Name input field',
                       'aria-required': 'true',
-                      'aria-invalid': !!nameError
+                      'aria-invalid': !!nameError,
+                      'tabIndex': 1
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
@@ -188,7 +166,8 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                     inputProps={{
                       'aria-label': 'Email input field',
                       'aria-required': 'true',
-                      'aria-invalid': !!emailError
+                      'aria-invalid': !!emailError,
+                      'tabIndex': 2
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
@@ -216,9 +195,10 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                     placeholder="Your phone number"
                     size="small"
                     inputProps={{
-                      'aria-label': 'Phone number input field',
+                      'aria-label': 'Phone input field',
                       'aria-required': 'true',
-                      'aria-invalid': !!phoneError
+                      'aria-invalid': !!phoneError,
+                      'tabIndex': 3
                     }}
                     sx={{
                       '& .MuiOutlinedInput-root': {
@@ -245,6 +225,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
             <button
               onClick={onClose}
               className="flex-1 rounded-md px-3.5 py-2.5 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
+              tabIndex={4}
             >
               Cancel
             </button>
@@ -255,6 +236,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
                 backgroundColor: artoTheme.colors.primary,
                 ['--tw-outline-color' as string]: artoTheme.colors.primary
               }}
+              tabIndex={5}
             >
               Submit
             </button>

@@ -1,6 +1,10 @@
 import { type Theme } from './types';
 import { getAssetPath } from '../utils/assetPath';
 
+// Define colors separately to avoid circular references
+const PRIMARY_COLOR = '#008080';
+const PRIMARY_LIGHT_COLOR = '#00808040'; // 25% of primary using hex opacity
+
 export const artoTheme: Theme = {
   name: 'arto',
   logo: getAssetPath('Arto-Logo-Reverse.svg'),
@@ -12,8 +16,8 @@ export const artoTheme: Theme = {
     xl: '1.25rem',    // 20px
   },
   colors: {
-    primary: '#008080',
-    primaryLight: '#00808040', // 25% of primary using hex opacity
+    primary: PRIMARY_COLOR,
+    primaryLight: PRIMARY_LIGHT_COLOR,
     secondary: '#006666',
     background: '#ffffff',
     foreground: '#000000',
@@ -47,7 +51,7 @@ export const artoTheme: Theme = {
     showFeedback: true,
     hideAssistantInfo: false,
     userMessage: {
-      background: '#00808040', // Same as primaryLight
+      background: PRIMARY_LIGHT_COLOR, 
       text: '#111827', // text-gray-900
       borderRadius: '12px 12px 4px 12px',
       fontSize: 'text-sm',

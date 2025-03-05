@@ -1,12 +1,12 @@
 import React from 'react';
-import ChatDialogCapture from './components/ChatDialogCapture';
+import ChatDialogContainer from './components/ChatDialogContainer';
 
 function CaptureDetails() {
   const [isOpen, setIsOpen] = React.useState(true);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center">
-      {isOpen && <ChatDialogCapture onClose={() => setIsOpen(false)} />}
+      {isOpen && <ChatDialogContainer onClose={() => setIsOpen(false)} />}
     </div>
   );
 }

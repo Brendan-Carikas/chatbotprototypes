@@ -1,14 +1,16 @@
 import React from 'react';
-import { X, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown } from 'lucide-react';
 import SendIcon from '@mui/icons-material/Send';
 import { artoTheme } from '../theme/arto';
-import { Tooltip, Chip, Stack } from '@mui/material';
+import { Chip, Stack } from '@mui/material';
 import QuestionAnswerOutlined from '@mui/icons-material/QuestionAnswerOutlined';
 import MailOutlined from '@mui/icons-material/MailOutlined';
 import TypingIndicator from './TypingIndicator';
 import SalesDialog from './SalesDialog';
 import { getAssetPath } from '../utils/assetPath';
 import PoweredByArto from './PoweredByArto';
+import TalkToUsConfirmation from './TalkToUsConfirmation';
+import ChatHeader from './ChatHeader';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -76,6 +78,23 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
   const [nameError, setNameError] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
   const [phoneError, setPhoneError] = React.useState('');
+  const [showTalkToUsConfirmation, setShowTalkToUsConfirmation] = React.useState(false);
+  const [hideDialog, setHideDialog] = React.useState(false);
+  const [messages, setMessages] = React.useState<Message[]>([
+    { 
+      id: '1',
+      content: "👋 Hi, I'm Arto, your AI assistant here to help. How can I assist you today?", 
+      isUser: false, 
+      showFeedback: false,
+      chips: WELCOME_OPTIONS,
+      feedback: null,
+      feedbackOption: null,
+      customFeedback: '',
+      isCustomFeedbackSubmitted: false,
+      isFeedbackResponseDismissed: false
+    },
+  ]);
+  const [newMessage, setNewMessage] = React.useState('');
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -119,22 +138,6 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
     return isValid;
   };
-  const [messages, setMessages] = React.useState<Message[]>([
-    { 
-      id: '1',
-      content: "👋 Hi, I'm Arto, your AI assistant here to help. How can I assist you today?", 
-      isUser: false, 
-      showFeedback: false,
-      chips: WELCOME_OPTIONS,
-      feedback: null,
-      feedbackOption: null,
-      customFeedback: '',
-      isCustomFeedbackSubmitted: false,
-      isFeedbackResponseDismissed: false
-    },
-  ]);
-  const [newMessage, setNewMessage] = React.useState('');
-
   const handleSendMessage = () => {
     if (newMessage.trim()) {
       const userMessage = { 
@@ -171,14 +174,25 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
   const handleContactSubmit = () => {
     if (validateContactForm()) {
       console.log('Contact form submitted:', { contactName, contactEmail, contactPhone });
-      // TODO: Handle form submission
-      setContactName('');
-      setContactEmail('');
-      setContactPhone('');
-      setNameError('');
-      setEmailError('');
-      setPhoneError('');
-      setActiveTab('ai'); // Switch back to conversation tab after submit
+      
+      // Show confirmation and hide dialog
+      setShowTalkToUsConfirmation(true);
+      setHideDialog(true);
+      
+      // After 3 seconds, hide confirmation and show dialog again
+      setTimeout(() => {
+        setShowTalkToUsConfirmation(false);
+        setHideDialog(false);
+        
+        // Reset form fields
+        setContactName('');
+        setContactEmail('');
+        setContactPhone('');
+        setNameError('');
+        setEmailError('');
+        setPhoneError('');
+        setActiveTab('ai'); // Switch back to conversation tab
+      }, 3000);
     }
   };
 
@@ -194,49 +208,22 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
 
 
-  return (
+  return hideDialog ? (
+    <div className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] my-auto">
+      <TalkToUsConfirmation name={contactName} />
+    </div>
+  ) : (
     <div 
-      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px]" 
+      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] my-auto" 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
-      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center" style={{ backgroundColor: artoTheme.colors.primary }}>
-        <div className="flex items-center gap-2">
-          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
-          <Tooltip 
-            title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
-            arrow
-            placement="bottom"
-            sx={{
-              '& .MuiTooltip-tooltip': {
-                backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                color: '#fff',
-                fontSize: '0.75rem',
-                padding: '8px 12px',
-                maxWidth: '280px',
-                borderRadius: '4px'
-              },
-              '& .MuiTooltip-arrow': {
-                color: 'rgba(0, 0, 0, 0.9)'
-              }
-            }}
-          >
-            <button 
-              className="p-1 rounded-full hover:bg-[#006666] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Information about AI Assistant"
-              tabIndex={2}
-            >
-              <Info className="h-4 w-4 text-white" />
-            </button>
-          </Tooltip>
-        </div>
-        <div className="flex items-center">
-          <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors">
-            <X size={20} />
-          </button>
-        </div>
-      </div>
-
+      <ChatHeader 
+        logoSrc={getAssetPath('Arto-Logo-Reverse.svg')} 
+        logoAlt="Arto"
+        tooltipText="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
+        onClose={onClose}
+      />
       {/* Tab Content */}
       {activeTab === 'ai' ? (
         <div 
@@ -339,6 +326,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Positive feedback"
+                      tabIndex={3 + (index * 2)}
                     >
                       <ThumbsUp className="w-4 h-4" />
                     </button>
@@ -352,6 +340,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Negative feedback"
+                      tabIndex={4 + (index * 2)}
                     >
                       <ThumbsDown className="w-4 h-4" />
                     </button>
@@ -658,6 +647,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                 className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 text-sm text-gray-700"
                 aria-label="Message input"
                 required
+                tabIndex={1}
               />
               <button
                 type="submit"
@@ -665,6 +655,7 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
                 style={{ backgroundColor: artoTheme.colors.primary }}
                 aria-label="Send message"
                 disabled={!newMessage.trim()}
+                tabIndex={2}
               >
                 <SendIcon fontSize="small" />
               </button>
@@ -727,6 +718,15 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
           <div className="bg-white rounded-lg shadow-lg p-4 text-center">
             <p className="text-lg font-medium mb-2">Thank you for your submission!</p>
             <p className="text-sm text-gray-600 mb-4">We will review your submission and get back to you soon.</p>
+          </div>
+        </div>
+      )}
+      {showTalkToUsConfirmation && (
+        <div className="fixed inset-0 z-10 flex items-center justify-center">
+          <div className="w-full max-w-[448px] mx-auto">
+            <TalkToUsConfirmation
+              onClose={() => setShowTalkToUsConfirmation(false)}
+            />
           </div>
         </div>
       )}

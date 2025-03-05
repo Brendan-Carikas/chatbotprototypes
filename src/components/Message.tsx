@@ -47,6 +47,7 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
             className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
                      focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             aria-label="Rate this response as helpful"
+            tabIndex={3 + (index * 2)}
           >
             <ThumbsUp className="w-4 h-4" />
           </button>
@@ -55,6 +56,7 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
             className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
                      focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             aria-label="Rate this response as not helpful"
+            tabIndex={4 + (index * 2)}
           >
             <ThumbsDown className="w-4 h-4" />
           </button>

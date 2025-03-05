@@ -131,6 +131,7 @@ const ChatbotFeedback = () => {
             onClick={handleThumbsUp}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors text-teal-600"
             aria-label="Positive feedback"
+            tabIndex={3}
           >
             <ThumbsUp className="w-5 h-5" />
           </button>
@@ -138,6 +139,7 @@ const ChatbotFeedback = () => {
             onClick={handleThumbsDown}
             className="p-2 hover:bg-gray-100 rounded-full transition-colors text-teal-600"
             aria-label="Negative feedback"
+            tabIndex={4}
           >
             <ThumbsDown className="w-5 h-5" />
           </button>

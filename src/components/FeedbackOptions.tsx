@@ -1,5 +1,6 @@
 import React from 'react';
 import { FeedbackOption } from '../types';
+import { artoTheme } from '../theme/arto';
 
 interface FeedbackOptionsProps {
   options: FeedbackOption[];
@@ -18,6 +19,9 @@ export const FeedbackOptions: React.FC<FeedbackOptionsProps> = ({
   onBack,
   selectedOptionId
 }) => {
+  // Create derived colors for hover and focus states
+  const primaryColorWithOpacity = `${artoTheme.colors.primary}20`; // 20% opacity for hover state
+  
   return (
     <div className="space-y-2">
       {showBackButton && (
@@ -34,15 +38,23 @@ export const FeedbackOptions: React.FC<FeedbackOptionsProps> = ({
           key={option.id}
           onClick={() => onSelect(option)}
           className={`w-full px-4 py-2 text-left text-sm rounded-lg border 
-                    ${type === 'positive' 
-                      ? 'border-teal-400 hover:bg-teal-50 focus:ring-teal-700' 
-                      : 'order-teal-400 hover:bg-teal-50 focus:ring-teal-700'
-                    } 
-                    ${selectedOptionId === option.id ?
-                      (type === 'positive' ? 'bg-teal-50' : 'bg-teal-50') : ''
-                    }
                     hover:bg-opacity-50 focus:outline-none focus:ring-2 
                     focus:ring-offset-2 transition-colors`}
+          style={{
+            borderColor: artoTheme.colors.primary,
+            backgroundColor: selectedOptionId === option.id ? primaryColorWithOpacity : '',
+            '--tw-ring-color': artoTheme.colors.primary
+          } as React.CSSProperties}
+          onMouseOver={(e) => {
+            if (selectedOptionId !== option.id) {
+              e.currentTarget.style.backgroundColor = primaryColorWithOpacity;
+            }
+          }}
+          onMouseOut={(e) => {
+            if (selectedOptionId !== option.id) {
+              e.currentTarget.style.backgroundColor = '';
+            }
+          }}
         >
           {option.label}
           {option.subOptions && (

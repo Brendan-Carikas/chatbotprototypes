@@ -146,7 +146,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
             </button>
           </Tooltip>
         </div>
-        <button onClick={onClose} className="text-white hover:text-gray-200">
+        <button onClick={onClose} className="text-white hover:text-gray-200" tabIndex={100}>
           <X size={20} />
         </button>
       </div>
@@ -203,6 +203,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Positive feedback"
+                      tabIndex={3 + (index * 2)}
                     >
                       <ThumbsUp className="w-4 h-4" />
                     </button>
@@ -216,6 +217,7 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors" style={{ color: artoTheme.colors.primary }}
                       aria-label="Negative feedback"
+                      tabIndex={4 + (index * 2)}
                     >
                       <ThumbsDown className="w-4 h-4" />
                     </button>
@@ -417,12 +419,14 @@ const ChatDialogWelcome: React.FC<ChatDialogWelcomeProps> = ({ onClose }) => {
             placeholder={isAuthenticated ? "Ask a question..." : "Please authenticate first..."}
             disabled={!isAuthenticated}
             className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2" style={{ '--tw-ring-color': artoTheme.colors.primary }}
+            tabIndex={1}
           />
           <button
             onClick={handleSendMessage}
             disabled={!isAuthenticated || !newMessage.trim()}
             className="p-2 w-14 h-10 text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
             style={{ backgroundColor: artoTheme.colors.primary }}
+            tabIndex={2}
           >
             <SendIcon fontSize="small" />
           </button>

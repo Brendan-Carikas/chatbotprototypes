@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useChat } from '../contexts/ChatContext';
-import { artoTheme } from '../styles/arto';
+import { artoTheme } from '../theme/arto';
 import SendIcon from '@mui/icons-material/Send';
 import PoweredByArto from './PoweredByArto';
 
@@ -32,15 +32,22 @@ const ChatInput: React.FC = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={artoTheme.buttonStyles.placeholder.text}
-            className={`flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 ${artoTheme.buttonStyles.placeholder.fontSize} ${artoTheme.buttonStyles.placeholder.color}`}
+            placeholder="Ask a question..."
+            className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 text-sm"
+            style={{ '--tw-ring-color': artoTheme.colors.primary } as React.CSSProperties}
             aria-label="Message input"
             required
+            tabIndex={1}
           />
           <button
             type="submit"
-            className="bg-teal-600 text-white rounded-lg px-4 py-2 hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2"
+            className="text-white rounded-lg px-4 py-2 hover:bg-opacity-90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+            style={{ 
+              backgroundColor: artoTheme.colors.primary,
+              '--tw-ring-color': artoTheme.colors.primary
+            } as React.CSSProperties}
             aria-label="Send message"
+            tabIndex={2}
           >
             <SendIcon fontSize="small" />
           </button>
