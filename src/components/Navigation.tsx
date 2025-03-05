@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface NavigationProps {
   isOpen?: boolean;
@@ -60,7 +61,7 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen: propIsOpen, onToggle: p
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
       >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {isOpen ? <CloseIcon /> : <MenuIcon />}
       </button>
 
       {/* Overlay */}

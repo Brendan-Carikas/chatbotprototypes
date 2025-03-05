@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2 } from 'lucide-react';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckCircleIconOutlined from '@mui/icons-material/CheckCircleOutlined';
 import { useFeedback } from '../hooks/useFeedback';
 import FeedbackOptions from './FeedbackOptions';
 import { POSITIVE_OPTIONS, NEGATIVE_OPTIONS, FeedbackOption } from '../types';
@@ -73,10 +74,12 @@ const FeedbackDrawer: React.FC = () => {
         {submitted && submittedOption ? (
           <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-4">
             <div className="animate-[scale-up_0.5s_ease-out,bounce_0.5s_ease-in-out_0.5s]">
-              <CheckCircle2 
-                className="w-16 h-16 animate-[draw-check_1s_ease-out_forwards]"
-                style={{ color: artoTheme.colors.primary }}
-                strokeWidth={2.5}
+              <CheckCircleIconOutlined 
+                sx={{ 
+                  fontSize: 96, 
+                  color: artoTheme.colors.primary,
+                  animation: 'pulse 2s infinite'
+                }}
                 aria-label="Success check mark"
               />
             </div>
@@ -100,7 +103,7 @@ const FeedbackDrawer: React.FC = () => {
                 aria-label="Close feedback"
                 tabIndex={100}
               >
-                <X className="w-5 h-5 text-gray-600" />
+                <CloseIcon fontSize="small" className="text-gray-600" />
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-4">

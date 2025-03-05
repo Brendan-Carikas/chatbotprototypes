@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Info, X } from 'lucide-react';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import { Tooltip } from '@mui/material';
 import { artoTheme } from '../theme/arto';
 
@@ -69,7 +70,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
             aria-label="Information about AI Assistant"
             tabIndex={2}
           >
-            <Info className="h-4 w-4 text-white" />
+            <InfoOutlinedIcon fontSize="small" className="text-white" />
           </button>
         </Tooltip>
         
@@ -83,7 +84,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           aria-label="Close chat"
           tabIndex={100}
         >
-          <X className="h-[1.4rem] w-[1.4rem] text-white" />
+          <CloseIcon fontSize="small" className="text-white" />
         </button>
       )}
     </header>

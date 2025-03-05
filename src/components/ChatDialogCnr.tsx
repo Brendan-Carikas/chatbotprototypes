@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, ThumbsUp, ThumbsDown } from 'lucide-react';
+import CloseIcon from '@mui/icons-material/Close';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import { Card } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { cn } from '../lib/utils';
@@ -254,7 +256,8 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                 {message.sender === 'bot' && !message.feedback && currentThemeObj.messageStyles.showFeedback !== false && (
                   <div className="flex gap-1" role="group" aria-label="Message feedback">
                     <button
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                               focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                       onClick={() => handleFeedbackClick(message.id, true)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -265,10 +268,11 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                       tabIndex={3 + (index * 2)}
                       aria-label="Positive feedback"
                     >
-                      <ThumbsUp className="h-4 w-4" />
+                      <ThumbUpOutlinedIcon fontSize="small" />
                     </button>
                     <button
-                      className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
+                      className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
+                               focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                       onClick={() => handleFeedbackClick(message.id, false)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
@@ -279,7 +283,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                       tabIndex={4 + (index * 2)}
                       aria-label="Negative feedback"
                     >
-                      <ThumbsDown className="h-4 w-4" />
+                      <ThumbDownOutlinedIcon fontSize="small" />
                     </button>
                   </div>
                 )}
@@ -344,7 +348,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                           className="absolute top-1 right-1 p-1 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
                           aria-label="Dismiss feedback response"
                         >
-                          <X className="w-3 h-3" />
+                          <CloseIcon className="w-3 h-3" />
                         </button>
                         Thank you for your feedback. We'll use it to improve our responses.
                       </div>

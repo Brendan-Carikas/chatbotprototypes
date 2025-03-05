@@ -1,6 +1,6 @@
 import React from 'react';
-import { Info, CheckCircle2 } from 'lucide-react';
-import { Tooltip, TextField } from '@mui/material';
+import CheckCircleIconOutlined from '@mui/icons-material/CheckCircleOutlined';
+import { TextField } from '@mui/material';
 import { getAssetPath } from '../utils/assetPath';
 import { artoTheme } from '../theme/arto';
 import ChatHeader from './ChatHeader';
@@ -101,9 +101,12 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
           {isSubmitted ? (
             <div className="flex-1 flex flex-col items-center justify-center pt-16 p-8 space-y-4">
             <div className="animate-[scale-up_0.5s_ease-out,ease-in-out_0.5s]">
-              <CheckCircle2 
-                className="w-16 h-16 text-teal-600 animate-[draw-check_1s_ease-out_forwards]"
-                strokeWidth={2.5}
+              <CheckCircleIconOutlined 
+                sx={{ 
+                  fontSize: 96, 
+                  color: artoTheme.colors.primary,
+                  animation: 'pulse 2s infinite'
+                }}
                 aria-label="Success check mark"
               />
             </div>

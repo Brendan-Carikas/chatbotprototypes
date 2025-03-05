@@ -1,5 +1,6 @@
 import React from 'react';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import { Message as MessageType } from '../types';
 import { useFeedback } from '../hooks/useFeedback';
 import { artoTheme } from '../theme/arto';
@@ -49,7 +50,7 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
             aria-label="Rate this response as helpful"
             tabIndex={3 + (index * 2)}
           >
-            <ThumbsUp className="w-4 h-4" />
+            <ThumbUpOutlinedIcon fontSize="small" />
           </button>
           <button
             onClick={() => openFeedback('negative', message.id)}
@@ -58,7 +59,7 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
             aria-label="Rate this response as not helpful"
             tabIndex={4 + (index * 2)}
           >
-            <ThumbsDown className="w-4 h-4" />
+            <ThumbDownOutlinedIcon fontSize="small" />
           </button>
         </div>
       )}
