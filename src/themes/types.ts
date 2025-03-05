@@ -33,6 +33,16 @@ export interface Theme {
       message: string;
       timestamp: string;
     };
+    userMessage?: {
+      background: string;
+      text: string;
+      borderRadius: string;
+    };
+    botMessage?: {
+      background: string;
+      text: string;
+      borderRadius: string;
+    };
     showFeedback?: boolean;
     hideAssistantInfo?: boolean;
     hideTimestamp?: boolean;

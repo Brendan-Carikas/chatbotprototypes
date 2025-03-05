@@ -146,7 +146,7 @@ const ChatDialogWelcomeStyle2: React.FC<ChatDialogWelcomeStyle2Props> = ({ onClo
             </button>
           </Tooltip>
         </div>
-        <button onClick={onClose} className="text-white hover:text-gray-200">
+        <button onClick={onClose} className="text-white hover:text-gray-200" tabIndex={100}>
           <X size={20} />
         </button>
       </div>
@@ -203,6 +203,7 @@ const ChatDialogWelcomeStyle2: React.FC<ChatDialogWelcomeStyle2Props> = ({ onClo
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
                       aria-label="Positive feedback"
+                      tabIndex={3 + (index * 2)}
                     >
                       <ThumbsUp className="w-4 h-4" />
                     </button>
@@ -216,6 +217,7 @@ const ChatDialogWelcomeStyle2: React.FC<ChatDialogWelcomeStyle2Props> = ({ onClo
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
                       aria-label="Negative feedback"
+                      tabIndex={4 + (index * 2)}
                     >
                       <ThumbsDown className="w-4 h-4" />
                     </button>
@@ -411,10 +413,12 @@ const ChatDialogWelcomeStyle2: React.FC<ChatDialogWelcomeStyle2Props> = ({ onClo
             placeholder={isAuthenticated ? "Ask a question..." : "Please authenticate first..."}
             disabled={!isAuthenticated}
             className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080] disabled:bg-gray-100"
+            tabIndex={1}
           />
           <button
             onClick={handleSendMessage}
             className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
+            tabIndex={2}
           >
             <SendIcon fontSize="small" />
           </button>

@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, ThumbsUp, ThumbsDown } from 'lucide-react';
-import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { cn } from '../lib/utils';
 import { themes } from '../themes';
-import { Tooltip } from '@mui/material';
-import { Info } from 'lucide-react';
 import PoweredByArto from './PoweredByArto';
 import SendIcon from '@mui/icons-material/Send';
 import { getAssetPath } from '../utils/assetPath';
+import { artoTheme } from '../theme/arto';
+import ChatHeader from './ChatHeader';
 
 interface ChatDialogCnrProps {
   onClose?: () => void;
@@ -165,62 +164,13 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
   return (
     <Card className="h-[600px] w-full max-w-full sm:max-w-[448px] flex flex-col overflow-hidden shadow-lg bg-white rounded-lg" role="dialog" aria-label="Chat Dialog">
       {/* Header */}
-      <div className={cn(
-        "p-4 flex items-center justify-between rounded-t-lg",
-        "bg-[#008080] text-white"
-      )}>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center h-[56px] w-auto">
-            <img 
-              src={getAssetPath(currentThemeObj.logo)}
-              alt="Logo" 
-              className="h-full w-auto"
-            />
-          </div>
-
-          <Tooltip 
-            title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
-            arrow
-            placement="bottom"
-            sx={{
-              '& .MuiTooltip-tooltip': {
-                backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                color: '#fff',
-                fontSize: '0.75rem',
-                padding: '8px 12px',
-                maxWidth: '280px',
-                borderRadius: '4px'
-              },
-              '& .MuiTooltip-arrow': {
-                color: 'rgba(0, 0, 0, 0.9)'
-              }
-            }}
-          >
-            <button 
-              className="p-1 rounded-full hover:bg-[#006666] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Information about AI Assistant"
-              tabIndex={2}
-            >
-              <Info className="h-4 w-4 text-white" />
-            </button>
-          </Tooltip>
-        </div>
-        {onClose && (
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn(
-              "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-              "hover:bg-white/10 text-white"
-            )}
-            onClick={handleClose}
-            aria-label="Close chat"
-            tabIndex={1}
-          >
-            <X className="h-[1.4rem] w-[1.4rem]" />
-          </Button>
-        )}
-      </div>
+      <ChatHeader 
+        logoSrc={getAssetPath(currentThemeObj.logo)}
+        logoAlt="Logo"
+        tooltipText="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
+        onClose={onClose ? handleClose : undefined}
+        className="bg-[#008080] text-white"
+      />
 
       {/* Assistant Label */}
       {!currentThemeObj.messageStyles.hideAssistantInfo && (
@@ -270,20 +220,20 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                 <div
                   className={cn(
                     "whitespace-pre-wrap break-words",
-                    message.sender === 'user' ? "text-white" : "text-black"
+                    message.sender === 'user' ? currentThemeObj.messageStyles.userMessage?.text || "text-white" : currentThemeObj.messageStyles.botMessage?.text || "text-black"
                   )}
                   style={{ 
                     wordBreak: 'break-word',
-                    padding: '16px',
-                    maxWidth: '70%',
+                    padding: currentThemeObj.messageStyles.padding || '16px',
+                    maxWidth: currentThemeObj.messageStyles.maxWidth || '70%',
                     borderRadius: message.sender === 'user' 
-                      ? '20px 20px 4px 20px'
-                      : '20px 20px 20px 4px',
-                    boxShadow: 'none',
+                      ? currentThemeObj.messageStyles.userMessage?.borderRadius || currentThemeObj.borderRadius.userMessage || '20px 20px 4px 20px'
+                      : currentThemeObj.messageStyles.botMessage?.borderRadius || currentThemeObj.borderRadius.botMessage || '20px 20px 20px 4px',
+                    boxShadow: currentThemeObj.messageStyles.shadow || 'none',
                     background: message.sender === 'user'
-                      ? '#008080' // Teal color for user messages
-                      : '#f1f5f9', // Light gray for bot messages
-                    fontSize: '0.875rem'
+                      ? artoTheme.colors.primaryLight // Update user message background color
+                      : currentThemeObj.messageStyles.botMessage?.background || '#f1f5f9', // Light gray for bot messages
+                    fontSize: currentThemeObj.messageStyles.fontSize?.message || '0.875rem'
                   }}
                 >
                   {message.text}
@@ -345,7 +295,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                             placeholder="What was wrong with this response?"
                             value={message.feedback.reason || ''}
                             onChange={(e) => handleFeedbackText(message.id, e.target.value)}
-                            className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary min-h-[60px]"
+                            className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                             rows={3}
                             maxLength={600}
                           />
@@ -432,7 +382,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
               }}
               className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               aria-label="Chat input"
-              tabIndex={messages.length * 2 + 3}
+              tabIndex={1}
               ref={inputRef}
             />
             <button 
@@ -442,7 +392,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                 "p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center",
                 !inputValue.trim() && "opacity-50 cursor-not-allowed"
               )}
-              tabIndex={messages.length * 2 + 4}
+              tabIndex={2}
               disabled={!inputValue.trim()}
             >
               <SendIcon className="h-5 w-5" />

@@ -1,11 +1,11 @@
 import React from 'react';
-import { X, ThumbsUp, ThumbsDown, Info } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown } from 'lucide-react';
 import SendIcon from '@mui/icons-material/Send';
 import { artoTheme } from '../theme/arto';
-import { Tooltip } from '@mui/material';
 import TypingIndicator from './TypingIndicator';
 import { getAssetPath } from '../utils/assetPath';
 import PoweredByArto from './PoweredByArto';
+import ChatHeader from './ChatHeader';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -114,41 +114,12 @@ const ChatDialog: React.FC<ChatDialogProps> = ({ onClose }) => {
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
-      <div className="bg-[#008080] text-white p-4 rounded-t-lg flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <img src={getAssetPath('Arto-Logo-Reverse.svg')} alt="Arto" className="h-14" />
-          <Tooltip 
-            title="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
-            arrow
-            placement="bottom"
-            sx={{
-              '& .MuiTooltip-tooltip': {
-                backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                color: '#fff',
-                fontSize: '0.75rem',
-                padding: '8px 12px',
-                maxWidth: '280px',
-                borderRadius: '4px'
-              },
-              '& .MuiTooltip-arrow': {
-                color: 'rgba(0, 0, 0, 0.9)'
-              }
-            }}
-          >
-            <button 
-              className="p-1 rounded-full hover:bg-[#006666] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Information about AI Assistant"
-              tabIndex={2}
-            >
-              <Info className="h-4 w- text-white" />
-            </button>
-          </Tooltip>
-        </div>
-        <button onClick={onClose} className="text-white hover:text-gray-200">
-          <X size={20} />
-        </button>
-      </div>
-
+      <ChatHeader 
+        logoSrc={getAssetPath('Arto-Logo-Reverse.svg')} 
+        logoAlt="Arto"
+        tooltipText="These answers are generated using artificial intelligence. This is an experimental technology, and information may occasionally be incorrect or misleading."
+        onClose={onClose}
+      />
       {/* Messages */}
       <div 
         className="flex-1 overflow-y-auto"
@@ -199,6 +170,7 @@ const ChatDialog: React.FC<ChatDialogProps> = ({ onClose }) => {
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
                       aria-label="Positive feedback"
+                      tabIndex={3 + (index * 2)}
                     >
                       <ThumbsUp className="w-4 h-4" />
                     </button>
@@ -212,6 +184,7 @@ const ChatDialog: React.FC<ChatDialogProps> = ({ onClose }) => {
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
                       aria-label="Negative feedback"
+                      tabIndex={4 + (index * 2)}
                     >
                       <ThumbsDown className="w-4 h-4" />
                     </button>

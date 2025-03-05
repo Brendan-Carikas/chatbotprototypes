@@ -3,6 +3,7 @@ import { X, CheckCircle2 } from 'lucide-react';
 import { useFeedback } from '../hooks/useFeedback';
 import FeedbackOptions from './FeedbackOptions';
 import { POSITIVE_OPTIONS, NEGATIVE_OPTIONS, FeedbackOption } from '../types';
+import { artoTheme } from '../theme/arto';
 
 const FeedbackDrawer: React.FC = () => {
   const { isOpen, type, close, submitted, selectedOption: submittedOption, submitFeedback } = useFeedback();
@@ -73,7 +74,8 @@ const FeedbackDrawer: React.FC = () => {
           <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-4">
             <div className="animate-[scale-up_0.5s_ease-out,bounce_0.5s_ease-in-out_0.5s]">
               <CheckCircle2 
-                className="w-16 h-16 text-teal-600 animate-[draw-check_1s_ease-out_forwards]"
+                className="w-16 h-16 animate-[draw-check_1s_ease-out_forwards]"
+                style={{ color: artoTheme.colors.primary }}
                 strokeWidth={2.5}
                 aria-label="Success check mark"
               />
@@ -96,6 +98,7 @@ const FeedbackDrawer: React.FC = () => {
                 onClick={close}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                 aria-label="Close feedback"
+                tabIndex={100}
               >
                 <X className="w-5 h-5 text-gray-600" />
               </button>
@@ -123,8 +126,9 @@ const FeedbackDrawer: React.FC = () => {
                     onChange={(e) => setCustomFeedback(e.target.value)}
                     placeholder="Enter your feedback here..."
                     className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg resize-none
-                             focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+                             focus:outline-none focus:ring-2 focus:border-transparent
                              placeholder:text-gray-400"
+                    style={{ '--tw-ring-color': artoTheme.colors.primary } as React.CSSProperties}
                     maxLength={180}
                   />
                   <div className="text-right text-sm text-gray-500">
@@ -139,9 +143,10 @@ const FeedbackDrawer: React.FC = () => {
                 disabled={isSubmitDisabled}
                 className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
                   !isSubmitDisabled
-                    ? 'bg-teal-600 text-white hover:bg-teal-700'
+                    ? 'text-white hover:bg-opacity-90'
                     : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                 }`}
+                style={!isSubmitDisabled ? { backgroundColor: artoTheme.colors.primary } : {}}
                 aria-disabled={isSubmitDisabled}
               >
                 Submit Feedback

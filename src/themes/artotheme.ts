@@ -35,6 +35,16 @@ export const artotheme: Theme = {
       message: 'sm', // Message text size
       timestamp: 'none' // Hide timestamp
     },
+    userMessage: {
+      background: '#008080', // Teal color for user messages
+      text: 'text-black',
+      borderRadius: '20px 20px 4px 20px'
+    },
+    botMessage: {
+      background: '#f1f5f9', // Light gray for bot messages
+      text: 'text-black',
+      borderRadius: '20px 20px 20px 4px'
+    },
     showFeedback: false, // Hide feedback buttons
     hideAssistantInfo: true // Hide AI Assistant icon and text
   },

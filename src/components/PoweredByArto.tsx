@@ -13,7 +13,6 @@ const PoweredByArto: React.FC<PoweredByArtoProps> = ({ className = '' }) => {
         target="_blank" 
         rel="noopener noreferrer" 
         className="inline-flex items-center hover:opacity-80"
-        tabIndex={0}
         aria-label="Visit Arto AI Chatbot website"
       >
         <span className="text-[#656565] pt-2mb-2">Powered by</span>

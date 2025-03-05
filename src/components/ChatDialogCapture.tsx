@@ -8,6 +8,7 @@ import { getAssetPath } from '../utils/assetPath';
 import PoweredByArto from './PoweredByArto';
 import ChatBubbleOutlined from '@mui/icons-material/ChatBubbleOutlined';
 import SendIcon from '@mui/icons-material/Send';
+import TalkToUsConfirmation from './TalkToUsConfirmation';
 
 type FeedbackType = 'positive' | 'negative' | null;
 
@@ -37,6 +38,7 @@ interface Message {
 
 interface ChatDialogCaptureProps {
   onClose: () => void;
+  onTalkToUsClick?: () => void;
 }
 
 const WELCOME_OPTIONS: ChipOption[] = [];
@@ -61,7 +63,7 @@ const NEGATIVE_OPTIONS: FeedbackOption[] = [
   { id: 'other', label: 'Other', response: "Thanks for your feedback!" }
 ];
 
-const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
+const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkToUsClick }) => {
   const [isTyping, setIsTyping] = React.useState(false);
   const [inputPlaceholder] = React.useState('Ask a question...');
   const [showSalesDialog, setShowSalesDialog] = React.useState(false);
@@ -81,6 +83,9 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
     },
   ]);
   const [newMessage, setNewMessage] = React.useState('');
+  const [showTalkToUsConfirmation, setShowTalkToUsConfirmation] = React.useState(false);
+  const [hideDialog, setHideDialog] = React.useState(false);
+  const [submittedName, setSubmittedName] = React.useState('');
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
@@ -117,17 +122,24 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
 
   const handleSalesDialogSubmit = (name: string, email: string, phone: string) => {
     console.log('SalesDialog onSubmit called with:', { name, email, phone });
-    setIsSubmitted(true);
+    
+    // Save the submitted name
+    setSubmittedName(name);
+    
+    // Hide SalesDialog and show TalkToUsConfirmation
+    setShowSalesDialog(false);
+    setShowTalkToUsConfirmation(true);
+    
+    // After 3 seconds, hide TalkToUsConfirmation and show ChatDialogCapture
     setTimeout(() => {
-      setIsSubmitted(false); 
-      setShowSalesDialog(false); 
-      // Optionally, you can set any other state necessary to show ChatDialogCapture
-    }, 4000);
+      setShowTalkToUsConfirmation(false);
+      setHideDialog(false);
+    }, 3000);
   };
 
   return (
     <div 
-      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px]" 
+      className={`bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] ${hideDialog ? 'hidden' : ''}`} 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
@@ -163,13 +175,20 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
         </div>
         <div className="flex items-center gap-4">
           <button
-            onClick={() => setShowSalesDialog(true)}
+            onClick={() => {
+              if (onTalkToUsClick) {
+                onTalkToUsClick();
+              } else {
+                setShowSalesDialog(true);
+                setHideDialog(true);
+              }
+            }}
             className="flex items-center gap-1.5 px-3 py-1.5 border border-white hover:bg-white hover:text-[#008080] rounded-md transition-colors text-sm font-medium"
           >
             <ChatBubbleOutlined sx={{ fontSize: 16, color: 'inherit' }} />
             Talk to us
           </button>
-          <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors">
+          <button onClick={onClose} className="p-1.5 hover:bg-[#006666] rounded-md transition-colors" tabIndex={100}>
             <X size={20} />
           </button>
         </div>
@@ -277,6 +296,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
                       aria-label="Positive feedback"
+                      tabIndex={3 + (index * 2)}
                     >
                       <ThumbsUp className="w-4 h-4" />
                     </button>
@@ -290,6 +310,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
                       }}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors text-[#008080]"
                       aria-label="Negative feedback"
+                      tabIndex={4 + (index * 2)}
                     >
                       <ThumbsDown className="w-4 h-4" />
                     </button>
@@ -511,12 +532,14 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
             placeholder={inputPlaceholder}
             inputProps={{
               'aria-label': 'Message input field',
-              'aria-required': 'true'
+              'aria-required': 'true',
+              tabIndex: 1
             }}
           />
           <button
             onClick={handleSendMessage}
             className="p-2 w-14 h-10 bg-[#008080] text-white rounded-md hover:bg-[#006666] transition-colors flex items-center justify-center"
+            tabIndex={2}
           >
             <SendIcon fontSize="small" />
           </button>
@@ -526,11 +549,24 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose }) => {
         </div>
       </div>
       {showSalesDialog && (
-        <div className="fixed inset-0 z-10 flex items-center justify-center">
+        <div className="fixed inset-0 z-10 flex items-center justify-center" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
           <div className="w-full max-w-[448px] mx-auto">
             <SalesDialog
               onSubmit={handleSalesDialogSubmit}
-              onClose={() => setShowSalesDialog(false)}
+              onClose={() => {
+                setShowSalesDialog(false);
+                setHideDialog(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
+      {showTalkToUsConfirmation && (
+        <div className="fixed inset-0 z-10 flex items-center justify-center" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
+          <div className="w-full max-w-[448px] mx-auto">
+            <TalkToUsConfirmation
+              name={submittedName}
+              onClose={() => setShowTalkToUsConfirmation(false)}
             />
           </div>
         </div>
