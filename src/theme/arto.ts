@@ -2,8 +2,8 @@ import { type Theme } from './types';
 import { getAssetPath } from '../utils/assetPath';
 
 // Define colors separately to avoid circular references
-const PRIMARY_COLOR = '#005E54';
-const PRIMARY_LIGHT_COLOR = '#005E5440'; // 25% of primary using hex opacity
+const PRIMARY_COLOR = '#008080';
+const PRIMARY_LIGHT_COLOR = '#00808040'; // 25% of primary using hex opacity
 
 export const artoTheme: Theme = {
   name: 'arto',
