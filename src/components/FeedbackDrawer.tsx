@@ -101,7 +101,7 @@ const FeedbackDrawer: React.FC = () => {
                 onClick={close}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                 aria-label="Close feedback"
-                tabIndex={100}
+                tabIndex={1}
               >
                 <CloseIcon fontSize="small" className="text-gray-600" />
               </button>
@@ -114,6 +114,7 @@ const FeedbackDrawer: React.FC = () => {
                 showBackButton={showSubOptions}
                 onBack={handleBack}
                 selectedOptionId={selectedOption?.id}
+                tabIndex={2}
               />
               {selectedOption?.id === 'other' && !showSubOptions && (
                 <div className="mt-4 space-y-2">
@@ -128,6 +129,7 @@ const FeedbackDrawer: React.FC = () => {
                     value={customFeedback}
                     onChange={(e) => setCustomFeedback(e.target.value)}
                     placeholder="Enter your feedback here..."
+                    tabIndex={2}
                     className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg resize-none
                              focus:outline-none focus:ring-2 focus:border-transparent
                              placeholder:text-gray-400"
@@ -151,6 +153,7 @@ const FeedbackDrawer: React.FC = () => {
                 }`}
                 style={!isSubmitDisabled ? { backgroundColor: artoTheme.colors.primary } : {}}
                 aria-disabled={isSubmitDisabled}
+                tabIndex={3}
               >
                 Submit Feedback
               </button>

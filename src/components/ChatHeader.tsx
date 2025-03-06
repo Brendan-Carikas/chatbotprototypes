@@ -82,7 +82,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           className="p-1.5 hover:bg-white/10 rounded-sm transition-colors focus:outline-none focus:ring-1 focus:ring-white/30"
           onClick={handleClose}
           aria-label="Close chat"
-          tabIndex={4}
+          tabIndex={100}
         >
           <CloseIcon fontSize="small" className="text-white" />
         </button>

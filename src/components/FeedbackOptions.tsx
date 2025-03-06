@@ -9,15 +9,16 @@ interface FeedbackOptionsProps {
   showBackButton?: boolean;
   onBack?: () => void;
   selectedOptionId?: string | null;
+  tabIndex?: number;
 }
 
 export const FeedbackOptions: React.FC<FeedbackOptionsProps> = ({ 
   options, 
   onSelect, 
-  type,
   showBackButton,
   onBack,
-  selectedOptionId
+  selectedOptionId,
+  tabIndex
 }) => {
   // Create derived colors for hover and focus states
   const primaryColorWithOpacity = `${artoTheme.colors.primary}20`; // 20% opacity for hover state
@@ -27,6 +28,7 @@ export const FeedbackOptions: React.FC<FeedbackOptionsProps> = ({
       {showBackButton && (
         <button
           onClick={onBack}
+          tabIndex={tabIndex}
           className="w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-800 
                    focus:outline-none transition-colors mb-2"
         >
@@ -37,6 +39,7 @@ export const FeedbackOptions: React.FC<FeedbackOptionsProps> = ({
         <button
           key={option.id}
           onClick={() => onSelect(option)}
+          tabIndex={tabIndex}
           className={`w-full px-4 py-2 text-left text-sm rounded-lg border 
                     hover:bg-opacity-50 focus:outline-none focus:ring-2 
                     focus:ring-offset-2 transition-colors`}
