@@ -27,7 +27,7 @@ const FeedbackConfirmation: React.FC<FeedbackConfirmationProps> = ({ submittedOp
         />
       </div>
       <p 
-        className="text-lg text-center text-gray-700 max-w-md animate-fade-in"
+        className="text-lg xs:text-sm text-center text-gray-700 max-w-md animate-fade-in"
         role="status"
         aria-live="polite"
       >

@@ -38,7 +38,7 @@ const ChatDialog: React.FC = () => {
       aria-labelledby="chat-title"
     >
       <div 
-        className="w-[378px] md:w-[448px] bg-white rounded-lg shadow-xl flex flex-col h-[600px] relative"
+        className="max-w-[448px] xs: m-4 bg-white rounded-lg shadow-xl flex flex-col h-[600px] relative"
         role="document"
       >
         {/* Header */}

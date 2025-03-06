@@ -211,12 +211,12 @@ const ChatDialogCaptureV2: React.FC<ChatDialogCaptureV2Props> = ({ onClose }) =>
 
 
   return hideDialog ? (
-    <div className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] my-auto">
+    <div className="bg-white rounded-lg shadow-lg flex flex-col w-[448px] mx-4 h-[600px] my-auto">
       <TalkToUsConfirmation name={contactName} />
     </div>
   ) : (
     <div 
-      className="bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] my-auto" 
+      className="bg-white rounded-lg shadow-lg flex flex-col w-[448px] mx-4 xl:w-[448px] h-[600px] my-auto" 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}

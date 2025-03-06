@@ -142,7 +142,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
 
   return (
     <div 
-      className={`bg-white rounded-lg shadow-lg flex flex-col w-[378px] xl:w-[448px] h-[600px] ${hideDialog ? 'hidden' : ''}`} 
+      className={`bg-white rounded-lg shadow-lg flex flex-col max-w-[448px] xs: m-4 h-[600px] ${hideDialog ? 'hidden' : ''}`} 
       style={{ fontFamily: artoTheme.fonts.sans.join(', ') }}
     >
       {/* Header */}
@@ -592,7 +592,7 @@ const ChatDialogCapture: React.FC<ChatDialogCaptureProps> = ({ onClose, onTalkTo
       </div>
       {showSalesDialog && (
         <div className="fixed inset-0 z-10 flex items-center justify-center" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-          <div className="w-full max-w-[448px] mx-auto">
+          <div className="w-full max-w-[448px] xs:m-4 mx-auto">
             <SalesDialog
               onSubmit={handleSalesDialogSubmit}
               onClose={() => {

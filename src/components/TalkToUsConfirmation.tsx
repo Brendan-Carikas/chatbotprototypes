@@ -9,7 +9,7 @@ interface TalkToUsConfirmationProps {
 
 const TalkToUsConfirmation: React.FC<TalkToUsConfirmationProps> = ({ name }) => {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-4 bg-white rounded-lg shadow-lg h-[600px]">
+    <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-4 bg-white rounded-lg max-w-[448px] mx-4 h-[600px]">
       <div className="animate-[scale-up_0.5s_ease-out,bounce_0.5s_ease-in-out_0.5s]">
         <CheckCircleIconOutlined
           sx={{ 
@@ -20,7 +20,7 @@ const TalkToUsConfirmation: React.FC<TalkToUsConfirmationProps> = ({ name }) => 
           aria-label="Success check mark"
         />
       </div>
-      <h2 className="text-2xl font-semibold text-center text-gray-800">
+      <h2 className="text-2xl xs:text-sm font-semibold text-center text-gray-800">
         Thank you{name ? `, ${name}` : ''}!
       </h2>
       <p className="text-center text-gray-600 max-w-xs">
