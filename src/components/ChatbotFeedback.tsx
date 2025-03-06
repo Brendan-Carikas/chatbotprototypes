@@ -142,7 +142,7 @@ const ChatbotFeedback = () => {
             className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
                      focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             aria-label="Negative feedback"
-            tabIndex={4}
+            tabIndex={6}
           >
             <ThumbDownOutlinedIcon fontSize="small" />
           </button>

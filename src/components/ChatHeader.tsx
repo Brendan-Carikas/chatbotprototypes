@@ -68,7 +68,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           <button 
             className="p-1 rounded-full hover:bg-[#006666] focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Information about AI Assistant"
-            tabIndex={2}
+            tabIndex={3}
           >
             <InfoOutlinedIcon fontSize="small" className="text-white" />
           </button>

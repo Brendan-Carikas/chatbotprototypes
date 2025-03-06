@@ -14,6 +14,7 @@ const PoweredByArto: React.FC<PoweredByArtoProps> = ({ className = '' }) => {
         rel="noopener noreferrer" 
         className="inline-flex items-center hover:opacity-80"
         aria-label="Visit Arto AI Chatbot website"
+        tabIndex={-1}
       >
         <span className="text-[#656565] pt-2mb-2">Powered by</span>
         <img 
