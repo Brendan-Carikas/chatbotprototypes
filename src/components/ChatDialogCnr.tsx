@@ -162,7 +162,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
   };
 
   return (
-    <Card className="h-[600px] w-full max-w-full sm:max-w-[448px] flex flex-col overflow-hidden shadow-lg bg-white rounded-lg" role="dialog" aria-label="Chat Dialog">
+    <Card className="h-[600px]   xl:m-w-[448px] mx-4 w-full flex flex-col overflow-hidden shadow-lg bg-white rounded-lg" role="dialog" aria-label="Chat Dialog">
       {/* Header */}
       <ChatHeader 
         logoSrc={getAssetPath(currentThemeObj.logo)}

@@ -22,7 +22,7 @@ const Spec = () => {
     <div className="min-h-screen bg-[#1a1262] p-4">
       <div className="max-w-4xl mx-auto">
         {/* Chat Dialog Container */}
-        <div className={`fixed bottom-4 right-4 z-50 min-w-[448px] ${isChatOpen ? 'block' : 'hidden'}`}>
+        <div className={`fixed bottom-4 right-8 z-50 sm:w-[448px] ${isChatOpen ? 'block' : 'hidden'}`}>
           <ChatDialogCnr onClose={handleClose} theme={currentChatTheme} />
         </div>
 
