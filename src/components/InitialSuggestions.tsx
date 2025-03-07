@@ -3,11 +3,10 @@ import { useChat } from '../contexts/ChatContextSug';
 import { artoTheme } from '../theme/arto';
 
 const INITIAL_SUGGESTIONS = [
-  "React hooks and state management",
-  "TypeScript with React components",
-  "Implementing ARIA in React",
-  "Tailwind responsive patterns",
-  "React performance tips"
+  "Ask for a proposal",
+  "Ask a question",
+ 
+  
 ];
 
 const InitialSuggestions: React.FC = () => {

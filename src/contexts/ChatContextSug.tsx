@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Message } from '../types';
 
-const REACT_RESPONSES = [
-  'React hooks let you use state and lifecycle features in functional components. Common hooks include useState for state management and useEffect for side effects.',
-  'TypeScript enhances React development by providing static typing, better IDE support, and catching potential errors at compile time.',
-  'ARIA attributes make React components accessible. Key attributes include role, aria-label, and aria-live for dynamic content.',
-  'Tailwind CSS provides utility classes for responsive design. Use breakpoints like sm:, md:, and lg: for different screen sizes.',
-  'Optimize React performance by using useMemo for expensive calculations, useCallback for function memoization, and React.memo for component memoization.'
+const CHAT_RESPONSES = [
+  'I can assist with various tasks like answering questions, providing information, and helping with proposals. Just let me know what you need!',
+  'As an AI assistant, I aim to provide accurate and helpful responses while maintaining a natural conversational flow.',
+  'I can help you explore different topics and provide detailed explanations. Feel free to ask follow-up questions for clarification.',
+  'My responses are generated using advanced language models, but I always encourage users to verify critical information.',
+  'I strive to be helpful while being transparent about my capabilities and limitations as an AI assistant.'
 ];
 
 interface ChatContextType {
@@ -27,11 +27,11 @@ interface ChatProviderProps {
   showSuggestions?: boolean;
 }
 
-export const ChatProvider: React.FC<ChatProviderProps> = ({ children, showSuggestions = false }) => {
+export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: '👋 Hi, I am Arto how can help?',
+      content: '👋 Hi, I am Arto your helpful AI assistant',
       isBot: true,
       timestamp: null, // First message: no timestamp
       showFeedback: false // First message: no feedback
@@ -66,7 +66,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children, showSugges
 
     // Simulate bot response
     setTimeout(() => {
-      const randomResponse = REACT_RESPONSES[Math.floor(Math.random() * REACT_RESPONSES.length)];
+      const randomResponse = CHAT_RESPONSES[Math.floor(Math.random() * CHAT_RESPONSES.length)];
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: randomResponse,

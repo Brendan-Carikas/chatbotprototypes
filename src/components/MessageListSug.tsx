@@ -19,7 +19,8 @@ const MessageListSug: React.FC = () => {
             message={message} 
             index={index}
           />
-          {message.showSuggestions && <InitialSuggestions />}
+          {/* Show suggestions only for second bot message if showSuggestions is true */}
+          {message.showSuggestions && index === 1 && message.isBot && <InitialSuggestions />}
         </div>
       ))}
     </div>
