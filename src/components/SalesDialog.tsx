@@ -82,7 +82,7 @@ const SalesDialog: React.FC<SalesDialogProps> = ({ onSubmit, onClose }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg flex flex-col max-w-[448px] h-[600px]overflow-hidden mx-4">
+    <div className="bg-white rounded-lg shadow-lg flex flex-col max-w-[448px] h-[600px] overflow-hidden mx-4">
       {/* Header */}
       <ChatHeader 
         logoSrc={getAssetPath('Arto-Logo-Reverse.svg')} 

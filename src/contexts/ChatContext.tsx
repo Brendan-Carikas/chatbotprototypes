@@ -16,76 +16,100 @@ interface ChatContextType {
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const getFormattedTime = () => {
+  const now = new Date();
+  return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+};
+
+interface ChatProviderProps {
+  children: React.ReactNode;
+  showSuggestions?: boolean;
+}
+
+export const ChatProvider: React.FC<ChatProviderProps> = ({ children, showSuggestions = false }) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: '👋 Hi, I am Arto how can help?',
+      content: '👋 Hi, I am Arto your helpful AI assistant',
       isBot: true,
-      timestamp: '14:30'
+      timestamp: null, // First message: no timestamp
+      showFeedback: false // First message: no feedback
     },
     {
       id: '2',
+      content: 'Select an option below or type a brief message so I can better assist you.',
+      isBot: true,
+      timestamp: null, // Second message: no timestamp (per memory)
+      showFeedback: false, // Second message: no feedback
+      showSuggestions: showSuggestions // Only show suggestions in ChatDialogSuggestions
+    },
+    {
+      id: '3',
       content: 'Can you explain what React hooks are?',
       isBot: false,
       timestamp: '14:31'
     },
     {
-      id: '3',
+      id: '4',
       content: 'Life is like riding a bicycle. To keep your balance you must keep moving',
       isBot: true,
-      timestamp: '14:31'
+      timestamp: '14:31',
+      showFeedback: true // Bot messages after first two: show feedback
     },
     {
-      id: '4',
+      id: '5',
       content: 'That\'s an interesting quote, but I was asking about React hooks.',
       isBot: false,
       timestamp: '14:32'
     },
     {
-      id: '5',
+      id: '6',
       content: 'I have always depended on the kindness of strangers',
       isBot: true,
-      timestamp: '14:32'
+      timestamp: '14:32',
+      showFeedback: true // Bot messages after first two: show feedback
     },
     {
-      id: '6',
+      id: '7',
       content: 'I think there might be something wrong with the chatbot...',
       isBot: false,
       timestamp: '14:33'
     },
     {
-      id: '7',
+      id: '8',
       content: 'Eighty percent of success is showing up',
       isBot: true,
-      timestamp: '14:33'
+      timestamp: '14:33',
+      showFeedback: true // Bot messages after first two: show feedback
     },
     {
-      id: '8',
+      id: '9',
       content: 'Are you just giving me random quotes now?',
       isBot: false,
       timestamp: '14:34'
     },
     {
-      id: '9',
+      id: '10',
       content: 'If at first you don\'t succeed, try, try, try again',
       isBot: true,
-      timestamp: '14:34'
+      timestamp: '14:34',
+      showFeedback: true // Bot messages after first two: show feedback
     },
     {
-      id: '10',
+      id: '11',
       content: 'This is actually kind of funny. Give me another one!',
       isBot: false,
       timestamp: '14:35'
     },
     {
-      id: '11',
+      id: '12',
       content: 'Life is like riding a bicycle. To keep your balance you must keep moving',
       isBot: true,
-      timestamp: '14:35'
+      timestamp: '14:35',
+      showFeedback: true // Bot messages after first two: show feedback
     },
     {
-      id: '12',
+      id: '13',
       content: 'You already said that one! 😄',
       isBot: false,
       timestamp: '14:36'
@@ -93,10 +117,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
-  const getFormattedTime = () => {
-    const now = new Date();
-    return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-  };
+
 
   const sendMessage = (content: string) => {
     // Add user message
@@ -104,7 +125,8 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: Date.now().toString(),
       content,
       isBot: false,
-      timestamp: getFormattedTime()
+      timestamp: getFormattedTime(), // User messages: show timestamp
+      showFeedback: false // User messages: no feedback
     };
     
     setMessages((prev) => [...prev, userMessage]);
@@ -119,7 +141,9 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         id: (Date.now() + 1).toString(),
         content: randomResponse,
         isBot: true,
-        timestamp: getFormattedTime()
+        timestamp: getFormattedTime(), // Bot messages after first two: show timestamp
+        showFeedback: true, // Bot messages after first two: show feedback
+        showSuggestions: false
       };
       setIsTyping(false);
       setMessages((prev) => [...prev, botMessage]);

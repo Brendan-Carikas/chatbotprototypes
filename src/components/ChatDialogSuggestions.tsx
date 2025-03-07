@@ -1,13 +1,13 @@
 import React from 'react';
-import MessageList from './MessageList';
-import ChatInput from './ChatInputDrawer';
+import MessageList from './MessageListSug';
+import ChatInput from './ChatInput';
 import FeedbackDrawer from './FeedbackDrawer';
 import TypingIndicator from './TypingIndicator';
-import { useChat } from '../contexts/ChatContext';
+import { useChat, ChatProvider } from '../contexts/ChatContextSug';
 import ChatHeader from './ChatHeader';
 import { getAssetPath } from '../utils/assetPath';
 
-const ChatDialog: React.FC = () => {
+const ChatDialogContent: React.FC = () => {
   const { isTyping } = useChat();
 
   const handleEscapeKey = (event: KeyboardEvent) => {
@@ -72,4 +72,12 @@ const ChatDialog: React.FC = () => {
   );
 };
 
-export default ChatDialog;
+const ChatDialogSuggestions: React.FC = () => {
+  return (
+    <ChatProvider showSuggestions={true}>
+      <ChatDialogContent />
+    </ChatProvider>
+  );
+};
+
+export default ChatDialogSuggestions;

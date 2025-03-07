@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useChat } from '../contexts/ChatContext';
+import { useChat } from '../contexts/ChatContextSug';
 import { artoTheme } from '../theme/arto';
 import SendIcon from '@mui/icons-material/Send';
 import PoweredByArto from './PoweredByArto';

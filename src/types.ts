@@ -2,7 +2,9 @@ export interface Message {
   id: string;
   content: string;
   isBot: boolean;
-  timestamp: string;
+  timestamp: string | null;
+  showFeedback?: boolean;
+  showSuggestions?: boolean;
 }
 
 export interface FeedbackOption {

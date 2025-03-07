@@ -33,7 +33,7 @@ const Spec = () => {
               console.log('Opening chat dialog');
               setIsChatOpen(true);
             }}
-            className="rounded-full w-12 h-12 md:w-14 md:h-14 p-0 flex items-center justify-center"
+            className="rounded-full bg-[#008080] w-12 h-12 md:w-14 md:h-14 p-0 flex items-center justify-center"
             size="icon"
           >
             <img 

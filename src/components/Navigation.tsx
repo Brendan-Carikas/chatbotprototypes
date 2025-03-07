@@ -88,13 +88,13 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen: propIsOpen, onToggle: p
 
           <div className="flex flex-col space-y-2">
             
-          <Link 
+            
+            <Link 
               to="/original" 
               className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/original' ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}
               aria-label="Go to Original Chat Dialog page"
               onClick={handleLinkClick}
-              tabIndex={-1} // Add this line to ignore tab navigation
-
+              tabIndex={-1}
             >
               Chatbot: Original Dialog
             </Link>
@@ -159,6 +159,16 @@ const Navigation: React.FC<NavigationProps> = ({ isOpen: propIsOpen, onToggle: p
 
             >
               Chatbot: Talk to sales v2
+            </Link>
+
+            <Link 
+              to="/suggestions" 
+              className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/suggestions' ? 'bg-gray-100 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'}`}
+              aria-label="Go to Chat Dialog Suggestions page"
+              onClick={handleLinkClick}
+              tabIndex={-1}
+            >
+              Chatbot: Dialog Suggestions
             </Link>
             
           </div>
