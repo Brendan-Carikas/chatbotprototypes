@@ -4,7 +4,6 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import { Message as MessageType } from '../types';
 import { useFeedback } from '../hooks/useFeedback';
 import { artoTheme } from '../theme/arto';
-import InitialSuggestions from './InitialSuggestions';
 
 interface MessageProps {
   message: MessageType;
@@ -44,9 +43,6 @@ const MessageSug: React.FC<MessageProps> = ({ message, index }) => {
         )}
       </div>
 
-      {/* Show suggestions for second message if enabled */}
-      {message.showSuggestions && <InitialSuggestions />}
-      
       {/* Show feedback buttons for bot messages that have showFeedback enabled */}
       {message.isBot && message.showFeedback && !hasSubmittedFeedback && (
         <div className="flex space-x-2 mt-2">
