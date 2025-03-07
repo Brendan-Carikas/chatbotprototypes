@@ -11,7 +11,7 @@ interface MessageProps {
   index: number;
 }
 
-const Message: React.FC<MessageProps> = ({ message, index }) => {
+const MessageSug: React.FC<MessageProps> = ({ message, index }) => {
   const { openFeedback, hasFeedback } = useFeedback();
   const hasSubmittedFeedback = hasFeedback(message.id);
 
@@ -74,4 +74,4 @@ const Message: React.FC<MessageProps> = ({ message, index }) => {
   );
 };
 
-export default Message;
+export default MessageSug;

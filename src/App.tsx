@@ -10,6 +10,7 @@ import Spec from './pages/Spec';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { artoTheme } from './theme/arto';
 import Navigation from './components/Navigation';
+import ChatDialogSuggestions from './components/ChatDialogSuggestions';
 
 function OriginalApp() {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -42,6 +43,7 @@ function App() {
               <Route path="/spec" element={<Spec />} />
               <Route path="/" element={<Navigate to="/welcome" replace />} />
               <Route path="/chat-feedback" element={<ChatFeedDrawer />} />
+              <Route path="/suggestions" element={<ChatDialogSuggestions />} />
             </Routes>
           </main>
         </div>

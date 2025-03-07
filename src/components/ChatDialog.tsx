@@ -59,7 +59,7 @@ const ChatDialog: React.FC<ChatDialogProps> = ({ onClose }) => {
       id: '1',
       content: "👋 Hi, I am Arto how can help?", 
       isUser: false, 
-      showFeedback: true,
+      showFeedback: false, // First message: no feedback buttons
       feedback: null,
       feedbackOption: null,
       customFeedback: '',
