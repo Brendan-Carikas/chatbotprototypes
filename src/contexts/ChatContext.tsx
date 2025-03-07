@@ -2,10 +2,11 @@ import React, { createContext, useContext, useState } from 'react';
 import { Message } from '../types';
 
 const BOT_RESPONSES = [
-  'I have always depended on the kindness of strangers',
-  'Life is like riding a bicycle. To keep your balance you must keep moving',
-  'Eighty percent of success is showing up',
-  'If at first you don\'t succeed, try, try, try again'
+  'I can assist with various tasks like answering questions, providing information, and helping with proposals. Just let me know what you need!',
+  'As an AI assistant, I aim to provide accurate and helpful responses while maintaining a natural conversational flow.',
+  'I can help you explore different topics and provide detailed explanations. Feel free to ask follow-up questions for clarification.',
+  'My responses are generated using advanced language models, but I always encourage users to verify critical information.',
+  'I strive to be helpful while being transparent about my capabilities and limitations as an AI assistant.'
 ];
 
 interface ChatContextType {
@@ -45,74 +46,55 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children, showSugges
     },
     {
       id: '3',
-      content: 'Can you explain what React hooks are?',
+      content: 'Can you help me with a proposal?',
       isBot: false,
       timestamp: '14:31'
     },
     {
       id: '4',
-      content: 'Life is like riding a bicycle. To keep your balance you must keep moving',
+      content: 'I can assist with various tasks like answering questions, providing information, and helping with proposals. Just let me know what you need!',
       isBot: true,
       timestamp: '14:31',
       showFeedback: true // Bot messages after first two: show feedback
     },
     {
       id: '5',
-      content: 'That\'s an interesting quote, but I was asking about React hooks.',
+      content: 'I need a proposal for a new website project.',
       isBot: false,
       timestamp: '14:32'
     },
     {
       id: '6',
-      content: 'I have always depended on the kindness of strangers',
+      content: 'I can help you explore different topics and provide detailed explanations. Feel free to ask follow-up questions for clarification.',
       isBot: true,
       timestamp: '14:32',
       showFeedback: true // Bot messages after first two: show feedback
     },
     {
       id: '7',
-      content: 'I think there might be something wrong with the chatbot...',
+      content: 'What kind of information can you provide for the proposal?',
       isBot: false,
       timestamp: '14:33'
     },
     {
       id: '8',
-      content: 'Eighty percent of success is showing up',
+      content: 'As an AI assistant, I aim to provide accurate and helpful responses while maintaining a natural conversational flow.',
       isBot: true,
       timestamp: '14:33',
       showFeedback: true // Bot messages after first two: show feedback
     },
     {
       id: '9',
-      content: 'Are you just giving me random quotes now?',
+      content: 'Can you help me structure the proposal?',
       isBot: false,
       timestamp: '14:34'
     },
     {
       id: '10',
-      content: 'If at first you don\'t succeed, try, try, try again',
+      content: 'I strive to be helpful while being transparent about my capabilities and limitations as an AI assistant.',
       isBot: true,
       timestamp: '14:34',
       showFeedback: true // Bot messages after first two: show feedback
-    },
-    {
-      id: '11',
-      content: 'This is actually kind of funny. Give me another one!',
-      isBot: false,
-      timestamp: '14:35'
-    },
-    {
-      id: '12',
-      content: 'Life is like riding a bicycle. To keep your balance you must keep moving',
-      isBot: true,
-      timestamp: '14:35',
-      showFeedback: true // Bot messages after first two: show feedback
-    },
-    {
-      id: '13',
-      content: 'You already said that one! 😄',
-      isBot: false,
-      timestamp: '14:36'
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
