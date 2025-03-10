@@ -5,6 +5,7 @@ export interface Message {
   timestamp: string | null;
   showFeedback?: boolean;
   showSuggestions?: boolean;
+  suggestions?: string[];
 }
 
 export interface FeedbackOption {

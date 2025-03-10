@@ -2,11 +2,10 @@ import React from 'react';
 import { useChat } from '../contexts/ChatContextSug';
 import { artoTheme } from '../theme/arto';
 
+// Initial suggestions for the second bot message
 const INITIAL_SUGGESTIONS = [
   "Ask for a proposal",
-  "Ask a question",
- 
-  
+  "Ask a question"
 ];
 
 const InitialSuggestions: React.FC = () => {

@@ -46,7 +46,13 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hello! How can I help you today?',
+      text: '👋 Hi, I am Arto your helpful AI assistant', // First message per memory
+      sender: 'bot',
+      timestamp: new Date(),
+    },
+    {
+      id: '2',
+      text: 'Select an option below or type a brief message so I can better assist you.', // Second message per memory
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -206,7 +212,8 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
               <div className={cn(
                 "flex items-end gap-2",
                 message.sender === 'user' ? "justify-end" : "justify-start",
-                "w-full"
+                "w-full",
+                "text-sm" // Base font size for all messages
               )}>
                 {message.sender === 'bot' && !currentThemeObj.messageStyles.hideAssistantInfo && (
                   <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
@@ -219,7 +226,7 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                 )}
                 <div
                   className={cn(
-                    "whitespace-pre-wrap break-words",
+                    "whitespace-pre-wrap break-words text-sm", // Base font size for all messages
                     message.sender === 'user' ? currentThemeObj.messageStyles.userMessage?.text || "text-white" : currentThemeObj.messageStyles.botMessage?.text || "text-black"
                   )}
                   style={{ 
@@ -231,9 +238,8 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                       : currentThemeObj.messageStyles.botMessage?.borderRadius || currentThemeObj.borderRadius.botMessage || '20px 20px 20px 4px',
                     boxShadow: currentThemeObj.messageStyles.shadow || 'none',
                     background: message.sender === 'user'
-                      ? artoTheme.colors.primaryLight // Update user message background color
-                      : currentThemeObj.messageStyles.botMessage?.background || '#f1f5f9', // Light gray for bot messages
-                    fontSize: currentThemeObj.messageStyles.fontSize?.message || '0.875rem'
+                      ? artoTheme.colors.primaryLight
+                      : currentThemeObj.messageStyles.botMessage?.background || '#f1f5f9'
                   }}
                 >
                   {message.text}
@@ -243,15 +249,14 @@ const ChatDialogCnr: React.FC<ChatDialogCnrProps> = ({
                 "flex items-center gap-2",
                 message.sender === 'user' ? "justify-end" : "justify-start",
               )}>
-                {!currentThemeObj.messageStyles.hideTimestamp && currentThemeObj.messageStyles.fontSize.timestamp !== 'none' && (
-                  <span className={cn(
-                    "text-muted-foreground",
-                    currentThemeObj.messageStyles.fontSize.timestamp === 'xs' ? "text-xs" : "text-sm"
-                  )}>
+                {/* Show timestamp based on memory requirements */}
+                {((message.sender === 'user') || (message.sender === 'bot' && index > 1)) && (
+                  <span className="text-xs text-muted-foreground">
                     {message.timestamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                   </span>
                 )}
-                {message.sender === 'bot' && !message.feedback && currentThemeObj.messageStyles.showFeedback !== false && (
+                {/* Show feedback buttons based on memory requirements */}
+                {message.sender === 'bot' && index > 1 && !message.feedback && (
                   <div className="flex gap-1" role="group" aria-label="Message feedback">
                     <button
                       className="p-1.5 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded-full transition-colors
