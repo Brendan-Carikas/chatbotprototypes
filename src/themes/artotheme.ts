@@ -28,25 +28,25 @@ export const artotheme: Theme = {
     button: '12px', // Send button corners
   },
   messageStyles: {
-    maxWidth: '70%', // Maximum width of message bubbles
-    padding: '16px', // Padding inside message bubbles
-    shadow: 'none', // No shadow on message bubbles
+    maxWidth: '70%',
+    padding: '16px',
+    shadow: 'none',
     fontSize: {
-      message: 'sm', // Message text size
-      timestamp: 'none' // Hide timestamp
+      message: 'sm', // Base message size
+      timestamp: 'xs' // Timestamp size
     },
     userMessage: {
-      background: '#008080', // Teal color for user messages
+      background: '#008080',
       text: 'text-black',
       borderRadius: '20px 20px 4px 20px'
     },
     botMessage: {
-      background: '#f1f5f9', // Light gray for bot messages
+      background: '#f1f5f9',
       text: 'text-black',
       borderRadius: '20px 20px 20px 4px'
     },
-    showFeedback: false, // Hide feedback buttons
-    hideAssistantInfo: true // Hide AI Assistant icon and text
+    showFeedback: true, // Show feedback buttons for non-initial messages
+    hideAssistantInfo: true
   },
   buttonStyles: {
     primary: {

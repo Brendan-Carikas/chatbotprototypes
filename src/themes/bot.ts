@@ -13,6 +13,10 @@ export const botTheme: Theme = {
     popoverForeground: '0 0% 0%', // Text in dropdown menus
     secondary: '174 57% 90%', // Bot message bubbles
     secondaryForeground: '0 0% 0%', // Bot message text color
+    border: '220 13% 91%', // Border color for UI elements
+    focusRing: '242 65% 24%', // Focus ring color (same as primary)
+    muted: '220 13% 91%', // Muted background color
+    mutedForeground: '220 8.9% 46.1%', // Muted text color
   },
   fonts: {
     sans: ['Libre Franklin', 'sans-serif'], // Main chat font
