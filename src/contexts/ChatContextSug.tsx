@@ -76,6 +76,10 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
 
   const handleProposalFlow = (userInput: string) => {
+    // Hide initial suggestions when user asks a question
+    if (userInput === 'Ask a question') {
+      setHideInitialSuggestions(true);
+    }
     let nextStep: ProposalStep = null;
     let botResponse = '';
     const updatedProposalData = { ...proposalData };
