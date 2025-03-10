@@ -30,6 +30,7 @@ interface ChatContextType {
     phone?: string;
   };
   hideInitialSuggestions: boolean;
+  hideSummarySuggestions: boolean;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -46,6 +47,7 @@ interface ChatProviderProps {
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const [hideInitialSuggestions, setHideInitialSuggestions] = useState(false);
+  const [hideSummarySuggestions, setHideSummarySuggestions] = useState(false);
   const [proposalData, setProposalData] = useState<{
     step: ProposalStep;
     name?: string;
@@ -100,7 +102,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
           isBot: true,
           timestamp: getFormattedTime(), // Rule 3: All bot messages after second show timestamp
           showFeedback: false, // Special case: Hide feedback buttons for summary message
-          showSuggestions: true,
+          showSuggestions: !hideSummarySuggestions, // Hide suggestions if they've been used
           suggestions: ['No, I\'m good', 'I still need help']
         };
         setMessages(prev => [...prev, summaryMessage]);
@@ -140,6 +142,8 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         setHideInitialSuggestions(true);
         isProposalFlow = true;
       } else if (content === 'No, I\'m good') {
+        // Hide summary suggestions
+        setHideSummarySuggestions(true);
         // Create final thank you message
         const thankYouMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -150,6 +154,22 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
           showSuggestions: false
         };
         setMessages(prev => [...prev, thankYouMessage]);
+        setProposalData({ ...proposalData, step: null }); // Reset proposal flow
+        setIsTyping(false);
+        return;
+      } else if (content === 'I still need help') {
+        // Hide summary suggestions
+        setHideSummarySuggestions(true);
+        // Create help message
+        const helpMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          content: 'How can I help?',
+          isBot: true,
+          timestamp: getFormattedTime(),
+          showFeedback: messages.length >= 2,
+          showSuggestions: false
+        };
+        setMessages(prev => [...prev, helpMessage]);
         setProposalData({ ...proposalData, step: null }); // Reset proposal flow
         setIsTyping(false);
         return;
@@ -184,7 +204,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   };
 
   return (
-    <ChatContext.Provider value={{ messages, isTyping, sendMessage, proposalData, hideInitialSuggestions }}>
+    <ChatContext.Provider value={{ messages, isTyping, sendMessage, proposalData, hideInitialSuggestions, hideSummarySuggestions }}>
       {children}
     </ChatContext.Provider>
   );

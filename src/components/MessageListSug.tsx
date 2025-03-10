@@ -5,7 +5,7 @@ import InitialSuggestions from './InitialSuggestions';
 import { artoTheme } from '../theme/arto';
 
 const MessageListSug: React.FC = () => {
-  const { messages, hideInitialSuggestions, sendMessage } = useChat();
+  const { messages, hideInitialSuggestions, hideSummarySuggestions, sendMessage } = useChat();
 
   return (
     <div 
@@ -26,7 +26,7 @@ const MessageListSug: React.FC = () => {
               {index === 1 && !hideInitialSuggestions ? (
                 /* Rule 2: Second message shows initial suggestions */
                 <InitialSuggestions />
-              ) : message.suggestions ? (
+              ) : message.suggestions && !hideSummarySuggestions ? (
                 <div className="flex flex-wrap gap-2">
                   {message.suggestions.map((suggestion, i) => (
                     <button
