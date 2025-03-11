@@ -21,12 +21,13 @@ const MessageListSug: React.FC = () => {
             index={index}
           />
           {/* Show suggestions based on message type */}
-          {message.showSuggestions && message.isBot && (
+          {message.showSuggestions && message.suggestions && message.isBot && (
             <div className="mt-4">
-              {index === 1 && !hideInitialSuggestions ? (
-                /* Rule 2: Second message shows initial suggestions */
+              {!hideInitialSuggestions && message.suggestions.includes('Ask for a proposal') ? (
+                /* Initial suggestions */
                 <InitialSuggestions />
-              ) : message.suggestions && !hideSummarySuggestions ? (
+              ) : !hideSummarySuggestions && message.suggestions.includes('No, I\'m good') ? (
+                /* Summary suggestions */
                 <div className="flex flex-wrap gap-2">
                   {message.suggestions.map((suggestion, i) => (
                     <button

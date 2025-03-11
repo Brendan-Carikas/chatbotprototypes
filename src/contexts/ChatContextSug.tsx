@@ -60,66 +60,107 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
       content: '👋 Hi, I am Arto your helpful AI assistant',
       isBot: true,
       timestamp: null, // First message: no timestamp per memory
-      showFeedback: false // First message: no feedback per memory
+      showFeedback: false, // First message: no feedback per memory
+      showSuggestions: false // First message: no suggestions per memory
     },
     {
       id: '2',
       content: 'Select an option below or type a brief message so I can better assist you.',
       isBot: true,
-      timestamp: getFormattedTime(), // Second message: shows timestamp per memory
+      timestamp: null, // Second message: no timestamp per memory cebe3a5d
       showFeedback: false, // Second message: no feedback per memory
-      showSuggestions: true // Second message: shows initial suggestions per memory
+      showSuggestions: !hideInitialSuggestions, // Second message: shows initial suggestions per memory
+      suggestions: hideInitialSuggestions ? undefined : ['Ask for a proposal', 'Ask a question'] // Only show if not hidden
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
 
 
+  const showInitialOptions = () => {
+    setHideInitialSuggestions(false);
+    const botMessage: Message = {
+      id: Date.now().toString(),
+      content: 'Select an option below or type a brief message so I can better assist you.',
+      isBot: true,
+      timestamp: getFormattedTime(),
+      showFeedback: false,
+      showSuggestions: true,
+      suggestions: ['Ask for a proposal', 'Ask a question']
+    };
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      setMessages(prev => [...prev.map(msg => ({
+        ...msg,
+        showSuggestions: msg.id === '2' ? false : msg.showSuggestions,
+        suggestions: msg.id === '2' ? undefined : msg.suggestions
+      })), botMessage]);
+    }, 1000);
+  };
+
   const handleProposalFlow = (userInput: string) => {
     // Hide initial suggestions when user asks a question
     if (userInput === 'Ask a question') {
       setHideInitialSuggestions(true);
+      return;
+    }
+
+    // Show initial suggestions if user mentions 'proposal' or 'quote'
+    const lowerInput = userInput.toLowerCase();
+    if (lowerInput.includes('proposal') || lowerInput.includes('quote')) {
+      showInitialOptions();
+      return;
     }
     let nextStep: ProposalStep = null;
-    let botResponse = '';
     const updatedProposalData = { ...proposalData };
 
     switch (proposalData.step) {
       case 'name':
         updatedProposalData.name = userInput;
         nextStep = 'email';
-        botResponse = PROPOSAL_FLOW.email;
+        const emailMessage: Message = {
+          id: Date.now().toString(),
+          content: PROPOSAL_FLOW.email,
+          isBot: true,
+          timestamp: getFormattedTime(),
+          showFeedback: false
+        };
+        setMessages(prev => [...prev, emailMessage]);
         break;
       case 'email':
         updatedProposalData.email = userInput;
         nextStep = 'phone';
-        botResponse = PROPOSAL_FLOW.phone;
+        const phoneMessage: Message = {
+          id: Date.now().toString(),
+          content: PROPOSAL_FLOW.phone,
+          isBot: true,
+          timestamp: getFormattedTime(),
+          showFeedback: false
+        };
+        setMessages(prev => [...prev, phoneMessage]);
         break;
       case 'phone':
         updatedProposalData.phone = userInput;
         nextStep = 'summary';
-        botResponse = `${PROPOSAL_FLOW.complete}\n\nName: ${updatedProposalData.name}\nEmail: ${updatedProposalData.email}\nPhone: ${updatedProposalData.phone}\n\nIs there anything else I can help you with?`;
-        // Add bot message with suggestions immediately
         const summaryMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          content: botResponse,
+          id: Date.now().toString(),
+          content: `${PROPOSAL_FLOW.complete}\n\nName: ${updatedProposalData.name}\nEmail: ${updatedProposalData.email}\nPhone: ${updatedProposalData.phone}\n\nIs there anything else I can help you with?`,
           isBot: true,
-          timestamp: getFormattedTime(), // Rule 3: All bot messages after second show timestamp
-          showFeedback: false, // Special case: Hide feedback buttons for summary message
-          showSuggestions: !hideSummarySuggestions, // Hide suggestions if they've been used
+          timestamp: getFormattedTime(),
+          showFeedback: false,
+          showSuggestions: !hideSummarySuggestions,
           suggestions: ['No, I\'m good', 'I still need help']
         };
         setMessages(prev => [...prev, summaryMessage]);
-        updatedProposalData.step = nextStep;
-        setProposalData(updatedProposalData);
-        return null;
+        break;
       default:
         return false;
     }
 
     updatedProposalData.step = nextStep;
     setProposalData(updatedProposalData);
-    return botResponse;
+    return null;
   };
 
   const sendMessage = (content: string) => {
@@ -137,73 +178,99 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
     // Handle proposal flow or regular chat
     setTimeout(() => {
-      let botResponse: string;
-      let isProposalFlow = false;
-      
-      if (content.toLowerCase() === 'ask for a proposal' && !proposalData.step) {
-        botResponse = PROPOSAL_FLOW.initial + '\n\n' + PROPOSAL_FLOW.name;
-        setProposalData({ ...proposalData, step: 'name' });
+      // Handle initial suggestion buttons
+      if (content === 'Ask for a proposal' || content === 'Ask a question') {
         setHideInitialSuggestions(true);
-        isProposalFlow = true;
-      } else if (content === 'No, I\'m good') {
-        // Hide summary suggestions
-        setHideSummarySuggestions(true);
-        // Create final thank you message
-        const thankYouMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          content: 'Thanks for taking the time to chat.',
-          isBot: true,
-          timestamp: getFormattedTime(),
-          showFeedback: messages.length >= 2,
-          showSuggestions: false
-        };
-        setMessages(prev => [...prev, thankYouMessage]);
-        setProposalData({ ...proposalData, step: null }); // Reset proposal flow
-        setIsTyping(false);
-        return;
-      } else if (content === 'I still need help') {
-        // Hide summary suggestions
-        setHideSummarySuggestions(true);
-        // Create help message
-        const helpMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          content: 'How can I help?',
-          isBot: true,
-          timestamp: getFormattedTime(),
-          showFeedback: messages.length >= 2,
-          showSuggestions: false
-        };
-        setMessages(prev => [...prev, helpMessage]);
-        setProposalData({ ...proposalData, step: null }); // Reset proposal flow
-        setIsTyping(false);
-        return;
-      } else {
-        const proposalResponse = handleProposalFlow(content);
-        if (proposalResponse === null) {
+        
+        // Update existing messages to hide initial suggestions
+        setMessages(prev => prev.map(msg => ({
+          ...msg,
+          showSuggestions: msg.suggestions?.includes('Ask for a proposal') ? false : msg.showSuggestions,
+          suggestions: msg.suggestions?.includes('Ask for a proposal') ? undefined : msg.suggestions
+        })));
+        
+        if (content === 'Ask for a proposal' && !proposalData.step) {
+          const botMessage: Message = {
+            id: Date.now().toString(),
+            content: PROPOSAL_FLOW.initial + '\n\n' + PROPOSAL_FLOW.name,
+            isBot: true,
+            timestamp: getFormattedTime(),
+            showFeedback: messages.length >= 2
+          };
+          setProposalData({ ...proposalData, step: 'name' });
           setIsTyping(false);
-          return; // Summary message was already added
+          setMessages(prev => [...prev, botMessage]);
         }
-        if (!proposalResponse) {
-          botResponse = CHAT_RESPONSES[Math.floor(Math.random() * CHAT_RESPONSES.length)];
+        return;
+      }
+      
+      // Handle summary suggestion buttons
+      if (content === 'No, I\'m good' || content === 'I still need help') {
+        setHideSummarySuggestions(true);
+        
+        // Update existing messages to hide summary suggestions
+        setMessages(prev => prev.map(msg => ({
+          ...msg,
+          showSuggestions: msg.suggestions?.includes('No, I\'m good') ? false : msg.showSuggestions,
+          suggestions: msg.suggestions?.includes('No, I\'m good') ? undefined : msg.suggestions
+        })));
+        
+        if (content === 'No, I\'m good') {
+          const thankYouMessage: Message = {
+            id: Date.now().toString(),
+            content: 'Thanks for taking the time to chat.',
+            isBot: true,
+            timestamp: getFormattedTime(),
+            showFeedback: messages.length >= 2,
+            showSuggestions: false
+          };
+          setMessages(prev => [...prev, thankYouMessage]);
         } else {
-          botResponse = proposalResponse;
-          isProposalFlow = true;
+          const helpMessage: Message = {
+            id: Date.now().toString(),
+            content: 'How can I help?',
+            isBot: true,
+            timestamp: getFormattedTime(),
+            showFeedback: messages.length >= 2,
+            showSuggestions: false
+          };
+          setMessages(prev => [...prev, helpMessage]);
+        }
+        
+        setProposalData({ ...proposalData, step: null });
+        setIsTyping(false);
+        return;
+      }
+      
+      // Check for proposal/quote keywords in regular messages
+      if (!proposalData.step) {
+        const lowerContent = content.toLowerCase();
+        if (lowerContent.includes('proposal') || lowerContent.includes('quote')) {
+          showInitialOptions();
+          return;
         }
       }
-
-      // Create bot message following display rules from memories
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        content: botResponse,
-        isBot: true,
-        timestamp: messages.length === 0 ? null : getFormattedTime(), // Rule 1: First message has no timestamp
-        showFeedback: !isProposalFlow && messages.length >= 2, // Hide feedback for proposal flow messages
-        showSuggestions: messages.length === 1, // Rule 2: Only second message shows initial suggestions
-        suggestions: undefined
-      };
       
-      setIsTyping(false);
-      setMessages((prev) => [...prev, botMessage]);
+      // Handle proposal flow steps
+      const proposalResponse = handleProposalFlow(content);
+      if (proposalResponse === null) {
+        setIsTyping(false);
+        return;
+      }
+      
+      // Handle regular chat responses
+      if (!proposalResponse) {
+        const botMessage: Message = {
+          id: Date.now().toString(),
+          content: CHAT_RESPONSES[Math.floor(Math.random() * CHAT_RESPONSES.length)],
+          isBot: true,
+          timestamp: getFormattedTime(),
+          showFeedback: messages.length >= 2,
+          showSuggestions: false
+        };
+        setIsTyping(false);
+        setMessages(prev => [...prev, botMessage]);
+      }
     }, 2000);
   };
 
