@@ -36,7 +36,7 @@ const MessageListSug: React.FC = () => {
                       className="text-left p-3 border-2 border-gray-200 hover:border-primary
                                transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2
                                active:scale-[0.98] text-sm text-gray-700 hover:text-primary focus:text-primary
-                               shadow-sm hover:shadow-md hover:bg-primary/5 focus:bg-primary/5"
+                                hover:shadow-md hover:bg-primary/5 focus:bg-primary/5"
                       style={{ 
                         borderRadius: '24px',
                         fontFamily: artoTheme.fonts.sans.join(', '),
