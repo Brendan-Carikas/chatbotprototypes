@@ -13,6 +13,11 @@ import Navigation from './components/Navigation';
 import ChatDialogSuggestions from './components/ChatDialogSuggestions';
 import ChatSuggestionsCouncil from './components/ChatSuggestionsCouncil';
 
+// Import authentication components
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import IDSLogin from './invauth/IDSLogin';
+
 function OriginalApp() {
   const [isOpen, setIsOpen] = React.useState(true);
   return (
@@ -32,23 +37,67 @@ function App() {
   return (
     <ThemeProvider initialTheme={artoTheme} initialChatTheme="artotheme">
       <HashRouter>
-        <div className="flex flex-col min-h-screen">
-          <Navigation isOpen={isNavOpen} onToggle={handleNavToggle} />
-          <main className="flex-grow pt-16">
-            <Routes>
-              <Route path="/welcome" element={<Welcome />} />
-              <Route path="/welcome-style2" element={<WelcomeStyle2 />} />
-              <Route path="/original" element={<OriginalApp />} />
-              <Route path="/capture" element={<CaptureDetails />} />
-              <Route path="/capture-v2" element={<CaptureDetailsV2 />} />
-              <Route path="/spec" element={<Spec />} />
-              <Route path="/" element={<Navigate to="/welcome" replace />} />
-              <Route path="/chat-feedback" element={<ChatFeedDrawer />} />
-              <Route path="/suggestions" element={<ChatDialogSuggestions />} />
-              <Route path="/council" element={<ChatSuggestionsCouncil />} />
-            </Routes>
-          </main>
-        </div>
+        <AuthProvider>
+          <div className="flex flex-col min-h-screen">
+            <Navigation isOpen={isNavOpen} onToggle={handleNavToggle} />
+            <main className="flex-grow pt-16">
+              <Routes>
+                {/* Authentication Routes */}
+                <Route path="/ids-login" element={<IDSLogin />} />
+                
+                {/* Protected Routes */}
+                <Route path="/welcome" element={
+                  <ProtectedRoute>
+                    <Welcome />
+                  </ProtectedRoute>
+                } />
+                <Route path="/welcome-style2" element={
+                  <ProtectedRoute>
+                    <WelcomeStyle2 />
+                  </ProtectedRoute>
+                } />
+                <Route path="/original" element={
+                  <ProtectedRoute>
+                    <OriginalApp />
+                  </ProtectedRoute>
+                } />
+                <Route path="/capture" element={
+                  <ProtectedRoute>
+                    <CaptureDetails />
+                  </ProtectedRoute>
+                } />
+                <Route path="/capture-v2" element={
+                  <ProtectedRoute>
+                    <CaptureDetailsV2 />
+                  </ProtectedRoute>
+                } />
+                <Route path="/spec" element={
+                  <ProtectedRoute>
+                    <Spec />
+                  </ProtectedRoute>
+                } />
+                <Route path="/chat-feedback" element={
+                  <ProtectedRoute>
+                    <ChatFeedDrawer />
+                  </ProtectedRoute>
+                } />
+                <Route path="/suggestions" element={
+                  <ProtectedRoute>
+                    <ChatDialogSuggestions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/council" element={
+                  <ProtectedRoute>
+                    <ChatSuggestionsCouncil />
+                  </ProtectedRoute>
+                } />
+                
+                {/* Default Route */}
+                <Route path="/" element={<Navigate to="/ids-login" replace />} />
+              </Routes>
+            </main>
+          </div>
+        </AuthProvider>
       </HashRouter>
     </ThemeProvider>
   );

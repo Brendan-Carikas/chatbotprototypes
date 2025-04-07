@@ -6,7 +6,6 @@ import TypingIndicator from './TypingIndicator';
 import { useChat, ChatProvider } from '../contexts/ChatContextSug';
 import ChatHeader from './ChatHeader';
 import { getAssetPath } from '../utils/assetPath';
-import InitialSuggestions from './InitialSuggestions';
 
 const ChatDialogContent: React.FC = () => {
   const { isTyping } = useChat();

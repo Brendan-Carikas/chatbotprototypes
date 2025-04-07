@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "artochat"
+  },
+  "targets": {
+    "ids-project-597cc": {
+      "hosting": {
+        "chatbot": [
+          "artochat-app"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
