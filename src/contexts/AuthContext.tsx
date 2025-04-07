@@ -58,6 +58,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      
+      // Store authentication state in localStorage for GitHub Pages
+      if (currentUser) {
+        localStorage.setItem('authUser', 'true');
+      } else {
+        localStorage.removeItem('authUser');
+      }
     });
     
     return () => unsubscribe();
@@ -115,6 +122,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = async (): Promise<boolean> => {
     try {
+      // Clear localStorage auth state
+      localStorage.removeItem('authUser');
+      
       if (isDemoMode) {
         setUser(null);
         setIsDemoMode(false);

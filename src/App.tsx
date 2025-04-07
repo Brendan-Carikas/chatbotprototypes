@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ChatDialog from './components/ChatDialog';
 import Welcome from './Welcome';
@@ -33,6 +33,15 @@ function App() {
   const handleNavToggle = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  // Force redirect to login page if accessed directly
+  useEffect(() => {
+    // Check if we're on a direct GitHub Pages URL that needs authentication
+    const path = window.location.hash.replace('#', '');
+    if (path && path !== '/ids-login' && !localStorage.getItem('authUser')) {
+      window.location.hash = '#/ids-login';
+    }
+  }, []);
 
   return (
     <ThemeProvider initialTheme={artoTheme} initialChatTheme="artotheme">
@@ -92,8 +101,9 @@ function App() {
                   </ProtectedRoute>
                 } />
                 
-                {/* Default Route */}
+                {/* Catch all routes and redirect to login */}
                 <Route path="/" element={<Navigate to="/ids-login" replace />} />
+                <Route path="*" element={<Navigate to="/ids-login" replace />} />
               </Routes>
             </main>
           </div>
