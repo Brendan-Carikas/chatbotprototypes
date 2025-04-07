@@ -34,16 +34,11 @@ function App() {
     setIsNavOpen(!isNavOpen);
   };
 
-  // Handle authentication redirects for both GitHub Pages and Firebase hosting
+  // Force redirect to login page if accessed directly
   useEffect(() => {
-    // Only run this check if we're not already on the login page
+    // Check if we're on a direct GitHub Pages URL that needs authentication
     const path = window.location.hash.replace('#', '');
-    const isLoginPage = path === '/ids-login';
-    const isAuthenticated = localStorage.getItem('authUser') === 'true';
-    
-    // If not on login page and not authenticated, redirect to login
-    if (!isLoginPage && !isAuthenticated) {
-      console.log('Not authenticated, redirecting to login page');
+    if (path && path !== '/ids-login' && !localStorage.getItem('authUser')) {
       window.location.hash = '#/ids-login';
     }
   }, []);
