@@ -18,8 +18,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-// Public directory assets are referenced directly without import
-const InvotraLogo = '/InvotraLogo.png';
+// Use a dynamic path that works in both local and GitHub Pages environments
+const basePath = import.meta.env.BASE_URL || '/';
+const InvotraLogo = `${basePath}InvotraLogo.png`;
 
 // Define interfaces for form data and auth result
 interface FormData {
