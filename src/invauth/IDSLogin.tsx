@@ -18,9 +18,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-// Use a dynamic path that works in both local and GitHub Pages environments
-const basePath = import.meta.env.BASE_URL || '/';
-const InvotraLogo = `${basePath}InvotraLogo.png`;
+// Import the logo directly to ensure it works with both Firebase and GitHub Pages
+import InvotraLogoSrc from '../assets/InvotraLogo.png';
+const InvotraLogo = InvotraLogoSrc;
 
 // Define interfaces for form data and auth result
 interface FormData {
