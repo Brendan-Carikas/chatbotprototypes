@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200">
+  <!-- Background -->
+  <rect width="1000" height="1200" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Chatbot Flow Wireframes</text>
+  
+  <!-- Initial State -->
+  <rect x="50" y="70" width="280" height="480" rx="8" ry="8" fill="white" stroke="#ccc" stroke-width="2"/>
+  <rect x="50" y="70" width="280" height="40" rx="8" ry="8" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="2"/>
+  <text x="190" y="95" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">ChatAssist</text>
+  <text x="65" y="135" font-family="Arial, sans-serif" font-size="14" fill="#333">Welcome Message Area</text>
+  <rect x="65" y="145" width="250" height="70" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="80" y="175" font-family="Arial, sans-serif" font-size="12" fill="#333">Hi there! 👋 I'm your ChatAssist.</text>
+  <text x="80" y="195" font-family="Arial, sans-serif" font-size="12" fill="#333">How can I help you today?</text>
+  
+  <rect x="65" y="225" width="140" height="36" rx="18" ry="18" fill="white" stroke="#4a6cf7" stroke-width="1.5"/>
+  <text x="135" y="248" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#4a6cf7">Ask for a proposal</text>
+  
+  <rect x="65" y="270" width="120" height="36" rx="18" ry="18" fill="white" stroke="#4a6cf7" stroke-width="1.5"/>
+  <text x="125" y="293" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#4a6cf7">Ask a question</text>
+  
+  <rect x="50" y="510" width="280" height="40" rx="8" ry="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="65" y="518" width="210" height="24" rx="12" ry="12" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="120" y="535" font-family="Arial, sans-serif" font-size="12" fill="#999">Type your message...</text>
+  <circle cx="305" cy="530" r="15" fill="#4a6cf7"/>
+  <text x="305" y="535" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">→</text>
+  
+  <text x="190" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">Initial State</text>
+  
+  <!-- Proposal Flow - Name Collection -->
+  <rect x="360" y="70" width="280" height="480" rx="8" ry="8" fill="white" stroke="#ccc" stroke-width="2"/>
+  <rect x="360" y="70" width="280" height="40" rx="8" ry="8" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="2"/>
+  <text x="500" y="95" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">ChatAssist</text>
+  
+  <rect x="375" y="120" width="250" height="70" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="390" y="145" font-family="Arial, sans-serif" font-size="12" fill="#333">Great! I'd be happy to help you</text>
+  <text x="390" y="165" font-family="Arial, sans-serif" font-size="12" fill="#333">request a proposal. Let's get started</text>
+  <text x="390" y="185" font-family="Arial, sans-serif" font-size="12" fill="#333">with a few details.</text>
+  
+  <rect x="375" y="200" width="250" height="50" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="390" y="230" font-family="Arial, sans-serif" font-size="12" fill="#333">First, could you please tell me your</text>
+  <text x="390" y="250" font-family="Arial, sans-serif" font-size="12" fill="#333">full name?</text>
+  
+  <rect x="490" y="260" width="135" height="30" rx="15" ry="15" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="1"/>
+  <text x="557" y="280" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">John Smith</text>
+  
+  <rect x="360" y="510" width="280" height="40" rx="8" ry="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="375" y="518" width="210" height="24" rx="12" ry="12" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="430" y="535" font-family="Arial, sans-serif" font-size="12" fill="#999">Type your message...</text>
+  <circle cx="615" cy="530" r="15" fill="#4a6cf7"/>
+  <text x="615" y="535" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">→</text>
+  
+  <text x="500" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">Proposal Flow - Name Collection</text>
+  
+  <!-- Proposal Flow - Email Collection -->
+  <rect x="670" y="70" width="280" height="480" rx="8" ry="8" fill="white" stroke="#ccc" stroke-width="2"/>
+  <rect x="670" y="70" width="280" height="40" rx="8" ry="8" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="2"/>
+  <text x="810" y="95" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">ChatAssist</text>
+  
+  <rect x="685" y="120" width="250" height="70" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="700" y="145" font-family="Arial, sans-serif" font-size="12" fill="#333">Great! I'd be happy to help you</text>
+  <text x="700" y="165" font-family="Arial, sans-serif" font-size="12" fill="#333">request a proposal. Let's get started</text>
+  <text x="700" y="185" font-family="Arial, sans-serif" font-size="12" fill="#333">with a few details.</text>
+  
+  <rect x="685" y="200" width="250" height="50" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="700" y="230" font-family="Arial, sans-serif" font-size="12" fill="#333">First, could you please tell me your</text>
+  <text x="700" y="250" font-family="Arial, sans-serif" font-size="12" fill="#333">full name?</text>
+  
+  <rect x="800" y="260" width="135" height="30" rx="15" ry="15" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="1"/>
+  <text x="867" y="280" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">John Smith</text>
+  
+  <rect x="685" y="300" width="250" height="70" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="700" y="325" font-family="Arial, sans-serif" font-size="12" fill="#333">Thanks, John! Now, could you please</text>
+  <text x="700" y="345" font-family="Arial, sans-serif" font-size="12" fill="#333">provide your email address so we can</text>
+  <text x="700" y="365" font-family="Arial, sans-serif" font-size="12" fill="#333">send you the proposal?</text>
+  
+  <rect x="765" y="380" width="170" height="30" rx="15" ry="15" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="1"/>
+  <text x="850" y="400" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">john@example.com</text>
+  
+  <rect x="670" y="510" width="280" height="40" rx="8" ry="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="685" y="518" width="210" height="24" rx="12" ry="12" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="740" y="535" font-family="Arial, sans-serif" font-size="12" fill="#999">Type your message...</text>
+  <circle cx="925" cy="530" r="15" fill="#4a6cf7"/>
+  <text x="925" y="535" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">→</text>
+  
+  <text x="810" y="560" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">Proposal Flow - Email Collection</text>
+  
+  <!-- Free-form Question Flow -->
+  <rect x="50" y="600" width="280" height="480" rx="8" ry="8" fill="white" stroke="#ccc" stroke-width="2"/>
+  <rect x="50" y="600" width="280" height="40" rx="8" ry="8" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="2"/>
+  <text x="190" y="625" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">ChatAssist</text>
+  
+  <rect x="65" y="650" width="250" height="50" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="80" y="675" font-family="Arial, sans-serif" font-size="12" fill="#333">Sure! What would you like to know</text>
+  <text x="80" y="695" font-family="Arial, sans-serif" font-size="12" fill="#333">about our services?</text>
+  
+  <rect x="145" y="710" width="170" height="30" rx="15" ry="15" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="1"/>
+  <text x="230" y="730" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">What are your pricing options?</text>
+  
+  <rect x="65" y="750" width="250" height="90" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="80" y="770" font-family="Arial, sans-serif" font-size="12" fill="#333">Our pricing varies based on project</text>
+  <text x="80" y="790" font-family="Arial, sans-serif" font-size="12" fill="#333">requirements. The best way to get an</text>
+  <text x="80" y="810" font-family="Arial, sans-serif" font-size="12" fill="#333">accurate quote is to request a proposal,</text>
+  <text x="80" y="830" font-family="Arial, sans-serif" font-size="12" fill="#333">and our team will provide detailed pricing</text>
+  
+  <rect x="50" y="1040" width="280" height="40" rx="8" ry="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="65" y="1048" width="210" height="24" rx="12" ry="12" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="120" y="1065" font-family="Arial, sans-serif" font-size="12" fill="#999">Type your message...</text>
+  <circle cx="305" cy="1060" r="15" fill="#4a6cf7"/>
+  <text x="305" y="1065" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">→</text>
+  
+  <text x="190" y="1090" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">Free-form Question Flow</text>
+  
+  <!-- Thank You & Confirmation -->
+  <rect x="360" y="600" width="280" height="480" rx="8" ry="8" fill="white" stroke="#ccc" stroke-width="2"/>
+  <rect x="360" y="600" width="280" height="40" rx="8" ry="8" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="2"/>
+  <text x="500" y="625" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">ChatAssist</text>
+  
+  <rect x="375" y="650" width="250" height="200" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="390" y="670" font-family="Arial, sans-serif" font-size="12" fill="#333">Thank you for providing all the</text>
+  <text x="390" y="690" font-family="Arial, sans-serif" font-size="12" fill="#333">information! Here's what I have:</text>
+  <text x="390" y="720" font-family="Arial, sans-serif" font-size="12" fill="#333">Name: John Smith</text>
+  <text x="390" y="740" font-family="Arial, sans-serif" font-size="12" fill="#333">Email: john@example.com</text>
+  <text x="390" y="760" font-family="Arial, sans-serif" font-size="12" fill="#333">Phone: (555) 123-4567</text>
+  <text x="390" y="780" font-family="Arial, sans-serif" font-size="12" fill="#333">Requirements: Website redesign</text>
+  <text x="390" y="800" font-family="Arial, sans-serif" font-size="12" fill="#333">Budget: $5,000-$10,000</text>
+  <text x="390" y="830" font-family="Arial, sans-serif" font-size="12" fill="#333">I've sent these details to our team, and</text>
+  <text x="390" y="850" font-family="Arial, sans-serif" font-size="12" fill="#333">they'll prepare a custom proposal for you.</text>
+  
+  <rect x="375" y="860" width="250" height="50" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="390" y="885" font-family="Arial, sans-serif" font-size="12" fill="#333">Is there anything else I can help you</text>
+  <text x="390" y="905" font-family="Arial, sans-serif" font-size="12" fill="#333">with today?</text>
+  
+  <rect x="375" y="920" width="100" height="36" rx="18" ry="18" fill="white" stroke="#4a6cf7" stroke-width="1.5"/>
+  <text x="425" y="943" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#4a6cf7">Ask a question</text>
+  
+  <rect x="485" y="920" width="140" height="36" rx="18" ry="18" fill="white" stroke="#4a6cf7" stroke-width="1.5"/>
+  <text x="555" y="943" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#4a6cf7">Schedule a meeting</text>
+  
+  <rect x="360" y="1040" width="280" height="40" rx="8" ry="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="375" y="1048" width="210" height="24" rx="12" ry="12" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="430" y="1065" font-family="Arial, sans-serif" font-size="12" fill="#999">Type your message...</text>
+  <circle cx="615" cy="1060" r="15" fill="#4a6cf7"/>
+  <text x="615" y="1065" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">→</text>
+  
+  <text x="500" y="1090" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">Thank You & Confirmation</text>
+  
+  <!-- Flow Completion - Live Agent -->
+  <rect x="670" y="600" width="280" height="480" rx="8" ry="8" fill="white" stroke="#ccc" stroke-width="2"/>
+  <rect x="670" y="600" width="280" height="40" rx="8" ry="8" fill="#4a6cf7" stroke="#4a6cf7" stroke-width="2"/>
+  <text x="810" y="625" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">ChatAssist</text>
+  
+  <rect x="685" y="650" width="250" height="70" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="700" y="675" font-family="Arial, sans-serif" font-size="12" fill="#333">I'd be happy to connect you with a live</text>
+  <text x="700" y="695" font-family="Arial, sans-serif" font-size="12" fill="#333">agent who can provide more detailed</text>
+  <text x="700" y="715" font-family="Arial, sans-serif" font-size="12" fill="#333">assistance with your specific needs.</text>
+  
+  <rect x="685" y="730" width="250" height="90" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="700" y="755" font-family="Arial, sans-serif" font-size="12" fill="#333">Please wait while I transfer you to the</text>
+  <text x="700" y="775" font-family="Arial, sans-serif" font-size="12" fill="#333">next available agent. Your current chat</text>
+  <text x="700" y="795" font-family="Arial, sans-serif" font-size="12" fill="#333">history will be preserved so they can</text>
+  <text x="700" y="815" font-family="Arial, sans-serif" font-size="12" fill="#333">better assist you.</text>
+  
+  <rect x="685" y="830" width="250" height="30" rx="16" ry="16" fill="#f0f2f5" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="700" y="850" font-family="Arial, sans-serif" font-size="12" fill="#333">Connecting you now...</text>
+  
+  <circle cx="750" cy="900" r="5" fill="#4a6cf7"/>
+  <circle cx="770" cy="900" r="5" fill="#4a6cf7"/>
+  <circle cx="790" cy="900" r="5" fill="#4a6cf7"/>
+  
+  <rect x="670" y="1040" width="280" height="40" rx="8" ry="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="685" y="1048" width="210" height="24" rx="12" ry="12" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="740" y="1065" font-family="Arial, sans-serif" font-size="12" fill="#999">Type your message...</text>
+  <circle cx="925" cy="1060" r="15" fill="#4a6cf7"/>
+  <text x="925" y="1065" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">→</text>
+  
+  <text x="810" y="1090" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">Flow Completion - Live Agent</text>
+  
+  <!-- Connecting Lines -->
+  <line x1="330" y1="240" x2="360" y2="240" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="355,235 360,240 355,245" fill="#666"/>
+  
+  <line x1="640" y1="240" x2="670" y2="240" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="665,235 670,240 665,245" fill="#666"/>
+  
+  <line x1="190" y1="550" x2="190" y2="600" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="185,595 190,600 195,595" fill="#666"/>
+  
+  <line x1="810" y1="550" x2="500" y2="600" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="502,595 500,600 507,602" fill="#666"/>
+  
+  <line x1="500" y1="1080" x2="810" y2="1080" stroke="#666" stroke-width="2" stroke-dasharray="5,5"/>
+  <polygon points="805,1075 810,1080 805,1085" fill="#666"/>
+</svg>
